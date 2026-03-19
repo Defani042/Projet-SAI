@@ -1,7 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
-    printf("Debut du jeu\n");
+#include "moteur/affichage.h"
+
+int main(int argc, char *argv[]){
+    glutInit(&argc, argv);                
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitWindowPosition(50, 50);  
+    glutCreateWindow("Projet SAI");
+    glutFullScreen();
+    glEnable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glutDisplayFunc(affichage);   
+    glutIdleFunc(animer);
+    glutMainLoop();
     exit(EXIT_SUCCESS);
 }
