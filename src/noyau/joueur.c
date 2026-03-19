@@ -22,8 +22,11 @@ joueur creer_joueur(position pos) {
     j->niv = 0;
     j->xp = 0;
     j->vie = VIE;
+    j->vie_max = VIE;
     j->pos = pos;
     j->vit = DEFAULT;
+    j->def = DEFAULT;
+    j->seuil = SEUIL;
     return j;
 }
 
@@ -78,7 +81,59 @@ S: vide
 A: Adrien
 */
 void utiliser_jetpack(joueur j){
+     if(j == NULL){
+        fprintf(stderr,"erreur dans la fonction utiliser_jetpack() le joueur est NULL\n");
+        return;
+    }
     j->jetpack -= USE_JET_PACK;
 }
+
+/*
+R: gestion des dégats subit par le joueur
+E: 1 TAD joueur 
+S: vide
+A: Adrien
+*/
+void degat(int deg,joueur j){
+     if(j == NULL){
+        fprintf(stderr,"erreur dans la fonction degat() le joueur est NULL\n");
+        return;
+    }
+    j->vie -= deg/j->def;
+}
+
+
+/*
+R: fonction d'amelioration des stats du joueur 
+E: 1 TAD joueur 
+S: vide
+A: Adrien
+*/
+void amelirorer_stat(joueur j,int stat,double val){
+    if(j == NULL){
+        fprintf(stderr,"erreur dans la fonction améliorer_stats() le joueur est NULL\n");
+        return;
+    }
+    switch (stat)
+    {
+    case CAP_ATK:j->atk += val;break;
+    case CAP_DEF:j->def += val;break;
+    case CAP_JET:j->jetpack += val;break;
+    case CAP_REG:j->reg += val;break;
+    case CAP_VIE:j->vie_max += val;break;
+    case CAP_VIT:j->vit += val;break;
+    default:break;
+    }
+}
+
+void niveau_suivant(joueur j){
+    if(j->xp <= j->niv*j->seuil){
+        j->xp -= j->seuil*j->niv;
+        j->niv++;
+    }
+}
+
+
+
 
 #endif /*_JOUEUR_C_*/

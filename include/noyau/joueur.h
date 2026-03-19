@@ -9,13 +9,15 @@
 #include "config/config.h"
 #include "noyau/position.h"
 
-#define DEFAULT 1;
-#define VIE 100;
-#define ATK 10;
-#define JET 50;
+#define DEFAULT 1
+#define VIE 100
+#define ATK 10
+#define JET 50
+#define SEUIL 100
 
 typedef struct s_joueur
 {
+    double vie_max;
     double vie; /*vie du joueur*/
     position pos; /*position du joueur dans l'espace*/
     double atk; /*attaque*/
@@ -24,6 +26,8 @@ typedef struct s_joueur
     int niv;
     int xp;
     double vit;
+    double def;
+    int seuil;
 }s_joueur;
 
 typedef s_joueur * joueur;
@@ -35,5 +39,7 @@ void liberer_joueur(joueur j);
 void deplacement(joueur j,double dirx,double diry,double dirz);
 
 void utiliser_jetpack(joueur j);
+
+void degat(int deg,joueur j);
 
 #endif /*_JOUEUR_H_*/
