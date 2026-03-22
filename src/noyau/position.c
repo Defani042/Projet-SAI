@@ -36,4 +36,17 @@ void liberer_position(position p){
 
 }
 
+/*
+R: renvoie la distance au carré entre deux position
+E: 2 TAD les deux position dans l'espace
+S: un double la distance au carré
+A: Adrien
+*/
+double distance_carre(position p1, position p2){
+    double dx = p2->x - p1->x;
+    double dy = p2->y - p1->y;
+    double dz = p2->z - p1->z;
+    return dx * dx + dy * dy + dz * dz; 
+}
+
 #endif /*_POSITION_C_*/
