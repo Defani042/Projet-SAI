@@ -5,6 +5,14 @@
 
 int touches[256] = {0};
 
+int lastX = 0, lastY = 0;
+float yaw = -90.0f;
+float pitch = 0.0f;
+
+float cameraFrontX = 0.0f;
+float cameraFrontY = 0.0f;
+float cameraFrontZ = -1.0f;
+
 /*
 R: Permet d'avancer
 E: rien
@@ -101,7 +109,7 @@ E: la touche et les coordonnées de la souris
 S: rien
 A: Gaultier
 */
-void update() {
+void raffraichir() {
 
     if (touches['z'] || touches['Z'])
         avancer();
@@ -131,6 +139,42 @@ A: Gaultier
 void gerer_souris(int bouton, int etat, int x, int y){
     /*printf pour le warning de non use */
     printf("Bouton: %d, Etat: %d, X: %d, Y: %d\n", bouton, etat, x, y);
+}
+
+/*
+R: Permet de gerer le mouvement de la souris
+E: les coordonnées de la souris
+S: rien
+A: Gaultier
+*/
+void mouvement_souris(int x, int y){
+    int dx = x - lastX;
+    int dy = y - lastY;
+    float radYaw;
+    float radPitch;
+
+    printf("Delta: %d %d\n", dx, dy);
+
+    lastX = x;
+    lastY = y;
+
+    if((dx < 1 && dx > -1) || (dy < 1 && dy > -1)){
+
+        yaw   -= dx;
+        pitch += dy;
+
+        if (pitch > 89.0f) pitch = 89.0f;
+        if (pitch < -89.0f) pitch = -89.0f;
+
+        radPitch = yaw * M_PI / 180.0f;
+        radYaw = pitch * M_PI / 180.0f;
+
+        cameraFrontX = cos(radYaw) * cos(radPitch);
+        cameraFrontY = sin(radPitch);
+        cameraFrontZ = sin(radYaw) * cos(radPitch);
+
+    }
+    
 }
 
 #endif /*CONTROLE_C*/

@@ -20,9 +20,6 @@ int b = -5;
 int top = 5;
 int n = 5;
 int f = 1000;
-float camYaw = 0.0f;
-float camPitch = 0.0f;
-float camSpeed = 1.0f;
 
 /*
 R: permet de dessiner un parallepipede
@@ -81,9 +78,9 @@ A: Gaultier
 void animer(){
     static clock_t last_time = 0;
     clock_t current_time = clock();
-    if (!(current_time - last_time < CLOCKS_PER_SEC / 30)){
+    if (!(current_time - last_time < CLOCKS_PER_SEC / 60)){
         last_time = current_time;
-        update();
+        raffraichir();
         glutPostRedisplay();
     }
 }
@@ -106,7 +103,7 @@ void affichage(){
     /*Init de la matrice de visualisation*/
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(eyeX,eyeY,eyeZ,xO,yO,zO,upX,upY,upZ);
+    gluLookAt(eyeX,eyeY,eyeZ,eyeX + cameraFrontX,eyeY + cameraFrontY,eyeZ + cameraFrontZ,upX,upY,upZ);
 
     /*Definition des points*/
     glBegin(GL_QUADS); /*GL_POINTS affiche des points et GL_QUADS affiche des rectangles*/

@@ -23,10 +23,6 @@ extern int b;
 extern int top;
 extern int n;
 extern int f;
-extern float camYaw;
-extern float camPitch;
-extern int windowWidth;
-extern int windowHeight;
 
 void drawParallelepiped(float x, float y, float z, float dx, float dy, float dz);
 

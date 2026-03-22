@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
     glutIdleFunc(animer);
     glutKeyboardFunc(clavier_down);
     glutKeyboardUpFunc(clavier_up);
+    glutPassiveMotionFunc(mouvement_souris);
     glutMainLoop();
     exit(EXIT_SUCCESS);
 }
