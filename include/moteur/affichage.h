@@ -34,6 +34,8 @@ void drawParallelepiped(float x, float y, float z, float dx, float dy, float dz)
 
 void animer();
 
+void afficher_objet_couleur(objet o);
+
 void affichage();
 
 #endif /*AFFICHAGE_H*/
