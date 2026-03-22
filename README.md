@@ -62,6 +62,8 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 - **aleatoire** (`aleatoire.c / aleatoire.h`)  
   Fournit des fonctions utilitaires pour générer des positions ou valeurs aléatoires.
 
+- **generateur_carte** (`generateur_carte.c / generateur_carte.h`)  
+  création d'une carte de jeu
 ---
 
 ### 2 Module `moteur`
