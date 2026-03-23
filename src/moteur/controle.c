@@ -5,13 +5,13 @@
 
 int touches[256] = {0};
 
-int lastX = 0, lastY = 0;
-float yaw = -90.0f;
-float pitch = 0.0f;
+int derX = 0, derY = 0;
+float camX = -90.0f;
+float camY = 0.0f;
 
-float cameraFrontX = 0.0f;
-float cameraFrontY = 0.0f;
-float cameraFrontZ = -1.0f;
+float directionX = 0.0f;
+float directionY = 0.0f;
+float directionZ = -1.0f;
 
 /*
 R: Permet d'avancer
@@ -85,7 +85,7 @@ E: la touche et les coordonnées de la souris
 S: rien
 A: Gaultier
 */
-void clavier_down(unsigned char touche, int x, int y) {
+void touche_pressee(unsigned char touche, int x, int y) {
     (void)x; /*pour le warning de non use */
     (void)y; /*pour le warning de non use */
     touches[touche] = 1;
@@ -97,7 +97,7 @@ E: la touche et les coordonnées de la souris
 S: rien
 A: Gaultier
 */
-void clavier_up(unsigned char touche, int x, int y) {
+void touche_relachee(unsigned char touche, int x, int y) {
     (void)x; /*pour le warning de non use */
     (void)y; /*pour le warning de non use */
     touches[touche] = 0;
@@ -148,30 +148,28 @@ S: rien
 A: Gaultier
 */
 void mouvement_souris(int x, int y){
-    int dx = x - lastX;
-    int dy = y - lastY;
-    float radYaw;
-    float radPitch;
+    int dx = x - derX;
+    int dy = y - derY;
+    float rad_camX;
+    float rad_camY;
 
-    printf("Delta: %d %d\n", dx, dy);
+    derX = x;
+    derY = y;
 
-    lastX = x;
-    lastY = y;
+    if((dx < 10 && dx > -10) || (dy < 10 && dy > -10)){
 
-    if((dx < 1 && dx > -1) || (dy < 1 && dy > -1)){
+        camX -= dx;
+        camY -= dy;
 
-        yaw   -= dx;
-        pitch += dy;
+        if (camY > 89.0f) camY = 89.0f;
+        if (camY < -89.0f) camY = -89.0f;
 
-        if (pitch > 89.0f) pitch = 89.0f;
-        if (pitch < -89.0f) pitch = -89.0f;
+        rad_camY = camY * M_PI / 180.0f;
+        rad_camX = camX * M_PI / 180.0f;
 
-        radPitch = yaw * M_PI / 180.0f;
-        radYaw = pitch * M_PI / 180.0f;
-
-        cameraFrontX = cos(radYaw) * cos(radPitch);
-        cameraFrontY = sin(radPitch);
-        cameraFrontZ = sin(radYaw) * cos(radPitch);
+        directionX = cos(rad_camY) * cos(rad_camX);
+        directionY = cos(rad_camY) * sin(rad_camX);
+        directionZ = sin(rad_camY);
 
     }
     

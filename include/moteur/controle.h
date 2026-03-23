@@ -8,9 +8,9 @@
 
 #include "moteur/affichage.h"
 
-extern float cameraFrontX;
-extern float cameraFrontY; 
-extern float cameraFrontZ;
+extern float directionX;
+extern float directionY; 
+extern float directionZ;
 
 void avancer();
 
@@ -24,9 +24,9 @@ void haut();
 
 void bas();
 
-void clavier_down(unsigned char touche, int x, int y);
+void touche_pressee(unsigned char touche, int x, int y);
 
-void clavier_up(unsigned char touche, int x, int y);
+void touche_relachee(unsigned char touche, int x, int y);
 
 void raffraichir();
 

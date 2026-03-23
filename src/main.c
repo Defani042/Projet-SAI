@@ -31,9 +31,10 @@ int main(int argc, char *argv[]){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glutDisplayFunc(affichage);   
     glutIdleFunc(animer);
-    glutKeyboardFunc(clavier_down);
-    glutKeyboardUpFunc(clavier_up);
+    glutKeyboardFunc(touche_pressee);
+    glutKeyboardUpFunc(touche_relachee);
     glutPassiveMotionFunc(mouvement_souris);
+    glutMotionFunc(mouvement_souris);
     glutMainLoop();
     exit(EXIT_SUCCESS);
 }
