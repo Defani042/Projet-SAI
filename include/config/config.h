@@ -7,6 +7,8 @@
 #define SET_UP_ORIGINE_POS creer_position(0,0,0)
 #define USE_JET_PACK .01
 
+/*affichage*/
+#define DIST_REND 1000.0
 
 /*definiation de la hitbox du joueur*/
 #define LONG 10

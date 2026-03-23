@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <GL/freeglut.h>
 
 /*moteur du jeu*/
 #include "moteur/affichage.h"
@@ -18,12 +19,15 @@ int main(int argc, char *argv[]){
     log_nettoyer();
     log_message(INIT SUCC "les fichiers de log ont été créés");
     log_message(INIT SUCC "Début du jeu");
+    
     /*initialisation de la map*/
     carte_jeu = creer_carte_test();
     log_message(INIT SUCC "la carte a été créé");
 
+    /*opengl*/
     glutInit(&argc, argv);                
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
     glutInitWindowPosition(50, 50);  
     glutCreateWindow("Projet SAI");
     glutFullScreen();
@@ -36,5 +40,11 @@ int main(int argc, char *argv[]){
     glutPassiveMotionFunc(mouvement_souris);
     glutMotionFunc(mouvement_souris);
     glutMainLoop();
+    glutMainLoop();/*boucle principale*/
+
+    /*fermeuture de la carte*/
+    log_message(INIT SUCC "Fermeture du jeux");
+    liberer_carte(carte_jeu);
+
     exit(EXIT_SUCCESS);
 }

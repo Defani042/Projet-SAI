@@ -20,6 +20,7 @@ typedef struct s_joueur
     double vie_max;
     double vie; /*vie du joueur*/
     position pos; /*position du joueur dans l'espace*/
+    double dirx, diry, dirz; /*direction ou on regarde*/
     double hauteur, largeur, longueur; /*hitbox*/
     double atk; /*attaque*/
     double reg; /*régenération*/

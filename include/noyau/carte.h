@@ -37,4 +37,6 @@ void deplacer_joueur(carte c, double dirx, double diry, double dirz);
 
 int game_over(carte c);
 
+int objet_visible(joueur j, objet o);
+
 #endif /*_CARTE_H_*/

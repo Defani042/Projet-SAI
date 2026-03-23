@@ -164,11 +164,54 @@ void deplacer_joueur(carte c, double dirx, double diry, double dirz)
 /*
 R: permet de vérifier si la partie est finie
 E: 1 TAD carte
-S: 0 si la partie est finie sinon 1
+S: 1 si la partie est finie sinon 0
 A: Adrien
 */
 int game_over(carte c){
     return(c->j->vie == 0);
+}
+
+/*
+R: détermine si l'objet est visible par le joueur 
+E: 1 TAD joueur et un TAD objet
+S: 0 si l'objet est invisible est finie sinon 1
+A: Adrien
+*/
+int objet_visible(joueur j, objet o)
+{
+    int ix, iy, iz;
+    double dx, dy, dz, dist2, dot;
+    double x0, y0, z0, w, h, l;
+    double coin[3];
+
+    if (j == NULL || o == NULL || j->pos == NULL || o->pos == NULL)
+        return 0;
+
+    x0 = o->pos->x; y0 = o->pos->y; z0 = o->pos->z;
+    w  = o->largeur; h = o->hauteur; l = o->longueur;
+
+    for (ix = 0; ix <= 1; ix++) { /*pour tous les point qui on x = xmin et x =xmax*/
+        coin[0] = x0 + ix * w;
+        for (iy = 0; iy <= 1; iy++) { /*pour tous les point qui on y = ymin et  y=ymax*/
+            coin[1] = y0 + iy * h;
+            for (iz = 0; iz <= 1; iz++) { /*pour tous les point qui on z = zmin et  y=zmax*/
+                coin[2] = z0 + iz * l;
+
+                dx = coin[0] - j->pos->x;
+                dy = coin[1] - j->pos->y;
+                dz = coin[2] - j->pos->z;
+
+                dist2 = dx*dx + dy*dy + dz*dz;
+                if (dist2 <= DIST_REND*DIST_REND) {
+                    dot = dx*j->dirx + dy*j->diry + dz*j->dirz;
+                    if (dot > 0)
+                        return 1;  /* au moins un coin visible */
+                }
+            }
+        }
+    }
+
+    return 0; /* aucun coin visible */
 }
 
 #endif /*_CARTE_C_*/

@@ -126,7 +126,7 @@ void liberer_objet(objet o){
         free(o);
         o = tmp;
     }
-     log_message(NOYAU SUCC "objet liberé !");
+    log_message(NOYAU SUCC "objet liberé !");
      
 }
 
