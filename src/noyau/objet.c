@@ -15,6 +15,7 @@ objet creer_objet(position pos,double h,double l,double L){
     if ((o = (objet)malloc(sizeof(s_objet))) == NULL)
 	{
         fprintf(stderr,"Erreur malloc par la fonction creer_objet()\n");
+        log_message(NOYAU ERR "Erreur malloc par la fonction creer_objet()");
         exit(EXIT_FAILURE);
     }
     o->hauteur = h;
@@ -22,7 +23,7 @@ objet creer_objet(position pos,double h,double l,double L){
     o->longueur = L;
     o->pos = pos;
     o->next = NULL;
-
+    log_message(NOYAU SUCC "Objet créé");
     return o;
 }
 
@@ -51,6 +52,7 @@ objet supprimer_objet(objet head, int i)
 
         tmp = head->next;
         liberer_position(head->pos);
+        log_message(NOYAU WARN "Objet à supprimer non trouvé! supprimer_objet()");
         free(head);
         return tmp;
     }
@@ -65,6 +67,7 @@ objet supprimer_objet(objet head, int i)
     if (tmp == NULL)
     {
         fprintf(stderr, "Indice hors limite\n");
+        
         return head;
     }
 
@@ -103,7 +106,7 @@ objet supprimer_objet_ptr(objet liste, objet cible){
     }
 
     /* cas ou la cible n'est pas trouvée */
-    fprintf(stderr, "Objet à supprimer non trouvé\n");
+    log_message(NOYAU WARN "Objet à supprimer non trouvé! supprimer_objet_ptr()");
     return liste;
     
 }
@@ -123,6 +126,7 @@ void liberer_objet(objet o){
         free(o);
         o = tmp;
     }
+     log_message(NOYAU SUCC "objet liberé !");
      
 }
 
@@ -207,6 +211,9 @@ objet obtenir_objet(objet liste, int index){
     {
         tmp = tmp->next;
         curpos ++;
+    }
+    if(curpos!=index){
+        log_message(NOYAU WARN "Aucun objet trouver !");
     }
     return tmp;
     

@@ -13,24 +13,14 @@
 #include "noyau/carte_globale.h"
 
 int main(int argc, char *argv[]){
-    int res;
     /*creation du fichier de log*/
-    creer_dossiers_log();
-    res = creer_fichier_log();
-    if(res == 0){
-        fprintf(stderr,"ERREUR: le fichier de log n'a pas put se créer\n");
-        exit(EXIT_FAILURE);
-    }
-    printf("Log OK");
-
-    printf("Debut du jeux\n");
+    log_init();
+    log_nettoyer();
+    log_message(INIT SUCC "les fichiers de log ont été créés");
+    log_message(INIT SUCC "Début du jeu");
+    /*initialisation de la map*/
     carte_jeu = creer_carte_test();
-    printf("Carte test créer\n");
-    if(carte_jeu == NULL){
-        printf("ERREUR la carte est NULL\n");
-        exit(EXIT_FAILURE);
-    }
-    printf("Carte test OK\n");
+    log_message(INIT SUCC "la carte a été créé");
 
     glutInit(&argc, argv);                
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);

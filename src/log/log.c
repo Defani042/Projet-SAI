@@ -64,7 +64,8 @@ void log_init()
     log_file = fopen(LOG_FILE_PATH, "a");
     if (!log_file)
     {
-        fprintf(stderr, "Erreur ouverture fichier log (%s)\n", LOG_FILE_PATH);
+        fprintf(stderr, LOG ERR"ouverture fichier log (%s)\n", LOG_FILE_PATH);
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -99,4 +100,37 @@ void log_close()
     }
 }
 
+/*
+R: netoyer les fichier de log
+E: rien
+S: rien
+A: Adrien
+*/
+int log_nettoyer()
+{
+    if (!log_file)
+        return 0;
+
+    /* Ferme le fichier pour pouvoir le rouvrir en mode écriture */
+    fclose(log_file);
+
+    /* Ouvre en "w" pour écraser le contenu */
+    log_file = fopen(LOG_FILE_PATH, "w");
+    if (!log_file)
+    {
+        fprintf(stderr, "Erreur nettoyage fichier log (%s)\n", LOG_FILE_PATH);
+        return 0;
+    }
+
+    /* Remet le fichier en mode append pour les prochaines écritures */
+    fclose(log_file);
+    log_file = fopen(LOG_FILE_PATH, "a");
+    if (!log_file)
+    {
+        fprintf(stderr, "Erreur réouverture fichier log (%s)\n", LOG_FILE_PATH);
+        return 0;
+    }
+
+    return 1;
+}
 #endif /*_LOG_C_*/

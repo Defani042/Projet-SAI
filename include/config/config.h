@@ -25,8 +25,12 @@
 
 /*LOG*/
 #define LOG_FILE_PATH "fich/log/log.txt"
-
-
-
+#define INIT "[INIT]: "
+#define ERR "(ERREUR): "
+#define WARN "(WARN): "
+#define SUCC "(SUCCES): "
+#define MOTEUR "[MOTEUR]: "
+#define NOYAU "[NOYEAU]: "
+#define LOG "[LOG]: "
 
 #endif /*_CONFIG_H_*/

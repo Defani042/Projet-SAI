@@ -15,6 +15,7 @@ joueur creer_joueur(position pos) {
     if ((j = (joueur)malloc(sizeof(s_joueur))) == NULL)
 	{
         fprintf(stderr,"Erreur malloc par la fonction creer_joueur()\n");
+        log_message(NOYAU ERR "Erreur malloc par la fonction creer_joueur()");
         exit(EXIT_FAILURE);
     }
     j->atk = ATK;
@@ -31,6 +32,7 @@ joueur creer_joueur(position pos) {
     j->hauteur = HAUT;
     j->largeur = LARG;
     j->longueur = LONG;
+    log_message(NOYAU SUCC "Joueur créé");
     return j;
 }
 
@@ -57,7 +59,7 @@ A: Adrien
 */
 void utiliser_jetpack(joueur j){
      if(j == NULL){
-        fprintf(stderr,"erreur dans la fonction utiliser_jetpack() le joueur est NULL\n");
+        log_message(NOYAU WARN "Joueur NULL! fonction utiliser_jetpack()");
         return;
     }
     j->jetpack -= USE_JET_PACK;
@@ -71,7 +73,7 @@ A: Adrien
 */
 void degat(int deg,joueur j){
      if(j == NULL){
-        fprintf(stderr,"erreur dans la fonction degat() le joueur est NULL\n");
+        log_message(NOYAU WARN "Joueur NULL! fonction degat()");
         return;
     }
     j->vie -= deg/j->def;
@@ -86,7 +88,7 @@ A: Adrien
 */
 void amelirorer_stat(joueur j,int stat,double val){
     if(j == NULL){
-        fprintf(stderr,"erreur dans la fonction améliorer_stats() le joueur est NULL\n");
+        log_message(NOYAU WARN "Joueur NULL! fonction améliorer_stats()");
         return;
     }
     switch (stat)

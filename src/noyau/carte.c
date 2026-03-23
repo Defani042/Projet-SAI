@@ -14,12 +14,14 @@ carte creer_carte(objet liste_objets, joueur j)
     carte c;
     if ((c = (carte)malloc(sizeof(s_carte))) == NULL)
     {
+        log_message(NOYAU SUCC "Erreur malloc dans creer_carte()");
         fprintf(stderr, "Erreur malloc dans creer_carte()\n");
         exit(EXIT_FAILURE);
     }
     c->liste_objets = liste_objets;
     c->j = j;
-
+    
+    log_message(NOYAU SUCC "Carte créé");
     return c;
 }
 
@@ -44,6 +46,8 @@ void liberer_carte(carte c)
         liberer_joueur(c->j);
 
     free(c);
+
+    log_message(NOYAU SUCC "Carte libéré");
 }
 
 

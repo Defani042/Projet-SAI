@@ -14,11 +14,13 @@ position creer_position(double x, double y , double z){
     if ((p = (position)malloc(sizeof(s_position))) == NULL)
 	{
         fprintf(stderr,"Erreur malloc par la fonction creer_position()\n");
+        log_message(NOYAU ERR "Erreur malloc par la fonction creer_position()");
         exit(EXIT_FAILURE);
     }
     p->x = x;
     p->y = y;
     p->z = z;
+    log_message(NOYAU SUCC "Position créé");
     return p;
 }
 
@@ -33,7 +35,7 @@ void liberer_position(position p){
         free(p);
         p = NULL;
     }
-
+    log_message(NOYAU SUCC "Position libéré");
 }
 
 /*
