@@ -7,10 +7,14 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
- #include <unistd.h>
+#include <unistd.h>
 
+/*parite moteur*/
+#include "moteur/interface.h"
+/*parite noyau*/
 #include "noyau/objet.h"
 #include "noyau/carte_globale.h"
+#include "noyau/aleatoire.h"
 
 /*Variables globales*/
 extern int xO;

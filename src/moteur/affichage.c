@@ -215,7 +215,7 @@ void afficher_carte(carte c) {
 R: permet d'afficher les images
 E: rien
 S: rien
-A: Gaultier
+A: Gaultier et Adrien
 */
 void affichage(){
 
@@ -226,6 +226,11 @@ void affichage(){
     debut = clock();
     /*debut*/
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    /* ===================== */
+    /*       3D              */
+    /* ===================== */
+
 
     /*Modif de la visualisation*/
     glMatrixMode(GL_PROJECTION);
@@ -247,10 +252,33 @@ void affichage(){
     /*printf("ex,ey,ez,xO,y0,z0 : %d,%d,%d,%d,%d,%d\n", eyeX,eyeY,eyeZ,xO,yO,zO);*/
 
     glEnd();
+    /* ===================== */
+    /*       UI 2D           */
+    /* ===================== */
+    carte_jeu->j->vie = alea_double(1,carte_jeu->j->vie_max);
+    carte_jeu->j->jetpack = alea_double(1,carte_jeu->j->jetpack_max);
+    glDisable(GL_DEPTH_TEST);
+    /* Projection 2D */
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, largeur_ecran, hauteur_ecran, 0, -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    /* Dessin UI */
+    afficher_interface();
+
+   
+    glEnable(GL_DEPTH_TEST); 
+
+    /* Affichage */
+    glutSwapBuffers();
+
 
     /*Fin*/
     glutSwapBuffers();
 
+    /* Mesure du temps */
     fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;
     sprintf(buffer, "%s%s frame calculé en %f sec", MOTEUR, SUCC, temps);

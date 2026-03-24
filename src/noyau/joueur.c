@@ -21,6 +21,7 @@ joueur creer_joueur(position pos) {
     j->dir = creer_position(1,0,0);
     j->atk = ATK;
     j->jetpack = JET;
+    j->jetpack_max = JET;
     j->niv = 0;
     j->xp = 0;
     j->vie = VIE;
@@ -66,6 +67,17 @@ void utiliser_jetpack(joueur j){
     }
     j->jetpack -= USE_JET_PACK;
 }
+/*
+R: regeneration du jetpack
+E: 1 TAD joueur 
+S: vide
+A: Adrien
+*/
+void regeneration_jetpack(joueur j){
+    if(j->jetpack+USE_JET_PACK>j->jetpack_max){
+        j->jetpack = j->jetpack_max;
+    }
+}
 
 /*
 R: gestion des dégats subit par le joueur
@@ -97,7 +109,7 @@ void amelirorer_stat(joueur j,int stat,double val){
     {
     case CAP_ATK:j->atk += val;break;
     case CAP_DEF:j->def += val;break;
-    case CAP_JET:j->jetpack += val;break;
+    case CAP_JET:j->jetpack_max += val;break;
     case CAP_REG:j->reg += val;break;
     case CAP_VIE:j->vie_max += val;break;
     case CAP_VIT:j->vit += val;break;

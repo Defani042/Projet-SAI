@@ -25,7 +25,7 @@ float angle_direction;
 R: Permet d'avancer
 E: rien
 S: rien 
-A: Gaultier
+A: Gaultier et Adrien
 */
 void avancer() {
 
@@ -51,7 +51,7 @@ void avancer() {
 R: Permet d'aller à gauche
 E: rien
 S: rien 
-A: Gaultier
+A: Gaultier et Adrien
 */
 void gauche(){
 
@@ -77,7 +77,7 @@ void gauche(){
 R: Permet de reculer
 E: rien
 S: rien 
-A: Gaultier
+A: Gaultier et Adrien
 */
 void reculer(){
     joueur j = carte_jeu->j;
@@ -104,7 +104,7 @@ void reculer(){
 R: Permet d'aller à droite
 E: rien
 S: rien 
-A: Gaultier
+A: Gaultier et Adrien
 */
 void droite(){
     joueur j = carte_jeu->j;
@@ -128,7 +128,7 @@ void droite(){
 R: Permet de monter
 E: rien
 S: rien 
-A: Gaultier
+A: Gaultier et Adrien
 */
 void haut(){
     joueur j = carte_jeu->j;
@@ -150,7 +150,7 @@ void haut(){
 R: Permet de descendre
 E: rien
 S: rien 
-A: Gaultier
+A: Gaultier et Adrien
 */
 void bas(){
     joueur j = carte_jeu->j;
@@ -234,7 +234,7 @@ void gerer_souris(int bouton, int etat, int x, int y){
 R: Permet de gerer le mouvement de la souris
 E: les coordonnées de la souris
 S: rien
-A: Gaultier
+A: Gaultier et Adrien
 */
 void mouvement_souris(int x, int y){
     int dx = x - derX; /*distance de deplacement de la souris*/

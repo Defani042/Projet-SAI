@@ -25,6 +25,7 @@ typedef struct s_joueur
     double atk; /*attaque*/
     double reg; /*régenération*/
     double jetpack; /*jet pack*/
+    double jetpack_max; /*jet pack*/
     int niv;
     int xp;
     double vit;

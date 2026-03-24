@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/freeglut.h>
+#include <time.h> 
 
 /*moteur du jeu*/
 #include "moteur/affichage.h"
@@ -14,6 +15,8 @@
 #include "noyau/carte_globale.h"
 
 int main(int argc, char *argv[]){
+
+    srand((unsigned int)time(NULL));
     /*creation du fichier de log*/
     log_init();
     log_nettoyer();
