@@ -82,6 +82,10 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
   - Gestion des entrées clavier et souris  
   - Déplacement du joueur et interaction avec la carte
 
+- **interface** (`interface.c / interface.h`)  
+  Gestion de l'affichage de l'interface en 2D  
+  - Rendu OpenGL en 2D de la barre de vie
+  - Rendu OpenGL en 2D de la barre du jetpack
 ---
 
 ### 3 Module `config`
@@ -110,11 +114,11 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 
 **Responsabilité : gestion des logs du jeu**
 
-- **log** (`log.c / log.h`)
-  Contient les fonctions pour créer des journeaux de log :
-  - Création du fichier de log si inexistant
-  - Création des dossiers nécessaires pour les logs
-  - Écriture de messages de log pour le debug ou suivi du jeu
+- **log** (`log.c / log.h`)  
+  Contient les fonctions pour créer des journeaux de log :  
+  - Création du fichier de log si inexistant  
+  - Création des dossiers nécessaires pour les logs  
+  - Écriture de messages de log pour le debug ou suivi du jeu  
 
 ###  Résumé
 
