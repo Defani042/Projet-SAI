@@ -149,6 +149,12 @@ void afficher_carte(carte c) {
     }
 }
 
+/*
+R: affiche tous les objets 3d
+E: carte c
+S: rien
+A: Adrien
+*/
 void afficher3d(){
     afficher_carte(carte_jeu);
 }
