@@ -1,5 +1,5 @@
-#ifndef COMPOSANT2D_C
-#define COMPOSANT2D_C
+#ifndef _COMPOSANT2D_C_
+#define _COMPOSANT2D_C_
 
 #include "moteur/composant2d.h"
 /*
@@ -37,4 +37,4 @@ void draw_text(float x, float y, const char* text)
     }
 }
 
-#endif
+#endif /*_COMPOSANT2D_C_*/

@@ -78,8 +78,8 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 
 - **affichage** (`affichage.c / affichage.h`)  
   Gestion de l'affichage du jeu (interface + 3D)  
-  - Rendu OpenGL de la scène et des objets  
-  - Debug visuel des listes d’objets
+  - Rendu OpenGL de la scène et des objets en 3D
+  - Rendu OpenGL de l'interface en 2D
 
 - **controle** (`controle.c / controle.h`)  
   Gestion de l'affichage des input clavier    
@@ -93,9 +93,16 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
   - Rendu OpenGL en 2D du compteur de FPS (éstimation)
 
   - **composant2d** (`composant2d.c / composant2d.h`)    
-  Gestion de l'affichage des composant en 2D  
+  Gestion de l'affichage des composant en 2D 
   - affichage d'un rectangle
   - affichage de texte 
+
+  - **composant2d** (`composant3d.c / composant3d.h`)     
+  Gestion de l'affichage des composant en 3D  
+  - affichage d'un parralépipède
+  - affichage d'un objet en 3d
+  - affichage de la carte en 3D
+
 ---
 
 ### 3 Module `config`

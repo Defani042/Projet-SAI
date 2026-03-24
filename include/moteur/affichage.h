@@ -11,10 +11,7 @@
 
 /*parite moteur*/
 #include "moteur/interface.h"
-/*parite noyau*/
-#include "noyau/objet.h"
-#include "noyau/carte_globale.h"
-#include "noyau/aleatoire.h"
+#include "moteur/composant3d.h"
 
 /*Variables globales*/
 extern int xO;
@@ -37,14 +34,9 @@ extern int hauteur_ecran;
 
 void initialisation();
 
-void Parallelepiped(float x, float y, float z, float dx, float dy, float dz);
-
 void animer();
-
-void afficher_objet_couleur(objet o);
 
 void affichage();
 
-void afficher_carte(carte c);
 
 #endif /*AFFICHAGE_H*/
