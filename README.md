@@ -68,6 +68,8 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 
 - **generateur_carte** (`generateur_carte.c / generateur_carte.h`)  
   création d'une carte de jeu
+  - gestion du déplacement du joueur avec les colision
+  - gestion des colision entre objet et joueur
 ---
 
 ### 2 Module `moteur`
@@ -75,10 +77,12 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 **Responsabilité : interaction et rendu**
 
 - **affichage** (`affichage.c / affichage.h`)  
+  Gestion de l'affichage du jeu (interface + 3D)  
   - Rendu OpenGL de la scène et des objets  
   - Debug visuel des listes d’objets
 
 - **controle** (`controle.c / controle.h`)  
+  Gestion de l'affichage des input clavier    
   - Gestion des entrées clavier et souris  
   - Déplacement du joueur et interaction avec la carte
 
@@ -86,6 +90,12 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
   Gestion de l'affichage de l'interface en 2D  
   - Rendu OpenGL en 2D de la barre de vie
   - Rendu OpenGL en 2D de la barre du jetpack
+  - Rendu OpenGL en 2D du compteur de FPS (éstimation)
+
+  - **composant2d** (`composant2d.c / composant2d.h`)    
+  Gestion de l'affichage des composant en 2D  
+  - affichage d'un rectangle
+  - affichage de texte 
 ---
 
 ### 3 Module `config`

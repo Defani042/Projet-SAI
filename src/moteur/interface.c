@@ -3,40 +3,10 @@
 
 #include"moteur/interface.h"
 
-/*
-R: permet d'afficher un rectangle
-E: 7 float (les coordonné x,y)(la taille w et h)(les rgb)
-S: rien
-A: Adrien
-*/
-void draw_rect(float x, float y, float w, float h, float r, float g, float b)
-{
-    glColor3f(r, g, b);
-    glBegin(GL_QUADS);
-        glVertex2f(x, y);
-        glVertex2f(x + w, y);
-        glVertex2f(x + w, y + h);
-        glVertex2f(x, y + h);
-    glEnd();
-}
-
-/*
-R: permet d'afficher du texte
-E: 2 float (les coordonné x,y) et une chaine de caractère
-S: rien
-A: Adrien
-*/
-void draw_text(float x, float y, const char* text)
-{
-    glColor3f(1.0f, 1.0f, 1.0f); /*couleur blanc*/
-    glRasterPos2f(x, y);         /*position*/
-    /*affichage du texte*/
-    while (*text)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *text);
-        text++;
-    }
-}
+/*variable pour compter le nombre de FPS*/
+static int frame_count = 0;
+static double last_time = 0.0;
+static double fps = 0.0;
 
 /*
 R: permet d'afficher la bare de vie 
@@ -68,6 +38,12 @@ void afficher_vie()
     draw_text(x + 50, y + 16, buffer);
 }
 
+/*
+R: permet d'afficher la bare du jetpack
+E: vide
+S: rien
+A: Adrien
+*/
 void afficher_jet()
 {
     char buffer[32];
@@ -90,6 +66,40 @@ void afficher_jet()
     sprintf(buffer, "%d / %d", (int)j->jetpack, (int)j->jetpack_max);
     draw_text(x + 50, y + 16, buffer);
 }
+
+
+/*
+R: permet de mettre à jour les fps
+E: vide
+S: rien
+A: Adrien
+*/
+void maj_fps()
+{   
+    double current_time;
+    frame_count++;
+
+    current_time = glutGet(GLUT_ELAPSED_TIME) / 1000.0; 
+    if (current_time - last_time >= 1.0)/*actualisation toutes les seconde*/
+    {
+        fps = frame_count / (current_time - last_time);
+        frame_count = 0;
+        last_time = current_time;
+    }
+}
+
+/*
+R: permet d'afficher les FPS
+E: vide
+S: rien
+A: Adrien
+*/
+void afficher_fps()
+{
+    char buffer[32];
+    sprintf(buffer, "FPS: %.2f", fps);
+    draw_text(largeur_ecran -100,20, buffer); /*coin en haut à droite*/
+}
 /*
 R: permet d'afficher l'interface
 E: vide
@@ -99,6 +109,8 @@ A: Adrien
 void afficher_interface(){
     afficher_vie();
     afficher_jet();
+    maj_fps();
+    afficher_fps();
 }
 
 #endif /*_INTERFACE_C_*/

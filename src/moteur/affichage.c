@@ -109,7 +109,6 @@ void animer(){
         last_time = current_time;
         raffraichir();
         glutPostRedisplay();
-        usleep(2000);
     }
 }
 
@@ -219,11 +218,11 @@ A: Gaultier et Adrien
 */
 void affichage(){
 
-    clock_t debut, fin;
+    /*clock_t debut, fin;
     double temps;
     char buffer[64];
 
-    debut = clock();
+    debut = clock();*/
     /*debut*/
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
@@ -255,8 +254,8 @@ void affichage(){
     /* ===================== */
     /*       UI 2D           */
     /* ===================== */
-    carte_jeu->j->vie = alea_double(1,carte_jeu->j->vie_max);
-    carte_jeu->j->jetpack = alea_double(1,carte_jeu->j->jetpack_max);
+    /*carte_jeu->j->vie = alea_double(1,carte_jeu->j->vie_max);
+    carte_jeu->j->jetpack = alea_double(1,carte_jeu->j->jetpack_max);*/
     glDisable(GL_DEPTH_TEST);
     /* Projection 2D */
     glMatrixMode(GL_PROJECTION);
@@ -279,9 +278,9 @@ void affichage(){
     glutSwapBuffers();
 
     /* Mesure du temps */
-    fin = clock();
+    /*fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;
     sprintf(buffer, "%s%s frame calculé en %f sec", MOTEUR, SUCC, temps);
-    log_message(buffer);
+    log_message(buffer);*/
 }
 #endif /*AFFICHAGE_C*/
