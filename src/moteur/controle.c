@@ -35,7 +35,7 @@ void avancer() {
         return;
     }
         
-    deplacer_joueur(carte_jeu, -1.0, 0.0, 0.0);
+    deplacer_joueur(carte_jeu, 1.0, 0.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
     eyeX = (int)j->pos->x;
@@ -62,7 +62,7 @@ void gauche(){
     }
     
 
-    deplacer_joueur(carte_jeu, 0.0, -1.0, 0.0);
+    deplacer_joueur(carte_jeu, 0.0, 1.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
     eyeX = (int)j->pos->x;
@@ -87,7 +87,7 @@ void reculer(){
     }
     
 
-    deplacer_joueur(carte_jeu, 1.0, 0.0, 0.0);
+    deplacer_joueur(carte_jeu, -1.0, 0.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
     eyeX = (int)j->pos->x;
@@ -113,7 +113,7 @@ void droite(){
         return;
     }
 
-    deplacer_joueur(carte_jeu, 0.0, 1.0, 0.0);
+    deplacer_joueur(carte_jeu, 0.0, -1.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
     eyeX = (int)j->pos->x;
@@ -240,7 +240,9 @@ void mouvement_souris(int x, int y){
     int dx = x - derX; /*distance de deplacement de la souris*/
     int dy = y - derY;
     float rad_camY;
+    joueur j;
 
+    j = carte_jeu->j;
     derX = x;
     derY = y;
 
@@ -259,11 +261,14 @@ void mouvement_souris(int x, int y){
         directionX = cos(rad_camY) * cos(angle_direction); /*application des */
         directionY = cos(rad_camY) * sin(angle_direction); /*direction aux vecteur*/
         directionZ = sin(rad_camY);
+        j->dir->x = directionX;
+        j->dir->y = directionY;
+        j->dir->z = directionZ;
 
     }
     /*si la souris touche les bors de l'ecran, elle reviens au centre*/
     if(x == 0 || y == 0 || x == largeur_ecran -1 || y == hauteur_ecran - 1){
-        glutWarpPointer(largeur_ecran/2, hauteur_ecran/2);
+        glutWarpPointer(largeur_ecran/2, hauteur_ecran/2);  
     }
     
 }

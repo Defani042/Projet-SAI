@@ -93,6 +93,7 @@ A: Adrien
 objet detecter_collision_joueur(carte c)
 {
     objet tmp;
+    char col[128];
 
     if (c == NULL || c->j == NULL)
         return NULL;
@@ -107,6 +108,8 @@ objet detecter_collision_joueur(carte c)
                 tmp->pos->x, tmp->pos->y, tmp->pos->z,
                 tmp->largeur, tmp->hauteur, tmp->longueur))
         {
+            sprintf(col,"%s%s collison détetecter en (%f,%f,%f)" ,NOYAU,SUCC,c->j->pos->x,c->j->pos->y,c->j->pos->z);
+            log_message(col);
             return tmp;  /* collision trouvée */
         }
 
@@ -128,29 +131,52 @@ void deplacer_joueur(carte c, double dx, double dy, double dz)
     double old_x, old_y, old_z;
     double pas;
 
+    double right_x;
+    double right_y; 
+
+    double move_x = 0;
+    double move_y = 0;
+    double move_z = 0;
+
     if (!c || !c->j || !c->j->pos)
         return;
 
     j = c->j;
 
-    /* Déplacement par frame */
-    pas = 1.0 * j->vit; /*calul du pas*/
+    pas = j->vit;
 
     old_x = j->pos->x;
     old_y = j->pos->y;
     old_z = j->pos->z;
 
-    j->pos->x += dx * pas;
+    /* Avancer / reculer (dx) */
+    move_x += j->dir->x * dx;
+    move_y += j->dir->y * dx;
+
+
+    /* Strafe gauche / droite (dy) */
+    right_x = -j->dir->y;
+    right_y = j->dir->x;
+
+    move_x += right_x * dy;
+    move_y += right_y * dy;
+
+    /* Vertical (dz) */
+    move_z = dz;
+
+    /* Application avec collisions */
+    j->pos->x += move_x * pas;
     if (detecter_collision_joueur(c))
         j->pos->x = old_x;
-    j->pos->y += dy * pas;
+
+    j->pos->y += move_y * pas;
     if (detecter_collision_joueur(c))
         j->pos->y = old_y;
-    j->pos->z += dz * pas;
+
+    j->pos->z += move_z * pas;
     if (detecter_collision_joueur(c))
         j->pos->z = old_z;
 }
-
 /*
 R: permet de vérifier si la partie est finie
 E: 1 TAD carte
