@@ -18,6 +18,12 @@ void maj_fps();
 
 void afficher_fps();
 
+void afficher_xp(int screen_width);
+
+void maj_fps();
+
+void afficher_fps();
+
 void afficher_pos();
 
 void afficher_interface();

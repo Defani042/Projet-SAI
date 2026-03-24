@@ -67,6 +67,43 @@ void afficher_jet()
     draw_text(x + 50, y + 16, buffer);
 }
 
+/*
+R: permet d'afficher l'xp
+E: vide
+S: rien
+A: Adrien
+*/
+void afficher_xp(int screen_width){
+    char buffer[32];
+    joueur j = carte_jeu->j;
+
+    /* Taille de la barre */
+    float largeur = 220;
+    float hauteur = 20;
+
+    /* Position centrée en haut */
+    float x = (screen_width - largeur) / 2.0f; /*centrée horizontalement*/
+    float y = 20; /*distance depuis le haut de l'écran*/
+
+    /* Ratio pour le remplissage (XP ou jetpack) */
+    float ratio = j->niv / j->seuil; /*proportion*/ 
+
+    /* Affichage fond gris */
+    draw_rect(x, y, largeur, hauteur, 0.2f, 0.2f, 0.2f);
+
+    /* Affichage du jetpack/fond bleu */
+    draw_rect(x + 10, y + 4, (largeur - 20) * ratio, hauteur - 8, 0.0f, 0.1f, 1.0f);
+
+    /* Texte sur la barre (XP ou jetpack) */
+    sprintf(buffer, "%d / %d", (int)j->xp, (int)j->seuil);
+    draw_text(x + (largeur / 2) - 30, y + 16, buffer); /*centré approximativement*/ 
+
+    /* Affichage du niveau sous la barre */
+    sprintf(buffer, "Niveau %d", j->niv);
+    draw_text(x + (largeur / 2) - 40, y + hauteur + 15, buffer); /*centré horizontalement*/
+}
+
+
 
 /*
 R: permet de mettre à jour les fps
@@ -127,6 +164,7 @@ void afficher_interface(){
     afficher_vie();
     afficher_jet();
     afficher_pos();
+    afficher_xp(largeur_ecran);
     maj_fps();
     afficher_fps();
 }

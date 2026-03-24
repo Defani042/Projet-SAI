@@ -127,6 +127,7 @@ void niveau_suivant(joueur j){
     if(j->xp <= j->niv*j->seuil){
         j->xp -= j->seuil*j->niv;
         j->niv++;
+        j->seuil*=2;
     }
 }
 
