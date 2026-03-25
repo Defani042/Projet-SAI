@@ -69,13 +69,24 @@ void afficher_objet_couleur(objet o)
     if (o == NULL || o->pos == NULL)
         return;
 
-    x1 = (float)o->pos->x;
-    y1 = (float)o->pos->y;
-    z1 = (float)o->pos->z;
+    glPushMatrix();
 
-    x2 = x1 + (float)o->largeur;
-    y2 = y1 + (float)o->hauteur;
-    z2 = z1 + (float)o->longueur;
+    /* translation de x,y,z de l'objet vers l'origine  */
+    glTranslatef(o->pos->x, o->pos->y, o->pos->z);
+
+    /* rotation */
+    glRotatef(o->rot->x, 1, 0, 0);
+    glRotatef(o->rot->y, 0, 1, 0);
+    glRotatef(o->rot->z, 0, 0, 1);
+
+    /* on dessine à l'origine  (0,0,0) */
+    x1 = 0;
+    y1 = 0;
+    z1 = 0;
+
+    x2 = (float)o->largeur;
+    y2 = (float)o->hauteur;
+    z2 = (float)o->longueur;
 
     glBegin(GL_QUADS);
 
@@ -122,6 +133,7 @@ void afficher_objet_couleur(objet o)
     glVertex3f(x1, y2, z2);
 
     glEnd();
+    glPopMatrix();
 }
 
 /*
