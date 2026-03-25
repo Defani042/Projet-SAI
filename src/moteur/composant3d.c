@@ -3,6 +3,7 @@
 
 #include "moteur/composant3d.h"
 
+int nb_obj = 0;
 
 /*
 R: permet de dessiner un parallepipede
@@ -132,6 +133,7 @@ A: Adrien
 void afficher_carte(carte c) {
     objet o;
     joueur j;
+    nb_obj = 0;
 
     /* sécurité : carte et joueur */
     if (c == NULL)
@@ -146,6 +148,7 @@ void afficher_carte(carte c) {
         /* affiche seulement si visible par le joueur */
         if (objet_visible(j, o)) {
             afficher_objet_couleur(o);
+            nb_obj++;
         }
         o = o->next;
     }

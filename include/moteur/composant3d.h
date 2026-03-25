@@ -9,6 +9,8 @@
 #include <time.h>
 #include <unistd.h>
 
+extern int nb_obj;
+
 /*parite noyau*/
 #include "noyau/objet.h"
 #include "noyau/carte_globale.h"

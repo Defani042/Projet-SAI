@@ -154,6 +154,20 @@ void afficher_pos(){
     sprintf(buffpos, "x:%d y:%d z:%d", (int)j->pos->x,(int)j->pos->y,(int)j->pos->z);
     draw_text(x,y+30, buffpos);
 }
+
+/*
+R: permet d'afficher le nombre d'objet
+E: vide
+S: rien
+A: Adrien
+*/
+void afficher_nb_obj(){
+    char buffer[32];
+    sprintf(buffer, "OBJ: %d", nb_obj);
+    draw_text(largeur_ecran -180,20, buffer); /*coin en haut à droite*/
+}
+
+
 /*
 R: permet d'afficher l'interface
 E: vide
@@ -164,6 +178,7 @@ void afficher_interface(){
     afficher_vie();
     afficher_jet();
     afficher_pos();
+    afficher_nb_obj();
     afficher_xp(largeur_ecran);
     maj_fps();
     afficher_fps();

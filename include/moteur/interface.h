@@ -26,6 +26,8 @@ void afficher_fps();
 
 void afficher_pos();
 
+void afficher_nb_obj();
+
 void afficher_interface();
 
 
