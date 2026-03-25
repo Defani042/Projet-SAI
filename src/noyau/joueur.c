@@ -134,8 +134,10 @@ A: Adrien
 */
 void reapparition(joueur j){
     if(j->pos->z < -100){
-        j->pos = creer_position(0,0, 2);
-        log_message(NOYAU SUCC "replacement du joueur en (0,0,2)");
+        j->pos->x = -5;
+        j->pos->y = -5;
+        j->pos->z = 5;
+        log_message(NOYAU SUCC "replacement du joueur en (0,0,5)");
     }
 
 }

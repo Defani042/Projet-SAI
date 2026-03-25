@@ -14,9 +14,9 @@
 #define DURRER_JET 3
 
 /*definiation de la hitbox du joueur*/
-#define LONG 1
-#define LARG 1
-#define HAUT 1
+#define LONG 0.5
+#define LARG 0.5
+#define HAUT 0.5
 
 
 /*CAPACITER DU JOUEUR*/
@@ -35,7 +35,7 @@
 #define WARN "(WARN): "
 #define SUCC "(SUCCES): "
 #define MOTEUR "[MOTEUR]: "
-#define NOYAU "[NOYEAU]: "
+#define NOYAU "[NOYAU]: "
 #define LOG "[LOG]: "
 
 #ifndef M_PI
