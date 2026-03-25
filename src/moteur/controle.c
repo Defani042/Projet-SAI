@@ -160,6 +160,7 @@ void bas(){
         log_message(MOTEUR WARN "Joueur NULL! fonction bas()");
         return;
     }
+    reapparition(j);
     
     deplacer_joueur(carte_jeu, 0.0, 0.0, -1.0);
 

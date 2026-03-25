@@ -131,6 +131,19 @@ void niveau_suivant(joueur j){
     }
 }
 
+/*
+R: fonction pour replacer le joueur sur la map 
+E: 1 TAD joueur 
+S: vide
+A: Adrien
+*/
+void reapparition(joueur j){
+    if(j->pos->z < -100){
+        j->pos = creer_position(0,0, 2);
+        log_message(NOYAU SUCC "replacement du joueur en (0,0,2)");
+    }
+
+}
 
 
 

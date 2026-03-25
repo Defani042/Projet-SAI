@@ -47,4 +47,6 @@ void amelirorer_stat(joueur j,int stat,double val);
 
 void niveau_suivant(joueur j);
 
+void reapparition(joueur j);
+
 #endif /*_JOUEUR_H_*/
