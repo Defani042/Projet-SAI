@@ -187,6 +187,6 @@ Supprime les fichiers compilés et recompile tout depuis zéro.
 - **Compiler et générer les fichiers d'assemblages** :  
 
 ```bash
-make re
+make asm
 ```
 Compile les fichiers source et génère le code en asembleur.
