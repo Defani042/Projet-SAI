@@ -13,6 +13,10 @@
 /*COULDOWN DE  REGENERATION*/
 #define DURRER_JET 3
 
+
+#define PADING 1
+
+
 /*definiation de la hitbox du joueur*/
 #define LONG 0.5
 #define LARG 0.5
