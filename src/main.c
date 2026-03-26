@@ -95,10 +95,10 @@ int main(int argc, char *argv[]){
     log_message(INIT SUCC "la carte a été créé");
 
     /*calcul des resource consommer par la carte*/
-    tj = sizeof(joueur);
+    tj = sizeof(s_joueur);
     size  =  taille(carte_jeu->liste_objets);
-    to = sizeof(objet) * size;
-    tm = sizeof(carte) + to;
+    to = sizeof(s_objet) * size;
+    tm = sizeof(s_carte) + tj + to;
     /*signalisation*/
     signal(SIGINT, liberation_programme);
     signal(SIGTERM, liberation_programme);
