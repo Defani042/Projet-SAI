@@ -7,6 +7,7 @@
 static int frame_count = 0;
 static double last_time = 0.0;
 static double fps = 0.0;
+clock_t timer = 0;
 
 /*
 R: permet d'afficher la bare de vie 
@@ -167,6 +168,30 @@ void afficher_nb_obj(){
     draw_text(largeur_ecran -180,20, buffer); /*coin en haut à droite*/
 }
 
+/*
+R: permet d'afficher le timmer
+E: vide
+S: rien
+A: Adrien
+*/
+void afficher_timmer(){
+    char buffer[32];
+    int min,sec,heur,reste;
+    float x = 400;
+    float y = 20;
+    /*calcul du timer*/
+    clock_t maintenant = clock(); /*temps actuel*/
+    float secondes = (float)(maintenant - timer) / CLOCKS_PER_SEC;
+    heur = (int)(secondes / 3600);
+    min  = ((int)secondes % 3600) / 60;
+    sec  = (int)secondes % 60;
+    /*desin du timmer*/
+    sprintf(buffer, "%02d:%02d:%02d",heur,min,sec);
+    draw_text(x,y+20, buffer);
+    
+}
+    
+
 
 /*
 R: permet d'afficher l'interface
@@ -178,6 +203,7 @@ void afficher_interface(){
     afficher_vie();
     afficher_jet();
     afficher_pos();
+    afficher_timmer();
     afficher_nb_obj();
     afficher_xp(largeur_ecran);
     maj_fps();

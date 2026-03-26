@@ -12,6 +12,8 @@
 #include "moteur/composant2d.h"
 #include "moteur/affichage.h"
 
+extern clock_t timer;
+
 void afficher_vie();
 
 void maj_fps();
@@ -27,6 +29,8 @@ void afficher_fps();
 void afficher_pos();
 
 void afficher_nb_obj();
+
+void afficher_timmer();
 
 void afficher_interface();
 

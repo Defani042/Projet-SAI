@@ -29,6 +29,10 @@ int main(int argc, char *argv[]){
     log_message(INIT SUCC "les fichiers de log ont été créés");
     log_message(INIT SUCC "Début du jeu");
     
+
+    /*init timer*/
+    timer = clock();
+    log_message(INIT SUCC "timer initialisé");
     /*initialisation de la map*/
     carte_jeu = creer_carte_jeu();
     log_message(INIT SUCC "la carte a été créé");
