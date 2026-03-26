@@ -122,7 +122,7 @@ int log_nettoyer()
         fprintf(stderr, "Erreur nettoyage fichier log (%s)\n", LOG_FILE_PATH);
         return 0;
     }
-
+    log_message(LOG SUCC "netoyage des logs des logs !");
     /* Remet le fichier en mode append pour les prochaines écritures */
     fclose(log_file);
     log_file = fopen(LOG_FILE_PATH, "a");
@@ -131,6 +131,7 @@ int log_nettoyer()
         fprintf(stderr, "Erreur réouverture fichier log (%s)\n", LOG_FILE_PATH);
         return 0;
     }
+    log_message(LOG SUCC "ouverture  des logs !");
 
     return 1;
 }
