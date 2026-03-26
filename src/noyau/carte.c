@@ -87,7 +87,7 @@ int collision_hitbox(
 /*
 R: gestion de la colision avec tous les pbjet de la carte
 E: 1 TAD carte
-S: l'objet en colistion avec le joeur ou NULL si aucune colision
+S: l'objet en colistion avec le joueur ou NULL si aucune colision
 A: Adrien
 */
 objet detecter_collision_joueur(carte c)

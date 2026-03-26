@@ -42,9 +42,8 @@ void avancer() {
     eyeY = (int)j->pos->y;
     eyeZ = (int)j->pos->z;
     xO--;
-    eyeX += cos(angle_direction);
-    eyeY += sin(angle_direction);
-
+    eyeX += directionX;
+    eyeY += directionY;
 }
 
 /*
@@ -69,8 +68,8 @@ void gauche(){
     eyeY = (int)j->pos->y;
     eyeZ = (int)j->pos->z;
     yO--;
-    eyeX -= sin(angle_direction);
-    eyeY += cos(angle_direction);
+    eyeX -= directionY;
+    eyeY += directionX;
 }
 
 /*
@@ -95,8 +94,8 @@ void reculer(){
     eyeZ = (int)j->pos->z;
     xO++;
 
-    eyeX -= cos(angle_direction);
-    eyeY -= sin(angle_direction);
+    eyeX -= directionX;
+    eyeY -= directionY;
 
 }
 
@@ -120,8 +119,8 @@ void droite(){
     eyeY = (int)j->pos->y;
     eyeZ = (int)j->pos->z;
     yO++;
-    eyeX += sin(angle_direction);
-    eyeY -= cos(angle_direction);
+    eyeX += directionY;
+    eyeY -= directionX;
 }
 
 /*
@@ -250,7 +249,7 @@ void mouvement_souris(int x, int y){
     derY = y;
 
     /*if pour les deplacement trop grand (comme le reset de la souris)*/
-    if((dx < 10 && dx > -10) && (dy < 10 && dy > -10)){
+    if((dx < 100 && dx > -100) && (dy < 100 && dy > -100)){
 
         camX -= dx;
         camY -= dy;

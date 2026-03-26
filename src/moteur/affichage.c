@@ -18,7 +18,7 @@ int l = -16;
 int r = 16;
 int b = -9;
 int top = 9;
-int n = 5;
+int n = 15;
 int f = 1000;
 int largeur_ecran;
 int hauteur_ecran;

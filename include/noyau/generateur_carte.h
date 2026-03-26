@@ -8,4 +8,6 @@
 
 carte creer_carte_test();
 
+carte creer_carte_jeu();
+
 #endif /*_GENERATEUR_CARTE_H_*/

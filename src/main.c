@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
     log_message(INIT SUCC "Début du jeu");
     
     /*initialisation de la map*/
-    carte_jeu = creer_carte_test();
+    carte_jeu = creer_carte_jeu();
     log_message(INIT SUCC "la carte a été créé");
 
     /*calcul des resource consommer par la carte*/
