@@ -176,7 +176,7 @@ A: Adrien
 */
 void afficher_timmer(){
     char buffer[32];
-    int min,sec,heur,reste;
+    int min,sec,heur;
     float x = 400;
     float y = 20;
     /*calcul du timer*/
