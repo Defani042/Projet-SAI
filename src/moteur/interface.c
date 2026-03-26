@@ -34,7 +34,7 @@ void afficher_vie()
 
    
     /*texte sur la barre*/
-    sprintf(buffer, "%d / %d", (int)j->vie, (int)j->vie_max);
+    sprintf(buffer, "PV : %d / %d", (int)j->vie, (int)j->vie_max);
     draw_text(x + 50, y + 16, buffer);
 }
 
@@ -63,7 +63,7 @@ void afficher_jet()
     draw_rect(x+10, y+4, (largeur-20) * ratio,hauteur-8, 0.0f, 0.0f, 1.0f);
     
     /*texte sur la barre*/
-    sprintf(buffer, "%d / %d", (int)j->jetpack, (int)j->jetpack_max);
+    sprintf(buffer, " Jet : %d / %d", (int)j->jetpack, (int)j->jetpack_max);
     draw_text(x + 50, y + 16, buffer);
 }
 
