@@ -122,9 +122,6 @@ void affichage(){
    
     glEnable(GL_DEPTH_TEST); 
 
-    /* Affichage */
-    glutSwapBuffers();
-
 
     /*Fin*/
     glutSwapBuffers();

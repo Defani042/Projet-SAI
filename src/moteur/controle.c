@@ -44,6 +44,7 @@ void avancer() {
     xO--;
     eyeX += directionX;
     eyeY += directionY;
+    eyeZ += directionZ;
 }
 
 /*
