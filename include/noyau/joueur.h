@@ -17,6 +17,7 @@ extern clock_t dernier_temps_jetpack;
 #define ATK 10
 #define JET 50
 #define SEUIL 100
+#define TAILLE 3;
 
 typedef struct s_joueur
 {
@@ -34,6 +35,7 @@ typedef struct s_joueur
     int xp;
     double vit;
     double def;
+    int taille;
     int seuil;
 }s_joueur;
 

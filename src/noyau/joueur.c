@@ -31,7 +31,9 @@ joueur creer_joueur(position pos) {
     j->vit = DEFAULT;
     j->def = DEFAULT;
     j->seuil = SEUIL;
+    j->taille = TAILLE;
 
+    /*hitbox du joueur*/
     j->hauteur = HAUT;
     j->largeur = LARG;
     j->longueur = LONG;

@@ -201,9 +201,9 @@ S: rien
 A: Adrien
 */
 void afficher3d(){
-    position pos = carte_jeu->j->pos;
+    joueur j = carte_jeu->j;
     afficher_carte(carte_jeu);
-    afficher_cercle3D(pos,3.0);
+    afficher_cercle3D(j->pos,j->taille);
     
 }
 
