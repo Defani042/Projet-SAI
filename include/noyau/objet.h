@@ -35,7 +35,7 @@ objet ajouter_fin(objet liste, objet nouvel_objet);
 
 objet obtenir_objet(objet liste, int index);
 
-int taille(objet o);
+int taille_objet(objet o);
 
 void afficher_objets(objet liste);
 

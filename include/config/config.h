@@ -46,4 +46,9 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+
+#define NBMAX_ENNEMI 20;
+
+
+
 #endif /*_CONFIG_H_*/

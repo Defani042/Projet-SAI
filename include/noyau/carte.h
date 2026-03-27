@@ -7,12 +7,15 @@
 
 #include "noyau/joueur.h"
 #include "noyau/objet.h"
+#include "noyau/ennemi.h"
 
 
 typedef struct s_carte
 {
     objet liste_objets;
     joueur j;
+    ennemi liste_ennemi;
+    
 }s_carte;
 
 typedef s_carte * carte;
@@ -26,6 +29,13 @@ carte creer_carte_vide();
 
 
 int collision_hitbox(
+    double x1, double y1, double z1,
+    double w1, double h1, double l1,
+    double x2, double y2, double z2,
+    double w2, double h2, double l2
+);
+
+int collision_objet(
     double x1, double y1, double z1,
     double w1, double h1, double l1,
     double x2, double y2, double z2,

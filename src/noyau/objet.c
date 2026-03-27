@@ -227,7 +227,7 @@ E: 1 TAD objet
 S: 1 entier la taille de la liste
 A: Adrien
 */
-int taille(objet o){
+int taille_objet(objet o){
     objet tmp = o;
     int t =0;
     while (tmp!=NULL)

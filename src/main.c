@@ -30,7 +30,6 @@ void liberer_jeux(){
     liberer_carte(carte_jeu);
     carte_jeu = NULL;
     log_close();
-
     
    
 }
@@ -72,12 +71,14 @@ void liberation_programme(int sig){
 }
 
 int main(int argc, char *argv[]){
-    int tj,to,tm;
-    int size;
+    int tj,to,tm,te;
+    int size1,size2;
     char buff1[64];
     char buff2[64];
     char buff3[64];
     char buff4[64];
+    char buff5[64];
+    char buff6[64];
     srand((unsigned int)time(NULL));
 
     /*creation du fichier de log*/
@@ -96,26 +97,31 @@ int main(int argc, char *argv[]){
 
     /*calcul des resource consommer par la carte*/
     tj = sizeof(s_joueur);
-    size  =  taille(carte_jeu->liste_objets);
-    to = sizeof(s_objet) * size;
-    tm = sizeof(s_carte) + tj + to;
+    size1  =  taille_objet(carte_jeu->liste_objets);
+    to = sizeof(s_objet) * size1;
+    size2 =  taille_ennemi(carte_jeu->liste_ennemi);
+    te = sizeof(s_ennemi)*size2;
+    tm = sizeof(s_carte) + tj + to + te;
     /*signalisation*/
     signal(SIGINT, liberation_programme);
     signal(SIGTERM, liberation_programme);
     signal(SIGSEGV, liberation_programme);
     log_message(INIT SUCC "signalisation... OK");
     /*préparation du message pour les log */
-    sprintf(buff1,"%s%s taille de la structure carte %d octets",INIT,SUCC,tm);
-    sprintf(buff2,"%s%s taille de la structure joueur %d octets",INIT,SUCC,tj);
-    sprintf(buff3,"%s%s taille de la liste d'objets %d octets",INIT,SUCC,to);
-    sprintf(buff4,"%s%s nombre d'objet initialisés %d ",INIT,SUCC,size);
-
+    sprintf(buff1,"%s%s taille de la structure carte %d octet(s)",INIT,SUCC,tm);
+    sprintf(buff2,"%s%s taille de la structure joueur %d octet(s)",INIT,SUCC,tj);
+    sprintf(buff3,"%s%s taille de la liste d'objets %d octet(s)",INIT,SUCC,to);
+    sprintf(buff4,"%s%s taille de la liste d'ennemis %d octet(s)",INIT,SUCC,te);
+    sprintf(buff5,"%s%s nombre d'objet(s) initialisés  : %d ",INIT,SUCC,size1);
+    sprintf(buff6,"%s%s nombre d'ennemi(s) initialisés : %d ",INIT,SUCC,size2);
     /*écriture dans les log*/
     log_message(INIT SUCC"====MONITEUR====");
     log_message(buff1);
     log_message(buff2);
     log_message(buff3);
     log_message(buff4);
+    log_message(buff5);
+    log_message(buff6);
     log_message(INIT SUCC"================");
     log_message(INIT SUCC"Préparation du rendu OPENGL");
 
