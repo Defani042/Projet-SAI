@@ -56,9 +56,10 @@ carte creer_carte_test()
 
 carte creer_carte_jeu(){
     carte c;
-    objet sol;
-    objet  obstacle1, obstacle2, obstacle3,obstacle4,mur,mur1,mur2,mur3;
-    objet plafond,plafond1,plafond2,plafond3;
+    objet sol,mur,mur1,mur2,mur3,plafond;
+
+    objet arrete1,arrete2,arrete3,arrete4,arrete5,arrete6,arrete7,arrete8;
+
     position pos_joueur;
 
     /* Crée une carte vide */
@@ -69,47 +70,64 @@ carte creer_carte_jeu(){
     c->j = creer_joueur(pos_joueur);
     
     /*Création du sol et du plafond*/
-    sol = creer_objet(creer_position(-100,-100,-2),200,200,2);
+    sol = creer_objet(creer_position(-250,-250,-2),500,500,2);
+    couleur_objet(sol, 0.0f, 0.9f, 0.0f);
+
+    mur = creer_objet(creer_position(-250, -250, -2), 500, 2, 500);
+    couleur_objet(mur, 0.0f, 0.0f, 0.9f);
+
+    mur1 = creer_objet(creer_position(250, -250, -2), 500, 2, 500);
+    couleur_objet(mur1, 0.0f, 0.0f, 0.9f);
+
+    mur2 = creer_objet(creer_position(-250, 250, -2), 2, 500, 500);
+    couleur_objet(mur2, 0.0f, 0.0f, 0.9f);
+
+    mur3 = creer_objet(creer_position(-250, -250, -2), 2, 500, 500);
+    couleur_objet(mur3, 0.0f, 0.0f, 0.9f);
+
+    plafond = creer_objet(creer_position(-250,-250,498),500,500,2);
+    couleur_objet(plafond, 0.0f, 0.0f, 0.9f);
+
+    arrete1 = creer_objet(creer_position(-248, -248, -2), 1.0, 1.0,500.0);
+    couleur_objet(arrete1, 0.0f, 0.0f, 0.0f);
+
+    arrete2 = creer_objet(creer_position(248, -248, -2), 1.0, 1.0, 500.0);
+    couleur_objet(arrete2, 0.0f, 0.0f, 0.0f);
+
+    arrete3 = creer_objet(creer_position(-248, 248, -2), 1.0, 1.0, 500.0);
+    couleur_objet(arrete3, 0.0f, 0.0f, 0.0f);
+
+    arrete4 = creer_objet(creer_position(248, 248, -2), 1.0, 1.0, 500.0);
+    couleur_objet(arrete4, 0.0f, 0.0f, 0.0f);
+
+    arrete5 = creer_objet(creer_position(-248, -248, 498), 500.0, 1.0, 1.0);
+    couleur_objet(arrete5, 0.0f, 0.0f, 0.0f);
+
+    arrete6 = creer_objet(creer_position(-248, -248, 498), 1.0, 500.0, 1.0);
+    couleur_objet(arrete6, 0.0f, 0.0f, 0.0f);
+
+    arrete7 = creer_objet(creer_position(248, 248, 498), -500.0, 1.0, 1.0);
+    couleur_objet(arrete7, 0.0f, 0.0f, 0.0f);
+
+    arrete8 = creer_objet(creer_position(248, 248, 498), 1.0, -500.0, 1.0);
+    couleur_objet(arrete8, 0.0f, 0.0f, 0.0f);
+
+
     c->liste_objets = ajouter_fin(c->liste_objets,sol);
-
-    plafond = creer_objet(creer_position(-100,-100,198),200,150,2);
-    c->liste_objets = ajouter_fin(c->liste_objets,plafond);
-
-    plafond1 = creer_objet(creer_position(-100,-50,398),150,200,2);
-    c->liste_objets = ajouter_fin(c->liste_objets,plafond1);
-
-    plafond2 = creer_objet(creer_position(-100,-100,598),150,200,2);
-    c->liste_objets = ajouter_fin(c->liste_objets,plafond2);
-
-    plafond3 = creer_objet(creer_position(-50,-100,798),200,150,2);
-    c->liste_objets = ajouter_fin(c->liste_objets,plafond3);
-    
-    /* création des mur*/
-    mur = creer_objet(creer_position(-100.0, -100, -2), 200, 2, 800);
+    c->liste_objets = ajouter_fin(c->liste_objets, plafond);
     c->liste_objets = ajouter_fin(c->liste_objets, mur);
-
-    mur1 = creer_objet(creer_position(100.0, -100, -2), 200, 2, 800);
     c->liste_objets = ajouter_fin(c->liste_objets, mur1);
-
-    mur2 = creer_objet(creer_position(-100.0, 100, -2), 2, 200, 800);
     c->liste_objets = ajouter_fin(c->liste_objets, mur2);
-
-    mur3 = creer_objet(creer_position(-100.0, -100, -2), 2, 200, 800);
     c->liste_objets = ajouter_fin(c->liste_objets, mur3);
 
-    obstacle4 = creer_objet(creer_position(-10.0, -1.0, -10.0), 20.0, 1.0, 20.0);
-    c->liste_objets = ajouter_fin(c->liste_objets, obstacle4);
-
-    /* Crée quelques obstacles */
-    obstacle1 = creer_objet(creer_position(3.0, 0.0, 2.0), 2.0, 2.0, 2.0);
-    obstacle2 = creer_objet(creer_position(-2.0, 0.0, -3.0), 1.5, 1.5, 1.5);
-    obstacle3 = creer_objet(creer_position(0.0, 0.0, 5.0), 2.0, 2.0, 2.0);
-    
-
-    /* Ajoute les obstacles à la liste */
-    c->liste_objets = ajouter_debut(c->liste_objets, obstacle1);
-    c->liste_objets = ajouter_debut(c->liste_objets, obstacle2);
-    c->liste_objets = ajouter_debut(c->liste_objets, obstacle3);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete1);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete2);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete3);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete4);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete5);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete6);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete7);
+    c->liste_objets = ajouter_fin(c->liste_objets, arrete8);
 
     return c;
 }

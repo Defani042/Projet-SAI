@@ -22,6 +22,9 @@ objet creer_objet(position pos,double h,double l,double L){
     o->hauteur = h;
     o->largeur = l;
     o->longueur = L;
+    o->r = 1.0; /*par défaut les objets sont blancs*/
+    o->g = 1.0;
+    o->b = 1.0;
     o->pos = pos;
     o->next = NULL;
     log_message(NOYAU SUCC "Objet créé");
@@ -258,6 +261,19 @@ void afficher_objets(objet liste){
         tmp = tmp->next;
     }
 
+}
+
+/*
+R: permet de changer la couleur d'un objet
+E: 1 TAD objet et 3 float pour les composantes de couleur
+S: rien
+A: Gaultier
+*/
+void couleur_objet(objet o, float r, float g, float b){
+    if(o == NULL) return;
+    o->r = r;
+    o->g = g;
+    o->b = b;
 }
 
 
