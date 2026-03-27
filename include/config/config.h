@@ -14,13 +14,13 @@
 #define DURRER_JET 3
 
 
-#define PADING 1
+#define PADING 15
 
 
 /*definiation de la hitbox du joueur*/
-#define LONG 0.5
-#define LARG 0.5
-#define HAUT 0.5
+#define LONG 1.0
+#define LARG 1.0
+#define HAUT 3.0
 
 
 /*CAPACITER DU JOUEUR*/

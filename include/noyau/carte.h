@@ -8,6 +8,7 @@
 #include "noyau/joueur.h"
 #include "noyau/objet.h"
 
+
 typedef struct s_carte
 {
     objet liste_objets;
