@@ -12,6 +12,7 @@ typedef struct s_objet
     position rot; /*indique les angles de rotation de l'objet*/
     position pos;
     double hauteur,largeur,longueur;
+    double r,g,b;
     
     struct s_objet * next;
 }s_objet;
@@ -38,5 +39,7 @@ objet obtenir_objet(objet liste, int index);
 int taille(objet o);
 
 void afficher_objets(objet liste);
+
+void couleur_objet(objet o, float r, float g, float b);
 
 #endif /*_OBJET_H_*/

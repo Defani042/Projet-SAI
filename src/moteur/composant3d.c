@@ -90,43 +90,40 @@ void afficher_objet_couleur(objet o)
 
     glBegin(GL_QUADS);
 
+    glColor3f(o->r, o->g, o->b);
+
     /* Face avant - rouge */
-    glColor3f(1.0f, 0.0f, 0.0f);
     glVertex3f(x1, y1, z2);
     glVertex3f(x2, y1, z2);
     glVertex3f(x2, y2, z2);
     glVertex3f(x1, y2, z2);
 
     /* Face arrière - vert */
-    glColor3f(0.0f, 1.0f, 0.0f);
     glVertex3f(x1, y1, z1);
     glVertex3f(x2, y1, z1);
     glVertex3f(x2, y2, z1);
     glVertex3f(x1, y2, z1);
 
     /* Face gauche - bleu */
-    glColor3f(0.0f, 0.0f, 1.0f);
     glVertex3f(x1, y1, z1);
     glVertex3f(x1, y1, z2);
     glVertex3f(x1, y2, z2);
     glVertex3f(x1, y2, z1);
 
     /* Face droite - jaune */
-    glColor3f(1.0f, 1.0f, 0.0f);
     glVertex3f(x2, y1, z1);
     glVertex3f(x2, y1, z2);
     glVertex3f(x2, y2, z2);
     glVertex3f(x2, y2, z1);
 
     /* Face bas - cyan */
-    glColor3f(0.0f, 1.0f, 1.0f);
     glVertex3f(x1, y1, z1);
     glVertex3f(x2, y1, z1);
     glVertex3f(x2, y1, z2);
     glVertex3f(x1, y1, z2);
 
     /* Face haut - magenta */
-    glColor3f(1.0f, 0.0f, 1.0f);
+    
     glVertex3f(x1, y2, z1);
     glVertex3f(x2, y2, z1);
     glVertex3f(x2, y2, z2);
