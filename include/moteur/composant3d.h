@@ -22,6 +22,8 @@ void afficher_objet_couleur(objet o);
 
 void afficher_carte(carte c);
 
+void afficher_cercle3D(position c, float radius);
+
 void afficher3d();
 
 

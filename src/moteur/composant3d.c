@@ -166,6 +166,34 @@ void afficher_carte(carte c) {
     }
 }
 
+
+/*
+R: affiche un cercle en 3D
+E: carte c
+S: rien
+A: Adrien
+*/
+void afficher_cercle3D(position c, float radius)
+{   
+    int i;
+    float angle,x,y,z;
+    int segments = 100; /*nombre de segment du cercle*/
+    glBegin(GL_LINE_LOOP);
+
+    for(i = 0; i < segments; i++)
+    {
+        angle = 2.0f * M_PI * i / segments;
+
+        x = c->x + radius * cos(angle);
+        y = c->y + radius * sin(angle);
+        z = c->z; /*parralléle au plan du point */
+
+        glVertex3f(x, y, z);
+    }
+
+    glEnd();
+}
+
 /*
 R: affiche tous les objets 3d
 E: carte c
@@ -173,7 +201,9 @@ S: rien
 A: Adrien
 */
 void afficher3d(){
+    position pos = carte_jeu->j->pos;
     afficher_carte(carte_jeu);
+    /*afficher_cercle3D(pos,3.0);*/
     
 }
 
