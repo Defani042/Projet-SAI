@@ -20,6 +20,76 @@ int f = 1000;
 int largeur_ecran;
 int hauteur_ecran;
 
+int deja_libere = 0;
+volatile sig_atomic_t should_exit = 0;
+volatile sig_atomic_t signal_recu = 0;
+
+/*
+R: gestionn du handler en cas de fin
+E: un entier le signale reçu
+S: rien
+A: Adrien
+*/
+void gestion_signal(int sig){
+    signal_recu = sig;
+    should_exit = 1;
+}
+/*
+R: écriture dans les fichier de log
+E: une chaine de caractere
+S: rien
+A: Adrien
+*/
+void fermer_fenetre() {
+    log_message(INIT SUCC "Fermeture de la fenêtre...");
+    liberer_jeux();
+}
+
+/*
+R: libération du jeusx
+E: une chaine de caractere
+S: rien
+A: Adrien
+*/
+void liberer_jeux(){
+   
+    if (deja_libere) return; /*portection*/
+    /*zone de la meme à libérrer*/
+    liberer_carte(carte_jeu);
+    carte_jeu = NULL;
+    log_close();
+    
+   
+}
+/*
+R: écriture dans les fichier de log
+E: une chaine de caractere
+S: rien
+A: Adrien
+*/
+
+void sortie_propre(){
+    char buffer[128];
+    switch(signal_recu) {
+        case SIGINT:
+            log_message(INIT SUCC"Signal SIGINT reçu. Nettoyage..." );
+            break;
+        case SIGTERM:
+            log_message(INIT SUCC"Signal SIGTERM reçu. Nettoyage...");
+            break;
+        case SIGSEGV:
+            log_message(INIT SUCC"Signal SIGSEV reçu. Nettoyage...");
+            log_message(INIT SUCC"Erreur de ségmentation...");
+            exit(EXIT_FAILURE);
+            break;        
+        default:
+            sprintf(buffer, INIT SUCC"Signal %d reçu. Nettoyage...", signal_recu);
+            log_message(buffer);
+    }
+    liberer_jeux();
+    glutLeaveMainLoop();
+}
+
 /*
 R: permet d'initialiser tous les paramètre GLUT
 E: rien
@@ -53,8 +123,12 @@ S: rien
 A: Gaultier
 */
 void animer(){
-    static clock_t last_time = 0;
     clock_t current_time = clock();
+    static clock_t last_time = 0;
+    if (should_exit) {
+        sortie_propre();
+        return;
+    }
     if (!(current_time - last_time < CLOCKS_PER_SEC / 60)){
         last_time = current_time;
         raffraichir();

@@ -15,61 +15,6 @@
 #include "noyau/generateur_carte.h"
 #include "noyau/carte_globale.h"
 
-
-int deja_libere = 0;
-/*
-R: libération du jeusx
-E: une chaine de caractere
-S: rien
-A: Adrien
-*/
-void liberer_jeux(){
-   
-    if (deja_libere) return; /*portection*/
-    /*zone de la meme à libérrer*/
-    liberer_carte(carte_jeu);
-    carte_jeu = NULL;
-    log_close();
-    
-   
-}
-/*
-R: écriture dans les fichier de log
-E: une chaine de caractere
-S: rien
-A: Adrien
-*/
-void fermer_fenetre() {
-    log_message(INIT SUCC "Fermeture de la fenêtre...");
-    liberer_jeux();
-}
-/*
-R: écriture dans les fichier de log
-E: une chaine de caractere
-S: rien
-A: Adrien
-*/
-void liberation_programme(int sig){
-    char buffer[128];
-    switch(sig) {
-        case SIGINT:
-            log_message(INIT SUCC"Signal SIGINT reçu. Nettoyage..." );
-            break;
-        case SIGTERM:
-            log_message(INIT SUCC"Signal SIGTERM reçu. Nettoyage...");
-            break;
-        case SIGSEGV:
-            log_message(INIT SUCC"Signal SIGSEV reçu. Nettoyage...");
-            log_message(INIT SUCC"Erreur de ségmentation...");
-            break;        
-        default:
-            sprintf(buffer, INIT SUCC"Signal %d reçu. Nettoyage...", sig);
-            log_message(buffer);
-    }
-    liberer_jeux();
-    exit(EXIT_SUCCESS);/*car la mémoir est libérer donc c'est nice*/
-}
-
 int main(int argc, char *argv[]){
     int tj,to,tm,te;
     int size1,size2;
@@ -103,9 +48,9 @@ int main(int argc, char *argv[]){
     te = sizeof(s_ennemi)*size2;
     tm = sizeof(s_carte) + tj + to + te;
     /*signalisation*/
-    signal(SIGINT, liberation_programme);
-    signal(SIGTERM, liberation_programme);
-    signal(SIGSEGV, liberation_programme);
+    signal(SIGINT, sortie_propre);
+    signal(SIGTERM, sortie_propre);
+    signal(SIGSEGV, sortie_propre);
     log_message(INIT SUCC "signalisation... OK");
     /*préparation du message pour les log */
     sprintf(buff1,"%s%s taille de la structure carte %d octet(s)",INIT,SUCC,tm);

@@ -3,11 +3,13 @@
 
 #include "GL/gl.h"
 #include "GL/glut.h"
+#include "GL/freeglut_ext.h" 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
+#include <signal.h>
 
 /*parite moteur*/
 #include "moteur/interface.h"
@@ -28,6 +30,14 @@ extern int n;
 extern int f;
 extern int largeur_ecran;
 extern int hauteur_ecran;
+
+void gestion_signal(int sig);
+
+void sortie_propre();
+
+void fermer_fenetre();
+
+void liberer_jeux();
 
 void initialisation();
 
