@@ -145,7 +145,6 @@ S: rien
 A: Gaultier et Adrien
 */
 void affichage(){
-
     /*clock_t debut, fin;
     double temps;
     char buffer[64];
@@ -196,9 +195,13 @@ void affichage(){
 
     /*Fin*/
     glutSwapBuffers();
-    /*application de la graviter*/
+
+
+    /*application de la logique du jeu*/
     bas();
     regenerer_jetpack(carte_jeu->j);
+    avencer_vague_ennemi(carte_jeu);
+
 
     /* Mesure du temps */
     /*fin = clock();

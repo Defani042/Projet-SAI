@@ -62,8 +62,8 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 
 - **carte** (`carte.c / carte.h`)  
   Représente la carte et la disposition des objets dans l’espace 3D.
-  - gestion des colision avec les obstacle 
-  - gestion des déplacement du joeur 
+  - allocution des l'objet
+  - gestion des délément visible par le joueur
 
 - **aleatoire** (`aleatoire.c / aleatoire.h`)  
   Fournit des fonctions utilitaires pour générer des positions ou valeurs aléatoires.
@@ -72,7 +72,23 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
   création d'une carte de jeu
   - gestion du déplacement du joueur avec les colision
   - gestion des colision entre objet et joueur
+
+- **generateur_ennemi** (`generateur_ennemi.c / generateur_ennemi.h`)  
+  gestiond de la genération des ennemi
+  - création d'une template pour les ennemi
+  - spawn des ennemi sur la carte 
+
+- **collision** (`collision.c / collision.h`)  
+  gestion de la collision entre les élément de la carte
+  - gestion de collision du joueur 
+  - gestion de collision des ennemie
+
+- **deplacement** (`collision.c / collision.h`)  
+  gestion de la collision entre les élément de la carte
+  - gestion du deplacement du joueur 
+  - gestion du deplacement des ennemie
 ---
+
 
 ### 2 Module `moteur`
 

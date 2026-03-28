@@ -78,12 +78,13 @@ void liberer_ennemi(ennemi e){
 
 /*
 R: ajouter un ennemi dans la liste chainné 
-E: 1 TAD ennemie
+E: 2 TAD ennemie (le nouveau, la liste)
 S: rien
 A: Adrien
 */
 ennemi ajouter_ennemi(ennemi e1,ennemi e2){
     /*je coupe ennemi 1*/
+    if(e1 == NULL)return e2;
     if(e1->next!=NULL){
         liberer_ennemi(e1->next);
         log_message(NOYAU WARN "vous ne pouvez ajouter qu'un ennemie à la fois");

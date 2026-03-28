@@ -14,6 +14,7 @@
 /*noyau du jeu*/
 #include "noyau/generateur_carte.h"
 #include "noyau/carte_globale.h"
+#include "noyau/generateur_ennemi.h"
 
 int main(int argc, char *argv[]){
     int tj,to,tm,te;
@@ -39,6 +40,9 @@ int main(int argc, char *argv[]){
     /*initialisation de la map*/
     carte_jeu = creer_carte_jeu();
     log_message(INIT SUCC "la carte a été créé");
+
+    /*initialisation du tableau ennemie*/
+    init_tab_ennemi();
 
     /*calcul des resource consommer par la carte*/
     tj = sizeof(s_joueur);

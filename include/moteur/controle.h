@@ -6,7 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+/*partie moteur*/
 #include "moteur/affichage.h"
+/*partie noyau*/
+#include "noyau/deplacement.h"
 
 extern float positionX;
 extern float positionY;

@@ -15,6 +15,9 @@
 #include "moteur/interface.h"
 #include "moteur/composant3d.h"
 
+/*partie noyeau*/
+#include "noyau/generateur_ennemi.h"
+
 /*Variables globales*/
 extern float eyeX;
 extern float eyeY;

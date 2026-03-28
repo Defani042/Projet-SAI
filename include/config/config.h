@@ -47,7 +47,7 @@
 #endif
 
 
-#define NBMAX_ENNEMI 20;
+#define NBMAX_ENNEMI 5
 
 
 

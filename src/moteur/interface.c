@@ -190,7 +190,22 @@ void afficher_timmer(){
     draw_text(x,y+20, buffer);
     
 }
+  
+/*
+R: permet d'afficher le nombre d'ennemie
+E: vide
+S: rien
+A: Adrien
+*/
+void afficher_nb_ennemie(){
+    char buffer[32];
+    float x = largeur_ecran - 400;
+    float y = 20;
+    /*desin du timmer*/
+    sprintf(buffer, "Ennemi: %d",taille_ennemi(carte_jeu->liste_ennemi));
+    draw_text(x,y, buffer);
     
+}
 
 
 /*
@@ -206,6 +221,7 @@ void afficher_interface(){
     afficher_timmer();
     afficher_nb_obj();
     afficher_xp(largeur_ecran);
+    afficher_nb_ennemie();
     maj_fps();
     afficher_fps();
 }
