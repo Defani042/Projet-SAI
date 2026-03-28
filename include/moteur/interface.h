@@ -13,6 +13,7 @@
 #include "moteur/affichage.h"
 
 extern clock_t timer;
+extern int show_menu_debug;
 
 void afficher_vie();
 

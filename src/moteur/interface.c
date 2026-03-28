@@ -3,11 +3,15 @@
 
 #include"moteur/interface.h"
 
+/*varaible globale*/
+clock_t timer = 0;
+int show_menu_debug = 0;
+
 /*variable pour compter le nombre de FPS*/
 static int frame_count = 0;
 static double last_time = 0.0;
 static double fps = 0.0;
-clock_t timer = 0;
+
 
 /*
 R: permet d'afficher la bare de vie 
@@ -136,7 +140,7 @@ void afficher_fps()
 {
     char buffer[32];
     sprintf(buffer, "FPS: %.2f", fps);
-    draw_text(largeur_ecran -100,20, buffer); /*coin en haut à droite*/
+    draw_text(largeur_ecran -120,20, buffer); /*coin en haut à droite*/
 }
 
 /*
@@ -147,8 +151,8 @@ A: Adrien
 */
 void afficher_pos(){
     char buffpos[64];
-    float x = 20;            
-    float y = 100;
+    float x = largeur_ecran -120;            
+    float y = 60;
     joueur j = carte_jeu->j;
     /*desin de la position*/
     draw_text(x +20, y, "Position:");
@@ -165,7 +169,7 @@ A: Adrien
 void afficher_nb_obj(){
     char buffer[32];
     sprintf(buffer, "OBJ: %d", nb_obj);
-    draw_text(largeur_ecran -180,20, buffer); /*coin en haut à droite*/
+    draw_text(largeur_ecran -100,160, buffer); /*coin en haut à droite*/
 }
 
 /*
@@ -199,11 +203,22 @@ A: Adrien
 */
 void afficher_nb_ennemie(){
     char buffer[32];
-    float x = largeur_ecran - 400;
-    float y = 20;
+    float x = largeur_ecran - 100;
+    float y = 120;
     /*desin du timmer*/
     sprintf(buffer, "Ennemi: %d",taille_ennemi(carte_jeu->liste_ennemi));
     draw_text(x,y, buffer);
+    
+}
+
+void afficher_menu_debug(){
+    draw_rect(largeur_ecran-160,0,160,200,0,0,0);
+    afficher_fps();
+    afficher_pos();
+    afficher_nb_ennemie();
+    afficher_nb_obj();
+    maj_fps();
+    afficher_fps();
     
 }
 
@@ -215,15 +230,11 @@ S: rien
 A: Adrien
 */
 void afficher_interface(){
+    afficher_menu_debug();
     afficher_vie();
     afficher_jet();
-    afficher_pos();
     afficher_timmer();
-    afficher_nb_obj();
     afficher_xp(largeur_ecran);
-    afficher_nb_ennemie();
-    maj_fps();
-    afficher_fps();
 }
 
 #endif /*_INTERFACE_C_*/
