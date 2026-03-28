@@ -136,6 +136,78 @@ void afficher_objet_couleur(objet o)
     glPopMatrix();
 }
 
+void afficher_ennemie(ennemi e){
+    float x1, y1, z1, x2, y2, z2;
+    objet o = e->obj;
+
+    /* sécurité */
+    if (o == NULL || o->pos == NULL)
+        return;
+
+    glPushMatrix();
+
+    /* translation de x,y,z de l'objet vers l'origine  */
+    glTranslatef(o->pos->x, o->pos->y, o->pos->z);
+
+    /* rotation */
+    glRotatef(o->rot->x, 1, 0, 0);
+    glRotatef(o->rot->y, 0, 1, 0);
+    glRotatef(o->rot->z, 0, 0, 1);
+
+    /* on dessine à l'origine  (0,0,0) */
+    x1 = 0;
+    y1 = 0;
+    z1 = 0;
+
+    x2 = (float)o->largeur;
+    y2 = (float)o->hauteur;
+    z2 = (float)o->longueur;
+
+    glBegin(GL_QUADS);
+
+    glColor3f(1.0f, 0.1f, 0.0f);
+
+    /* Face avant - rouge */
+    glVertex3f(x1, y1, z2);
+    glVertex3f(x2, y1, z2);
+    glVertex3f(x2, y2, z2);
+    glVertex3f(x1, y2, z2);
+
+    /* Face arrière - vert */
+    glVertex3f(x1, y1, z1);
+    glVertex3f(x2, y1, z1);
+    glVertex3f(x2, y2, z1);
+    glVertex3f(x1, y2, z1);
+
+    /* Face gauche - bleu */
+    glVertex3f(x1, y1, z1);
+    glVertex3f(x1, y1, z2);
+    glVertex3f(x1, y2, z2);
+    glVertex3f(x1, y2, z1);
+
+    /* Face droite - jaune */
+    glVertex3f(x2, y1, z1);
+    glVertex3f(x2, y1, z2);
+    glVertex3f(x2, y2, z2);
+    glVertex3f(x2, y2, z1);
+
+    /* Face bas - cyan */
+    glVertex3f(x1, y1, z1);
+    glVertex3f(x2, y1, z1);
+    glVertex3f(x2, y1, z2);
+    glVertex3f(x1, y1, z2);
+
+    /* Face haut - magenta */
+    glVertex3f(x1, y2, z1);
+    glVertex3f(x2, y2, z1);
+    glVertex3f(x2, y2, z2);
+    glVertex3f(x1, y2, z2);
+
+    glEnd();
+    glPopMatrix();
+    /*avant les fonction ddu G*/
+}
+
 /*
 R: affiche tous les objets de la carte dans OpenGL
 E: carte c
@@ -145,6 +217,7 @@ A: Adrien
 void afficher_carte(carte c) {
     objet o;
     joueur j;
+    ennemi e;
     nb_obj = 0;
 
     /* sécurité : carte et joueur */
@@ -164,6 +237,17 @@ void afficher_carte(carte c) {
         }
         o = o->next;
     }
+     /* parcours tous les ennemi */
+    e = c->liste_ennemi;
+    while (e != NULL)
+    {
+        /* affiche seulement si visible par le joueur */
+        if (objet_visible(j, e->obj)) {
+            afficher_ennemie(e);
+            nb_obj++;
+        }
+    }
+    
 }
 
 
@@ -193,6 +277,7 @@ void afficher_cercle3D(position c, float radius)
 
     glEnd();
 }
+
 
 /*
 R: affiche tous les objets 3d

@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 
 #include "noyau/joueur.h"
@@ -49,5 +50,9 @@ void deplacer_joueur(carte c, double dirx, double diry, double dirz);
 int game_over(carte c);
 
 int objet_visible(joueur j, objet o);
+
+void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur joueur);
+
+void avencer_vague_ennemi(carte c);
 
 #endif /*_CARTE_H_*/
