@@ -4,7 +4,7 @@
 #include "noyau/collision.h"
 /*
 R: gestion de la colision entre objet et joueur
-E: 12 doubles les position et la taille des deux objet
+E: 12 doubles les position et la taille des deux objet 2 entier pour savoir si l'objet est centrer(1 centrer sinon 0)
 S: 0 si il n'y a pas de colision sinon 1
 A: Adrien
 */
