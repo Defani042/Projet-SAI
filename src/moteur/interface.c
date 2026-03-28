@@ -140,7 +140,7 @@ void afficher_fps()
 {
     char buffer[32];
     sprintf(buffer, "FPS: %.2f", fps);
-    draw_text(largeur_ecran -120,20, buffer); /*coin en haut à droite*/
+    draw_text(largeur_ecran -120,40, buffer); /*coin en haut à droite*/
 }
 
 /*
@@ -152,7 +152,7 @@ A: Adrien
 void afficher_pos(){
     char buffpos[64];
     float x = largeur_ecran -120;            
-    float y = 60;
+    float y = 80;
     joueur j = carte_jeu->j;
     /*desin de la position*/
     draw_text(x +20, y, "Position:");
@@ -169,7 +169,7 @@ A: Adrien
 void afficher_nb_obj(){
     char buffer[32];
     sprintf(buffer, "OBJ: %d", nb_obj);
-    draw_text(largeur_ecran -100,160, buffer); /*coin en haut à droite*/
+    draw_text(largeur_ecran -100,180, buffer); /*coin en haut à droite*/
 }
 
 /*
@@ -204,7 +204,7 @@ A: Adrien
 void afficher_nb_ennemie(){
     char buffer[32];
     float x = largeur_ecran - 100;
-    float y = 120;
+    float y = 140;
     /*desin du timmer*/
     sprintf(buffer, "Ennemi: %d",taille_ennemi(carte_jeu->liste_ennemi));
     draw_text(x,y, buffer);
@@ -213,6 +213,7 @@ void afficher_nb_ennemie(){
 
 void afficher_menu_debug(){
     draw_rect(largeur_ecran-160,0,160,200,0,0,0);
+    draw_text(largeur_ecran-100,20, "DEBUG" );
     afficher_fps();
     afficher_pos();
     afficher_nb_ennemie();
