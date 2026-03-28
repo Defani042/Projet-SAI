@@ -35,6 +35,8 @@ void afficher_timmer();
 
 void afficher_nb_ennemie();
 
+void afficher_menu_debug();
+
 void afficher_interface();
 
 #endif /*_INTERFACE_H_*/

@@ -231,7 +231,9 @@ S: rien
 A: Adrien
 */
 void afficher_interface(){
-    afficher_menu_debug();
+    if(show_menu_debug){
+        afficher_menu_debug();
+    }
     afficher_vie();
     afficher_jet();
     afficher_timmer();

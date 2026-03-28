@@ -30,6 +30,8 @@ void haut();
 
 void bas();
 
+void show_debug_menu();
+
 void touche_pressee(unsigned char touche, int x, int y);
 
 void touche_relachee(unsigned char touche, int x, int y);

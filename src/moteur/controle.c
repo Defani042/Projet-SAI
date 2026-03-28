@@ -168,15 +168,34 @@ void bas(){
 }
 
 /*
+R: affichage du menu debug
+E: rien
+S: rien 
+A: Adrien
+*/
+void show_debug_menu(){
+    if(show_menu_debug == 0){
+        show_menu_debug = 1;
+    }
+    else{
+        show_menu_debug = 0;
+    }
+}
+
+
+/*
 R: Permet de mettre à jour le tableau de touches actives
 E: la touche et les coordonnées de la souris
 S: rien
-A: Gaultier
+A: Gaultier et Adrien
 */
 void touche_pressee(unsigned char touche, int x, int y) {
     (void)x; /*pour le warning de non use */
     (void)y; /*pour le warning de non use */
     touches[touche] = 1;
+    if(touche == 'k'){
+        show_debug_menu();
+    }
 }
 
 /*
