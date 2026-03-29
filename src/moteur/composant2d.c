@@ -134,4 +134,91 @@ void draw_text_underlined_color(float x, float y, const char* text,float r, floa
     glEnd();
 }
 
+/*
+R: permet d'afficher un cercle
+E: 3 float (les coordonné x,y du centre du cercle et le rayon du cercle) 1 entier nombre de segment
+S: rien
+A: Adrien
+*/
+void draw_circle(float cx, float cy, float r, int num_segments)
+{
+    int i;
+    glBegin(GL_LINE_LOOP); /* cercle (contour) */
+    glColor3f(1.0f, 1.0f, 1.0f); /*couleur blanc*/
+    for(i = 0; i < num_segments; i++)
+    {
+        float theta = 2.0f * M_PI * (float)i / (float)num_segments;
+        float x = r * cos(theta);
+        float y = r * sin(theta);
+        glVertex2f(cx + x, cy + y);
+    }
+    glEnd();
+}
+
+
+/*
+R: permet d'afficher un disque
+E: 3 float (les coordonné x,y du centre du cercle et le rayon du cercle) 1 entier nombre de segment
+S: rien
+A: Adrien
+*/
+void draw_disk(float cx, float cy, float r, int num_segments)
+{
+    int i;
+    glBegin(GL_TRIANGLE_FAN); /* disque rempli */
+    glColor3f(1.0f, 1.0f, 1.0f); /*couleur blanc*/
+    glVertex2f(cx, cy); /* centre du disque */
+    for(i = 0; i <= num_segments; i++)
+    {
+        float theta = 2.0f * M_PI * (float)i / (float)num_segments;
+        float x = r * cos(theta);
+        float y = r * sin(theta);
+        glVertex2f(cx + x, cy + y);
+    }
+    glEnd();
+}
+
+/*
+R: permet d'afficher un cercle de couleur
+E: 3 float (les coordonées x,y du centre du cercle et le rayon du cercle), 1 entier nombre de segments, 3 float couleur r,g,b
+S: rien
+A: Adrien
+*/
+void draw_colored_circle(float cx, float cy, float radius, int num_segments, float r_col, float g_col, float b_col)
+{
+    int i;
+    glBegin(GL_LINE_LOOP); /* cercle (contour) */
+    glColor3f(r_col, g_col, b_col); /* couleur du cercle */
+    for(i = 0; i < num_segments; i++)
+    {
+        float theta = 2.0f * M_PI * (float)i / (float)num_segments;
+        float x = radius * cos(theta);
+        float y = radius * sin(theta);
+        glVertex2f(cx + x, cy + y);
+    }
+    glEnd();
+}
+
+/*
+R: permet d'afficher un disque rempli de couleur
+E: 3 float (coordonnées x, y du centre, rayon du disque), 1 entier nombre de segments, 3 float couleur r, g, b
+S: rien
+A: Adrien
+*/
+void draw_colored_disk(float cx, float cy, float radius, int num_segments, float r_col, float g_col, float b_col)
+{
+    int i;
+    glBegin(GL_TRIANGLE_FAN); /* disque rempli */
+    glColor3f(r_col, g_col, b_col); /* couleur du disque */
+    glVertex2f(cx, cy); /* centre du disque */
+    for(i = 0; i <= num_segments; i++)
+    {
+        float theta = 2.0f * M_PI * (float)i / (float)num_segments;
+        float x = radius * cos(theta);
+        float y = radius * sin(theta);
+        glVertex2f(cx + x, cy + y);
+    }
+    glEnd();
+}
+
 #endif /*_COMPOSANT2D_C_*/
