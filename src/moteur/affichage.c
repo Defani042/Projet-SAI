@@ -57,6 +57,8 @@ void liberer_jeux(){
     /*zone de la meme à libérrer*/
     liberer_carte(carte_jeu);
     carte_jeu = NULL;
+    detruire_grille(grille_statique);
+    detruire_grille(grille_dynamique);
     log_close();
     
    

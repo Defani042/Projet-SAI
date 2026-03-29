@@ -17,6 +17,7 @@
 
 /*partie noyeau*/
 #include "noyau/generateur_ennemi.h"
+#include "noyau/grille_global.h"
 
 /*Variables globales*/
 extern float eyeX;

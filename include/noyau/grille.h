@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "noyau/objet.h"
+#include "noyau/ennemi.h"
 
 
 typedef struct s_cellule {
@@ -21,8 +22,16 @@ typedef struct s_grille {
 
 typedef s_grille * grille;
 
-grille creer_grille(int taile_x, int taille_y,double cell_size);
+grille creer_grille(int taille_x, int taille_y,double cell_size);
 
 void detruire_grille(grille g);
+
+void vider_grille(grille g) ;
+
+int coord_to_cell(double pos, double cell_size, int taille);
+
+void remplir_grille_statique(grille g, objet liste_objets);
+
+void remplir_grille_dynamique(grille g, ennemi liste_ennemis);
 
 #endif /*_GRILLE_H_*/
