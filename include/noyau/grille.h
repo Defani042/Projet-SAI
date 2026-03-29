@@ -28,12 +28,15 @@ void detruire_grille(grille g);
 
 void vider_grille(grille g) ;
 
-int coord_to_cell(double pos, double cell_size, int taille);
+int coord_to_cell_x(double pos, grille g);
+
+int coord_to_cell_y(double pos, grille g);
 
 void remplir_grille_statique(grille g, objet liste_objets);
 
 void remplir_grille_dynamique(grille g, ennemi liste_ennemis);
 
 void afficher_grille(grille g);
+
 
 #endif /*_GRILLE_H_*/

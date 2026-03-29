@@ -75,24 +75,36 @@ void detruire_grille(grille g)
 
     /* Libère les cellules dans chaque ligne */
     for (i = 0; i < g->taille_x; i++)
-    {
-        /* Libère chaque cellule dans la ligne si nécessaire */
-        for (j = 0; j < g->taille_y; j++)
-        {
-            /* Si chaque cellule a une ressource à libérer (par exemple liste), libérer ici */
-            /* Exemple : free(g->cellules[i][j].liste); */
-            liberer_objet(g->cellules[i][j]->liste);
-        }
+    {   
+        if (g->cellules[i] != NULL) {
+            /* Libère chaque cellule dans la ligne si nécessaire */
+            for (j = 0; j < g->taille_y; j++)
+            {
+                if (g->cellules[i][j] != NULL)  /* Vérifie si la cellule existe */
+                {
+                    if (g->cellules[i][j]->liste != NULL)  /* Vérifie si la liste d'objets existe */
+                    {
+                        liberer_objet(g->cellules[i][j]->liste);  /* Libère les objets dans la cellule */
+                        g->cellules[i][j]->liste = NULL;  /* Mets la liste à NULL après libération */
+                    }
+                    free(g->cellules[i][j]);  /* Libère la cellule */
+                    g->cellules[i][j] = NULL;  /* Mets la cellule à NULL après libération */
+                }
+            }
 
-        /* Libère la ligne de cellules */
-        free(g->cellules[i]);
+            /* Libère la ligne de cellules */
+            free(g->cellules[i]);
+            g->cellules[i] = NULL;  /* Mets la ligne à NULL après libération */
+        }
     }
 
     /* Libère le tableau de pointeurs de cellules */
     free(g->cellules);
+    g->cellules = NULL;  /* Mets le tableau de cellules à NULL après libération */
 
-    /* Libère la structure principale */
+    /* Libère la structure principale de la grille */
     free(g);
+    g = NULL;  /* Mets la grille à NULL après libération pour éviter un accès ultérieur */
 
     log_message(NOYAU SUCC "Grille libérée.");
 }
@@ -116,25 +128,72 @@ void vider_grille(grille g)
 }
 
 /*
-R: converti les coordonnes en
-E: 1 TAD grilles
-S: rien
+R: Conversion de la position sur l'axe X en indice de cellule dans la grille
+E: 1 double (position sur l'axe X), 1 TAD grille
+S: 1 entier (indice de cellule correspondant à la position X, ou -1 si hors des limites)
 A: Adrien
 */
-int coord_to_cell(double pos, double cell_size, int taille)
+int coord_to_cell_x(double pos, grille g)
 {
-    int idx = (int)(pos / cell_size);
-    if (idx < 0)
-        idx = 0;
-    if (idx >= taille)
-        idx = taille - 1;
+    double centre_x, min_x, max_x;
+    int idx;
+
+    /* Calcul dynamique du centre de la grille sur l'axe X */
+    centre_x = (g->taille_x * g->cell_size) / 2;  /* Calcul du centre de la grille */
+    min_x = -centre_x;  /* Limite inférieure */
+    max_x = centre_x;   /* Limite supérieure */
+
+    /* Si la position est hors de la grille, renvoyer -1 */
+    if (pos < min_x || pos > max_x) {
+        return -1;  /* Hors limites de la grille en X */
+    }
+
+    /* Conversion de la position X en indice de cellule */
+    idx = (int)((pos + centre_x) / g->cell_size);  /* Décalage pour faire en sorte que la carte aille de 0 à max_x */
+
+    /* Limites de la grille */
+    if (idx < 0) idx = 0;  /* Limite inférieure (bord gauche) */
+    if (idx >= g->taille_x) idx = g->taille_x - 1;  /* Limite supérieure (bord droit) */
+
+    return idx;
+}
+
+
+/*
+R: Conversion de la position sur l'axe Y en indice de cellule dans la grille
+E: 1 double (position sur l'axe Y), 1 TAD grille
+S: 1 entier (indice de cellule correspondant à la position Y, ou -1 si hors des limites)
+A: Adrien
+*/
+int coord_to_cell_y(double pos, grille g)
+{
+    double centre_y, min_y, max_y;
+    int idx;
+
+    /* Calcul dynamique du centre de la grille sur l'axe Y */
+    centre_y = (g->taille_y * g->cell_size) / 2;  /* Calcul du centre de la grille */
+    min_y = -centre_y;  /* Limite inférieure */
+    max_y = centre_y;   /* Limite supérieure */
+
+    /* Si la position est hors de la grille, renvoyer -1 */
+    if (pos < min_y || pos > max_y) {
+        return -1;  /* Hors limites de la grille en Y */
+    }
+
+    /* Conversion de la position Y en indice de cellule */
+    idx = (int)((pos + centre_y) / g->cell_size);  /* Décalage pour faire en sorte que la carte aille de 0 à max_y */
+
+    /* Limites de la grille */
+    if (idx < 0) idx = 0;  /* Limite inférieure (bord inférieur) */
+    if (idx >= g->taille_y) idx = g->taille_y - 1;  /* Limite supérieure (bord supérieur) */
+
     return idx;
 }
 
 /*
-R: on remplie la grille_statique pour les obstacle
-E: 1 TAD grilles
-S: rien
+R: On remplit la grille_statique pour les obstacles
+E: 1 TAD grille, 1 liste d'objets statiques
+S: Rien
 A: Adrien
 */
 void remplir_grille_statique(grille g, objet liste_objets)
@@ -143,31 +202,32 @@ void remplir_grille_statique(grille g, objet liste_objets)
     objet copie;
     int x_start, y_start, x_end, y_end;
     int i, j;
+
     for (o = liste_objets; o != NULL; o = o->next)
     {
-        /*je calcul les cellules couvertes par l'objet*/
-        x_start = (int)(o->pos->x / g->cell_size);
-        y_start = (int)(o->pos->y / g->cell_size);
-        x_end = (int)((o->pos->x + o->largeur) / g->cell_size);
-        y_end = (int)((o->pos->y + o->longueur) / g->cell_size);
+        /* Calcul des cellules couvertes par l'objet */
+        x_start = coord_to_cell_x(o->pos->x, g);  /* Utilisation de coord_to_cell_x */
+        y_start = coord_to_cell_y(o->pos->y, g);  /* Utilisation de coord_to_cell_y */
+        x_end = coord_to_cell_x(o->pos->x + o->largeur, g);
+        y_end = coord_to_cell_y(o->pos->y + o->longueur, g);
 
-        /*S'assurer qu'on reste dans les limites de la grille*/
-        if (x_start < 0)
-            x_start = 0;
-        if (y_start < 0)
-            y_start = 0;
-        if (x_end >= g->taille_x)
-            x_end = g->taille_x - 1;
-        if (y_end >= g->taille_y)
-            y_end = g->taille_y - 1;
+        /* Si l'objet est en dehors de la grille (x_start, y_start, x_end, y_end == -1), on l'ignore */
+        if (x_start == -1 || y_start == -1 || x_end == -1 || y_end == -1) {
+            continue;  /* L'objet est hors limites, on passe au suivant */
+        }
 
-        /*Parcourir toutes les cellules touchées par l'objet*/
+        /* S'assurer que les coordonnées restent dans les limites de la grille */
+        if (x_start < 0) x_start = 0;
+        if (y_start < 0) y_start = 0;
+        if (x_end >= g->taille_x) x_end = g->taille_x - 1;
+        if (y_end >= g->taille_y) y_end = g->taille_y - 1;
+
+        /* Parcourir toutes les cellules touchées par l'objet et ajouter l'objet dans la grille */
         for (i = x_start; i <= x_end; i++)
         {
             for (j = y_start; j <= y_end; j++)
             {
-                /*on ajoute l'objet dans la grille*/
-                copie = copier_objet(o); 
+                copie = copier_objet(o);  /* Copier l'objet pour l'ajouter dans la cellule */
                 copie->next = g->cellules[i][j]->liste; 
                 g->cellules[i][j]->liste = copie;
             }
@@ -176,9 +236,9 @@ void remplir_grille_statique(grille g, objet liste_objets)
 }
 
 /*
-R: on remplie la grille_dynamique pour les obstacle
-E: 1 TAD grilles
-S: rien
+R: On remplit la grille_dynamique pour les ennemis
+E: 1 TAD grille, 1 liste d'ennemis
+S: Rien
 A: Adrien
 */
 void remplir_grille_dynamique(grille g, ennemi liste_ennemis)
@@ -190,28 +250,29 @@ void remplir_grille_dynamique(grille g, ennemi liste_ennemis)
 
     for (e = liste_ennemis; e != NULL; e = e->next)
     {
-        /* calcul des cellules couvertes par l'ennemi */
-        x_start = (int)(e->obj->pos->x / g->cell_size);
-        y_start = (int)(e->obj->pos->y / g->cell_size);
-        x_end = (int)((e->obj->pos->x + e->obj->largeur) / g->cell_size);
-        y_end = (int)((e->obj->pos->y + e->obj->longueur) / g->cell_size);
+        /* Calcul des cellules couvertes par l'ennemi */
+        x_start = coord_to_cell_x(e->obj->pos->x, g);  /* Utilisation de coord_to_cell_x */
+        y_start = coord_to_cell_y(e->obj->pos->y, g);  /* Utilisation de coord_to_cell_y */
+        x_end = coord_to_cell_x(e->obj->pos->x + e->obj->largeur, g);
+        y_end = coord_to_cell_y(e->obj->pos->y + e->obj->longueur, g);
 
-        /* s'assurer de rester dans les limites */
-        if (x_start < 0)
-            x_start = 0;
-        if (y_start < 0)
-            y_start = 0;
-        if (x_end >= g->taille_x)
-            x_end = g->taille_x - 1;
-        if (y_end >= g->taille_y)
-            y_end = g->taille_y - 1;
+        /* Si l'ennemi est en dehors de la grille (x_start, y_start, x_end, y_end == -1), on l'ignore */
+        if (x_start == -1 || y_start == -1 || x_end == -1 || y_end == -1) {
+            continue;  /* L'ennemi est hors limites, on passe au suivant */
+        }
 
-        /* remplir toutes les cellules touchées par l'ennemi */
+        /* S'assurer que les coordonnées restent dans les limites de la grille */
+        if (x_start < 0) x_start = 0;
+        if (y_start < 0) y_start = 0;
+        if (x_end >= g->taille_x) x_end = g->taille_x - 1;
+        if (y_end >= g->taille_y) y_end = g->taille_y - 1;
+
+        /* Remplir toutes les cellules touchées par l'ennemi */
         for (i = x_start; i <= x_end; i++)
         {
             for (j = y_start; j <= y_end; j++)
             {
-                copie = copier_objet(e->obj); 
+                copie = copier_objet(e->obj);  /* Copier l'objet de l'ennemi */
                 copie->next = g->cellules[i][j]->liste; 
                 g->cellules[i][j]->liste = copie;
             }
@@ -219,6 +280,12 @@ void remplir_grille_dynamique(grille g, ennemi liste_ennemis)
     }
 }
 
+/*
+R: affichage de la grille dans le terminal
+E: 1 TAD grilles
+S: rien
+A: Adrien
+*/
 void afficher_grille(grille g)
 {
     int i, j;
@@ -258,5 +325,7 @@ void afficher_grille(grille g)
     }
     printf("\n");
 }
+
+
 
 #endif /*_GRILLE_C_*/

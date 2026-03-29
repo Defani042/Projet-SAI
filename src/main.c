@@ -75,7 +75,9 @@ int main(int argc, char *argv[]){
     log_message(INIT SUCC"================");
     /* --- Création des grilles --- */
     log_message(INIT "Création de la grille statique");
+
     grille_statique = creer_grille(TAILLE_GRILLE_X, TAILLE_GRILLE_Y, CELL_SIZE);
+    remplir_grille_statique(grille_statique,carte_jeu->liste_objets);
     log_message(SUCC "Grille statique créée");
 
     log_message(INIT "Création de la grille dynamique");

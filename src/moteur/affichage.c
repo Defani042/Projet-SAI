@@ -57,11 +57,10 @@ void liberer_jeux(){
     /*zone de la meme à libérrer*/
     liberer_carte(carte_jeu);
     carte_jeu = NULL;
-    detruire_grille(grille_statique);
-    detruire_grille(grille_dynamique);
+    /*if(grille_statique!=NULL)detruire_grille(grille_statique);
+    if(grille_dynamique!=NULL)detruire_grille(grille_dynamique);*/ /*provoque une segfault*/
     log_close();
-    
-   
+     
 }
 /*
 R: écriture dans les fichier de log
@@ -205,8 +204,13 @@ void affichage(){
     regeneration_vie(carte_jeu->j);
     avencer_vague_ennemi(carte_jeu);
     maj_grille_dynamique(carte_jeu->liste_ennemi);
+    /*
     printf("NOMBRE OBJ dans la map: %d\n",taille_objet(carte_jeu->liste_objets)); 
-    printf("POSITION DU JOUEUR SUR LA CARTE: (x:%f,y:%f",carte_jeu->j->pos->x,carte_jeu->j->pos->y);
+    printf("POSITION DU JOUEUR SUR LA CARTE: (x:%f,y:%f)\n",carte_jeu->j->pos->x,carte_jeu->j->pos->y);
+    printf("POSITION JOEUR DANS LA GRILLE : cellule[%d,%d]\n",coord_to_cell_x(carte_jeu->j->pos->x,grille_statique)
+                                                            ,coord_to_cell_x(carte_jeu->j->pos->y,grille_statique)
+    );
+    */
     /* Mesure du temps */
     /*fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;
