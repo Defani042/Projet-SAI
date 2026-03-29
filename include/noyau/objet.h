@@ -44,4 +44,6 @@ void afficher_objets(objet liste);
 
 void couleur_objet(objet o, float r, float g, float b);
 
+objet copier_objet(objet original);
+
 #endif /*_OBJET_H_*/
