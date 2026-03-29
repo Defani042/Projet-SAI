@@ -211,9 +211,12 @@ void afficher_nb_ennemie(){
     
 }
 
+
+
+
 void afficher_menu_debug(){
     draw_rect(largeur_ecran-160,0,160,200,0,0,0);
-    draw_text(largeur_ecran-100,20, "DEBUG" );
+    draw_text_underlined(largeur_ecran-100,20, "DEBUG");
     afficher_fps();
     afficher_pos();
     afficher_nb_ennemie();

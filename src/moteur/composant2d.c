@@ -37,4 +37,50 @@ void draw_text(float x, float y, const char* text)
     }
 }
 
+/*
+R: permet d'avoir la largeur du texte
+E: une chaine de caractère
+S: la largueur du texte
+A: Adrien
+*/
+float get_text_width(const char* text)
+{
+    const char* tmp;
+    float width;
+
+    tmp = text;
+    width = 0.0f;
+
+    while (*tmp)
+    {
+        width += glutBitmapWidth(GLUT_BITMAP_HELVETICA_18, *tmp);
+        tmp++;
+    }
+
+    return width;
+}
+
+/*
+R: permet d'afficher du texte surligné
+E: 2 float (les coordonné x,y) et une chaine de caractère
+S: rien
+A: Adrien
+*/
+void draw_text_underlined(float x, float y, const char* text)
+{
+    float width;
+
+    /* Dessine le texte */
+    draw_text(x, y, text);
+
+    /* Calcule la largeur */
+    width = get_text_width(text);
+
+    /* Dessine le soulignement */
+    glBegin(GL_LINES);
+        glVertex2f(x, y + UNDERLINE_OFFSET);
+        glVertex2f(x + width, y + UNDERLINE_OFFSET);
+    glEnd();
+}
+
 #endif /*_COMPOSANT2D_C_*/
