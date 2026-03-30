@@ -4,13 +4,13 @@
 #include "moteur/composant2d.h"
 /*
 R: permet d'afficher un rectangle
-E: 7 float (les coordonné x,y)(la taille w et h)(les rgb)
+E: 8 float (les coordonné x,y)(la taille w et h)(les rgb + transparence)
 S: rien
 A: Adrien
 */
-void draw_rect(float x, float y, float w, float h, float r, float g, float b)
+void draw_rect(float x, float y, float w, float h, float r, float g, float b, float a)
 {
-    glColor3f(r, g, b);
+    glColor4f(r, g, b,a);
     glBegin(GL_QUADS);
         glVertex2f(x, y);
         glVertex2f(x + w, y);

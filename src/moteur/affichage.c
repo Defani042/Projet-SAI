@@ -104,6 +104,8 @@ void initialisation(){
     glEnable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glutDisplayFunc(affichage);   
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glutIdleFunc(animer);
     glutKeyboardFunc(touche_pressee);
     largeur_ecran = glutGet(GLUT_SCREEN_WIDTH);
