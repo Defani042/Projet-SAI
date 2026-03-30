@@ -10,6 +10,7 @@
 #include <unistd.h>
 
 extern int nb_obj;
+extern float angle_soleil;
 
 /*parite noyau*/
 #include "noyau/objet.h"

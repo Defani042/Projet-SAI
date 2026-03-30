@@ -2,6 +2,7 @@
 #define _GENERATEUR_CARTE_C_
 
 #include "noyau/carte.h"
+#include "noyau/generateur_ennemi.h"
 
 carte creer_carte_test()
 {
@@ -100,6 +101,8 @@ carte creer_carte_jeu(){
     couleur_objet(sol, 0.0f, 0.3f, 0.0f);
 
     creer_monde(c);
+
+    init_tab_ennemi();
 
     c->liste_objets = ajouter_fin(c->liste_objets,sol);
 
