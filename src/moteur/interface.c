@@ -32,10 +32,10 @@ void afficher_vie()
     float ratio = j->vie / j->vie_max; /*proportion de vie restante au joueur*/
 
     /*affichage fon gris*/
-    draw_rect(x, y, largeur,hauteur, 0.2f, 0.2f, 0.2f);
+    draw_rect(x, y, largeur,hauteur, 0.2f, 0.2f, 0.2f, 1.0f);
 
     /*affichage de la vie fond rouge*/
-    draw_rect(x+10, y+4, (largeur-20) * ratio,hauteur-8, 1.0f, 0.0f, 0.0f);
+    draw_rect(x+10, y+4, (largeur-20) * ratio,hauteur-8, 1.0f, 0.0f, 0.0f, 1.0f);
 
    
     /*texte sur la barre*/
@@ -62,10 +62,10 @@ void afficher_jet()
     float ratio = j->jetpack / j->jetpack_max; /*proportion de vie restante au joueur*/
 
     /*affichage fon gris*/
-    draw_rect(x, y, largeur,hauteur, 0.2f, 0.2f, 0.2f);
+    draw_rect(x, y, largeur,hauteur, 0.2f, 0.2f, 0.2f, 1.0f);
 
     /*affichage du jet pack fond bleu*/
-    draw_rect(x+10, y+4, (largeur-20) * ratio,hauteur-8, 0.0f, 0.0f, 1.0f);
+    draw_rect(x+10, y+4, (largeur-20) * ratio,hauteur-8, 0.0f, 0.0f, 1.0f, 1.0f);
     
     /*texte sur la barre*/
     sprintf(buffer, " Jet : %d / %d", (int)j->jetpack, (int)j->jetpack_max);
@@ -94,10 +94,10 @@ void afficher_xp(int screen_width){
     float ratio = j->niv / j->seuil; /*proportion*/ 
 
     /* Affichage fond gris */
-    draw_rect(x, y, largeur, hauteur, 0.2f, 0.2f, 0.2f);
+    draw_rect(x, y, largeur, hauteur, 0.2f, 0.2f, 0.2f, 1.0f);
 
     /* Affichage du jetpack/fond bleu */
-    draw_rect(x + 10, y + 4, (largeur - 20) * ratio, hauteur - 8, 0.0f, 0.1f, 1.0f);
+    draw_rect(x + 10, y + 4, (largeur - 20) * ratio, hauteur - 8, 0.0f, 0.1f, 1.0f, 1.0f);
 
     /* Texte sur la barre (XP ou jetpack) */
     sprintf(buffer, "%d / %d", (int)j->xp, (int)j->seuil);
@@ -140,7 +140,7 @@ void afficher_fps()
 {
     char buffer[32];
     sprintf(buffer, "FPS: %.2f", fps);
-    draw_text(largeur_ecran -120,40, buffer); /*coin en haut à droite*/
+    draw_text(largeur_ecran -150,70, buffer); /*coin en haut à droite*/
 }
 
 /*
@@ -151,13 +151,13 @@ A: Adrien
 */
 void afficher_pos(){
     char buffpos[64];
-    float x = largeur_ecran -120;            
-    float y = 80;
+    float x = largeur_ecran -150;            
+    float y = 130;
     joueur j = carte_jeu->j;
     /*desin de la position*/
-    draw_text(x +20, y, "Position:");
+    draw_text(x, y, "Position:");
     sprintf(buffpos, "x:%d y:%d z:%d", (int)j->pos->x,(int)j->pos->y,(int)j->pos->z);
-    draw_text(x,y+30, buffpos);
+    draw_text(x, y + 20, buffpos);
 }
 
 /*
@@ -169,7 +169,7 @@ A: Adrien
 void afficher_nb_obj(){
     char buffer[32];
     sprintf(buffer, "OBJ: %d", nb_obj);
-    draw_text(largeur_ecran -100,180, buffer); /*coin en haut à droite*/
+    draw_text(largeur_ecran -150,250, buffer); /*coin en haut à droite*/
 }
 
 /*
@@ -203,8 +203,8 @@ A: Adrien
 */
 void afficher_nb_ennemie(){
     char buffer[32];
-    float x = largeur_ecran - 100;
-    float y = 140;
+    float x = largeur_ecran - 150;
+    float y = 200;
     /*desin du timmer*/
     sprintf(buffer, "Ennemi: %d",taille_ennemi(carte_jeu->liste_ennemi));
     draw_text(x,y, buffer);
@@ -215,8 +215,8 @@ void afficher_nb_ennemie(){
 
 
 void afficher_menu_debug(){
-    draw_rect(largeur_ecran-160,0,160,200,0,0,0);
-    draw_text_underlined_color(largeur_ecran-100,20, "DEBUG",1,0,0);
+    draw_rect(largeur_ecran-160,0,160,hauteur_ecran,0,0,0, 0.5f);
+    draw_text_underlined_color(largeur_ecran-150,20, "INFO",1,0,0);
     afficher_fps();
     afficher_pos();
     afficher_nb_ennemie();
