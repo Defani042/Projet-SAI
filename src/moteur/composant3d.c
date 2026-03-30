@@ -4,6 +4,7 @@
 #include "moteur/composant3d.h"
 
 int nb_obj = 0;
+float angle_soleil = M_PI / 2.0f;
 
 /*
 R: permet de dessiner un parallepipede
@@ -300,8 +301,7 @@ void afficher3d(){
     joueur j = carte_jeu->j;
     afficher_carte(carte_jeu);
     afficher_cercle3D(j->pos,j->taille);
-
-    sphere(950.0, 0, 950, 50.0);
+    sphere(950.0 * cos(angle_soleil), 0, 950.0 * sin(angle_soleil), 50.0);
 }
 
 #endif /*_COMPOSANT3D_C_*/

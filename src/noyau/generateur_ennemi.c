@@ -15,8 +15,8 @@ void init_tab_ennemi(){
     ennemi e1,e2,e3;
     /*création des ennemi*/
     e1 = creer_ennemi(creer_objet(creer_position(0,0,0),1,1,1));
-    e2 = creer_ennemi(creer_objet(creer_position(0,0,0),1,1,1));
-    e3 = creer_ennemi(creer_objet(creer_position(0,0,0),1,1,1));
+    e2 = creer_ennemi(creer_objet(creer_position(2,0,0),1,1,1));
+    e3 = creer_ennemi(creer_objet(creer_position(4,0,0),1,1,1));
 
     /*set e1 TANK*/
     e1->degat = 3;
