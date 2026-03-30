@@ -167,6 +167,7 @@ void avencer_vague_ennemi(carte c)
         /* verification mort */
         if (mort(tmp))
         {
+            j->xp += tmp->xp;
             log_message(NOYAU SUCC "un ennemie est mort");
             supprimer_ennemi_ptr(c->liste_ennemi, tmp);
         }

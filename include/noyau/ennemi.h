@@ -15,6 +15,7 @@ typedef struct  s_ennemi
     double vie;
     double degat;
     double vit;
+    int xp;
     struct s_ennemi* next;
 }s_ennemi;
 
