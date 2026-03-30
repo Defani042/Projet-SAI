@@ -15,6 +15,7 @@
 #include "noyau/generateur_carte.h"
 #include "noyau/carte_globale.h"
 #include "noyau/generateur_ennemi.h"
+#include "noyau/grille_global.h"
 
 int main(int argc, char *argv[]){
     int tj,to,tm,te;
@@ -72,7 +73,22 @@ int main(int argc, char *argv[]){
     log_message(buff5);
     log_message(buff6);
     log_message(INIT SUCC"================");
+    /* --- Création des grilles --- */
+    log_message(INIT "Création de la grille statique");
+
+    grille_statique = creer_grille(TAILLE_GRILLE_X, TAILLE_GRILLE_Y, CELL_SIZE);
+    remplir_grille_statique(grille_statique,carte_jeu->liste_objets);
+    log_message(SUCC "Grille statique créée");
+
+    log_message(INIT "Création de la grille dynamique");
+    grille_dynamique = creer_grille(TAILLE_GRILLE_X, TAILLE_GRILLE_Y, CELL_SIZE);
+    log_message(SUCC "Grille dynamique créée");
+
+    /*affichage de la grille dans les log  */
+    afficher_grille_log(grille_statique);
     log_message(INIT SUCC"Préparation du rendu OPENGL");
+
+
 
     /*opengl*/
     glutInit(&argc, argv);                

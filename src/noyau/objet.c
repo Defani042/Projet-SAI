@@ -277,5 +277,35 @@ void couleur_objet(objet o, float r, float g, float b){
     o->b = b;
 }
 
+/*
+R: copie un objet
+E: 1 TAD objet
+S: 1 TAD objet
+A: Gaultier
+*/
+objet copier_objet(objet original) {
+    objet copie = (objet)malloc(sizeof(s_objet));
+    if (copie == NULL) {
+        fprintf(stderr, "Erreur malloc\n");
+        exit(1);
+    }
+
+    /* Copie champ par champ */
+    copie->rot = original->rot;
+    copie->pos = original->pos;
+    copie->hauteur = original->hauteur;
+    copie->largeur  = original->largeur;
+    copie->longueur = original->longueur;
+    copie->r = original->r;
+    copie->g = original->g;
+    copie->b = original->b;
+    copie->parent = original->parent;
+
+    /* Pour la copie dans la grille, on ne copie pas next */
+    copie->next = NULL;
+
+    return copie;
+}
+
 
 #endif /*_OBJET_C_*/

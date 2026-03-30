@@ -51,6 +51,7 @@
 #define MOTEUR "[MOTEUR]: "
 #define NOYAU "[NOYAU]: "
 #define LOG "[LOG]: "
+#define INFO "[INFO]: "
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -58,6 +59,23 @@
 
 
 #define NBMAX_ENNEMI 5
+
+/* ---------- GRILLE ---------- */
+
+/* Taille maximale de la carte (en unité du monde) */
+#define CARTE_MAX_X 3000
+#define CARTE_MAX_Y 3000
+
+/* Taille d'une cellule de la grille */
+#define CELL_SIZE 100.0
+
+/* Nombre de cellules sur X et Y (calculé depuis la carte et la taille de cellule) */
+#define TAILLE_GRILLE_X ((CARTE_MAX_X / CELL_SIZE) + 1)
+#define TAILLE_GRILLE_Y ((CARTE_MAX_Y / CELL_SIZE) + 1)
+
+/* Messages de log spécifiques à la grille */
+#define GRILLE_SUCC NOYAU SUCC "Grille initialisée"
+#define GRILLE_ERR  NOYAU ERR  "Erreur lors de la création de la grille"
 
 
 
