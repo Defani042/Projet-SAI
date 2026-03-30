@@ -116,6 +116,7 @@ void vider_grille(grille g)
     {
         for (j = 0; j < g->taille_y; j++)
         {
+            liberer_objet(g->objets[i][j]);
             g->objets[i][j] = NULL; /*on vide juste la liste*/
         }
     }

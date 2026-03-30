@@ -9,6 +9,8 @@
 #include "noyau/ennemi.h"
 #include "noyau/carte_globale.h"
 #include "noyau/aleatoire.h"
+#include "noyau/collision.h"
+#include "grille_global.h"
 
 #define NB_TYPE_E 3
 #define TANK 0
@@ -19,6 +21,8 @@
 extern ennemi globale_ennemi_tab[NB_TYPE_E];
 
 void init_tab_ennemi();
+
+ennemi creer_ennemi_alea(carte c);
 
 
 

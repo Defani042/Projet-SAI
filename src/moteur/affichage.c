@@ -57,8 +57,12 @@ void liberer_jeux(){
     /*zone de la meme à libérrer*/
     liberer_carte(carte_jeu);
     carte_jeu = NULL;
-    /*if(grille_statique!=NULL)detruire_grille(grille_statique);
-    if(grille_dynamique!=NULL)detruire_grille(grille_dynamique);*/ /*provoque une segfault*/
+    log_message(NOYAU SUCC "libération grille statique...");
+    if(grille_statique!=NULL)detruire_grille(grille_statique);
+    log_message(NOYAU SUCC "grille statique libérer");
+    log_message(NOYAU SUCC "libération grille dynamique");
+    if(grille_dynamique!=NULL)detruire_grille(grille_dynamique);
+    log_message(NOYAU SUCC "grille dynamique libérer");
     log_close();
      
 }
@@ -211,6 +215,11 @@ void affichage(){
                                                             ,coord_to_cell_x(carte_jeu->j->pos->y,grille_statique)
     );
     */
+    if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
+        carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
+    }
+    avencer_vague_ennemi(carte_jeu); /*on avance les ennemi*/
+    niveau_suivant(carte_jeu->j);
     /* Mesure du temps */
     /*fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;

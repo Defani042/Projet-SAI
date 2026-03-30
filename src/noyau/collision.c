@@ -79,8 +79,8 @@ objet detecter_collision_generique(grille g, double px, double py, double pz, do
         return NULL; /* Calcul des cellules couvertes par la hitbox */
     x_start = coord_to_cell_x(centered ? px - w / 2 : px,g);
     x_end = coord_to_cell_x(centered ? px + w / 2 : px + w,g);
-    y_start = coord_to_cell_y(centered ? py - l / 2 : py, g);
-    y_end = coord_to_cell_y(centered ? py + l / 2 : py + l,g);
+    y_start = coord_to_cell_y(centered ? py - h / 2 : py, g);
+    y_end = coord_to_cell_y(centered ? py + h / 2 : py + h,g);
 
     /*on ne gère pas les objet hors de la map*/
     if(x_end == -1 || x_start == -1 || y_end== -1 || y_start ==-1)return NULL;

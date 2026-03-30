@@ -284,15 +284,24 @@ S: 1 TAD objet
 A: Gaultier
 */
 objet copier_objet(objet original) {
-    objet copie = (objet)malloc(sizeof(s_objet));
-    if (copie == NULL) {
-        fprintf(stderr, "Erreur malloc\n");
-        exit(1);
-    }
-
+    objet copie;
+    if (!original)
+        return NULL;
+    /* Création d'un objet avec position et rotation indépendantes */
+    copie = creer_objet(creer_position(0,0,0),0,0,0);
     /* Copie champ par champ */
-    copie->rot = original->rot;
-    copie->pos = original->pos;
+
+    if(copie->rot!=NULL){
+        copie->rot->x = original->rot->x;
+        copie->rot->z = original->rot->z;
+        copie->rot->y = original->rot->y;
+    }
+    if(copie->pos!=NULL){
+        copie->pos->x = original->pos->x;
+        copie->pos->z = original->pos->z;
+        copie->pos->y = original->pos->y;
+    }
+    
     copie->hauteur = original->hauteur;
     copie->largeur  = original->largeur;
     copie->longueur = original->longueur;

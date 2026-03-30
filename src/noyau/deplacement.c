@@ -80,64 +80,67 @@ E: 1 TAD joueur , 1 TAD ennemi(celui qu'on veux déplacer), 1 TAD joueur
 S: vide
 A: Adrien
 */
-void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur joueur)
+void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur j)
 {
-    float dx, dy, dz;
-    float longueur;
-    float oldX, oldY, oldZ;
-    float vitesse;
+    double old_x, old_y, old_z;
+    double move_x, move_y, move_z;
+    double dx, dy, dz;
+    double longueur;
+    double pas;
 
-    if (c == NULL || e == NULL || e->obj == NULL || joueur == NULL)
-    {
-        log_message(NOYAU WARN "parametre NULL dans deplacer_ennemi_vers_joueur");
+    /* Vérification des pointeurs */
+    if (!c || !e || !e->obj || !e->obj->pos || !j || !j->pos)
         return;
-    }
 
-    vitesse = e->vit;
+    pas = e->vit;
 
-    /* direction vers le joueur */
-    dx = joueur->pos->x - e->obj->pos->x;
-    dy = joueur->pos->y - e->obj->pos->y;
-    dz = joueur->pos->z - e->obj->pos->z;
+    /* Sauvegarde position */
+    old_x = e->obj->pos->x;
+    old_y = e->obj->pos->y;
+    old_z = e->obj->pos->z;
 
-    longueur = (float)sqrt(dx*dx + dy*dy + dz*dz);
-    if (longueur == 0.0)return;
+    /* Direction vers le joueur */
+    dx = j->pos->x - old_x;
+    dy = j->pos->y - old_y;
+    dz = j->pos->z - old_z;
 
+    longueur = sqrt(dx*dx + dy*dy + dz*dz);
+    if (longueur == 0.0)
+        return; /* déjà sur le joueur */
+
+    /* Normalisation */
     dx /= longueur;
     dy /= longueur;
     dz /= longueur;
 
-    /* sauvegarde position */
-    oldX = e->obj->pos->x;
-    oldY = e->obj->pos->y;
-    oldZ = e->obj->pos->z;
+    /* Déplacement avec vitesse */
+    move_x = dx * pas;
+    move_y = dy * pas;
+    move_z = dz * pas;
 
-    /* ===== Axe X ===== */
-    e->obj->pos->x = oldX + dx * vitesse;
-
-    if (detecter_collision_ennemi(grille_statique,e) != NULL ||
-        detecter_collision_ennemi(grille_dynamique,e)!= NULL)
-    {
-        e->obj->pos->x = oldX;
+    /* Appliquer mouvement axe par axe avec collisions */
+    e->obj->pos->x += move_x;
+    if (detecter_collision_ennemi(grille_statique, e) ||
+        detecter_collision_ennemi(grille_dynamique, e)){
+            e->obj->pos->x = old_x;
+            printf("pos bloquer en x\n");
+        }
+        
+    e->obj->pos->y += move_y;
+    if (detecter_collision_ennemi(grille_statique, e) ||
+        detecter_collision_ennemi(grille_dynamique, e)){
+        e->obj->pos->y = old_y;
+        printf("pos bloquer en y\n");
     }
+       
 
-    /* ===== Axe Y ===== */
-    e->obj->pos->y = oldY + dy * vitesse;
-
-   if (detecter_collision_ennemi(grille_statique,e) != NULL ||
-        detecter_collision_ennemi(grille_dynamique,e)!= NULL)
-    {
-        e->obj->pos->y = oldY;
-    }
-
-    /* ===== Axe Z ===== */
-    e->obj->pos->z = oldZ + dz * vitesse;
-
-    if (detecter_collision_ennemi(grille_statique,e) != NULL ||
-        detecter_collision_ennemi(grille_dynamique,e)!= NULL)
-    {
-        e->obj->pos->z = oldZ;
-    }
+    e->obj->pos->z += move_z;
+    if (detecter_collision_ennemi(grille_statique, e) ||
+        detecter_collision_ennemi(grille_dynamique, e)){
+            e->obj->pos->x = old_x;
+            printf("pos bloquer en y\n");
+        }
+       
 }
 
 
@@ -169,7 +172,7 @@ void avencer_vague_ennemi(carte c)
         {
             j->xp += tmp->xp;
             log_message(NOYAU SUCC "un ennemie est mort");
-            supprimer_ennemi_ptr(c->liste_ennemi, tmp);
+            c->liste_ennemi = supprimer_ennemi_ptr(c->liste_ennemi, tmp);
         }
         else
         {
