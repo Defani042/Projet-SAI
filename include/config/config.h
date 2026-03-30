@@ -51,6 +51,7 @@
 #define MOTEUR "[MOTEUR]: "
 #define NOYAU "[NOYAU]: "
 #define LOG "[LOG]: "
+#define INFO "[INFO]: "
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846

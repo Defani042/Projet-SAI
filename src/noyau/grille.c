@@ -13,46 +13,45 @@ grille creer_grille(int taille_x, int taille_y, double cell_size)
 {
     grille g;
     int i, j;
-    /*remplissage du pointeur*/
+    
+    /* Remplissage du pointeur pour la grille */
     if ((g = (grille)malloc(sizeof(s_grille))) == NULL)
     {
         fprintf(stderr, "Erreur malloc par la fonction creer_grille()\n");
         log_message(NOYAU ERR "Erreur malloc par la fonction creer_grille()");
         exit(EXIT_FAILURE);
     }
-    /*remplissage des champs simple*/
+    
+    /* Remplissage des champs simples */
     g->taille_x = taille_x;
     g->taille_y = taille_y;
     g->cell_size = cell_size;
 
-    /*allocution du tableau*/
-    if ((g->cellules = (cellule **)malloc(sizeof(cellule *) * taille_x)) == NULL)
+    /* Allocation du tableau 2D d'objets */
+    if ((g->objets = (objet **)malloc(sizeof(objet *) * taille_x)) == NULL)
     {
-        fprintf(stderr, "Erreur malloc par la fonction creer_grille()\n");
-        log_message(NOYAU ERR "Erreur malloc par la fonction creer_grille()");
+        fprintf(stderr, "Erreur malloc par la fonction creer_grille() pour les lignes\n");
+        log_message(NOYAU ERR "Erreur malloc pour les lignes dans creer_grille()");
         exit(EXIT_FAILURE);
     }
-    /*allocution des case du tableau*/
+
+    /* Allocation des cases du tableau */
     for (i = 0; i < taille_x; i++)
     {
-        if ((g->cellules[i] = (cellule *)malloc(sizeof(cellule) * taille_y)) == NULL)
+        if ((g->objets[i] = (objet *)malloc(sizeof(objet) * taille_y)) == NULL)
         {
-            fprintf(stderr, "Erreur malloc par la fonction creer_grille()\n");
-            log_message(NOYAU ERR "Erreur malloc par la fonction creer_grille()");
+            fprintf(stderr, "Erreur malloc par la fonction creer_grille() pour la colonne [%d]\n", i);
+            log_message(NOYAU ERR "Erreur malloc pour la colonne dans creer_grille()");
             exit(EXIT_FAILURE);
         }
+        
+        /* Initialisation des objets dans chaque cellule */
         for (j = 0; j < taille_y; j++)
         {
-            g->cellules[i][j] = (cellule)malloc(sizeof(s_cellule));
-            if (!g->cellules[i][j])
-            {
-                fprintf(stderr, "Erreur malloc pour cellule [%d][%d]\n", i, j);
-                log_message(NOYAU ERR "Erreur malloc pour cellule par la fonction creer_grille()");
-                exit(EXIT_FAILURE);
-            }
-            g->cellules[i][j]->liste = NULL;
+            g->objets[i][j] = NULL;  /*Initialisation à NULL (aucun objet dans la cellule au départ)*/
         }
     }
+
     log_message(NOYAU SUCC "Grille créée");
     return g;
 }
@@ -73,38 +72,33 @@ void detruire_grille(grille g)
         return;
     }
 
-    /* Libère les cellules dans chaque ligne */
+    /* Libère les objets dans chaque cellule */
     for (i = 0; i < g->taille_x; i++)
-    {   
-        if (g->cellules[i] != NULL) {
-            /* Libère chaque cellule dans la ligne si nécessaire */
+    {
+        if (g->objets[i] != NULL)  /*Vérifie que la ligne n'est pas NULL*/ 
+        {
             for (j = 0; j < g->taille_y; j++)
             {
-                if (g->cellules[i][j] != NULL)  /* Vérifie si la cellule existe */
+                if (g->objets[i][j] != NULL)  /*Vérifie que l'objet existe dans la cellule*/
                 {
-                    if (g->cellules[i][j]->liste != NULL)  /* Vérifie si la liste d'objets existe */
-                    {
-                        liberer_objet(g->cellules[i][j]->liste);  /* Libère les objets dans la cellule */
-                        g->cellules[i][j]->liste = NULL;  /* Mets la liste à NULL après libération */
-                    }
-                    free(g->cellules[i][j]);  /* Libère la cellule */
-                    g->cellules[i][j] = NULL;  /* Mets la cellule à NULL après libération */
+                    liberer_objet(g->objets[i][j]);  /*Libère l'objet dans la cellule*/ 
+                    g->objets[i][j] = NULL;  /* Mets l'objet à NULL après libération*/
                 }
             }
 
-            /* Libère la ligne de cellules */
-            free(g->cellules[i]);
-            g->cellules[i] = NULL;  /* Mets la ligne à NULL après libération */
+            /* Libère la ligne d'objets */
+            free(g->objets[i]);
+            g->objets[i] = NULL;  /*Mets la ligne à NULL après libération*/
         }
     }
 
-    /* Libère le tableau de pointeurs de cellules */
-    free(g->cellules);
-    g->cellules = NULL;  /* Mets le tableau de cellules à NULL après libération */
+    /* Libère le tableau de pointeurs d'objets */
+    free(g->objets);
+    g->objets = NULL;  /*Mets le tableau de cellules à NULL après libération*/ 
 
     /* Libère la structure principale de la grille */
     free(g);
-    g = NULL;  /* Mets la grille à NULL après libération pour éviter un accès ultérieur */
+    g = NULL;  /*Mets la grille à NULL après libération pour éviter un accès ultérieur*/ 
 
     log_message(NOYAU SUCC "Grille libérée.");
 }
@@ -122,7 +116,7 @@ void vider_grille(grille g)
     {
         for (j = 0; j < g->taille_y; j++)
         {
-            g->cellules[i][j]->liste = NULL; /*on vide juste la liste*/
+            g->objets[i][j] = NULL; /*on vide juste la liste*/
         }
     }
 }
@@ -209,7 +203,7 @@ void remplir_grille_statique(grille g, objet liste_objets)
         x_start = coord_to_cell_x(o->pos->x, g);  /* Utilisation de coord_to_cell_x */
         y_start = coord_to_cell_y(o->pos->y, g);  /* Utilisation de coord_to_cell_y */
         x_end = coord_to_cell_x(o->pos->x + o->largeur, g);
-        y_end = coord_to_cell_y(o->pos->y + o->longueur, g);
+        y_end = coord_to_cell_y(o->pos->y + o->hauteur, g);
 
         /* Si l'objet est en dehors de la grille (x_start, y_start, x_end, y_end == -1), on l'ignore */
         if (x_start == -1 || y_start == -1 || x_end == -1 || y_end == -1) {
@@ -228,8 +222,8 @@ void remplir_grille_statique(grille g, objet liste_objets)
             for (j = y_start; j <= y_end; j++)
             {
                 copie = copier_objet(o);  /* Copier l'objet pour l'ajouter dans la cellule */
-                copie->next = g->cellules[i][j]->liste; 
-                g->cellules[i][j]->liste = copie;
+                copie->next = g->objets[i][j]; 
+                g->objets[i][j] = copie;
             }
         }
     }
@@ -254,7 +248,7 @@ void remplir_grille_dynamique(grille g, ennemi liste_ennemis)
         x_start = coord_to_cell_x(e->obj->pos->x, g);  /* Utilisation de coord_to_cell_x */
         y_start = coord_to_cell_y(e->obj->pos->y, g);  /* Utilisation de coord_to_cell_y */
         x_end = coord_to_cell_x(e->obj->pos->x + e->obj->largeur, g);
-        y_end = coord_to_cell_y(e->obj->pos->y + e->obj->longueur, g);
+        y_end = coord_to_cell_y(e->obj->pos->y + e->obj->hauteur, g);
 
         /* Si l'ennemi est en dehors de la grille (x_start, y_start, x_end, y_end == -1), on l'ignore */
         if (x_start == -1 || y_start == -1 || x_end == -1 || y_end == -1) {
@@ -273,8 +267,8 @@ void remplir_grille_dynamique(grille g, ennemi liste_ennemis)
             for (j = y_start; j <= y_end; j++)
             {
                 copie = copier_objet(e->obj);  /* Copier l'objet de l'ennemi */
-                copie->next = g->cellules[i][j]->liste; 
-                g->cellules[i][j]->liste = copie;
+                copie->next = g->objets[i][j]; 
+                g->objets[i][j] = copie;
             }
         }
     }
@@ -310,7 +304,7 @@ void afficher_grille(grille g)
         printf("%2d|", j); /* numéro de ligne */
         for (i = 0; i < g->taille_x; i++)
         {
-            n = taille_objet(g->cellules[i][j]->liste);
+            n = taille_objet(g->objets[i][j]);
             if (n > 0)
                 printf("%2d ", n);
             else
@@ -326,6 +320,60 @@ void afficher_grille(grille g)
     printf("\n");
 }
 
+/*
+R: affichage de la grille dans les log
+E: 1 TAD grilles
+S: rien
+A: Adrien
+*/
 
+void afficher_grille_log(grille g)
+{
+    int i, j;
+    int n;
+    char buffer[1024];  /* Buffer temporaire pour stocker chaque ligne à loguer */
 
+    if (!g)
+        return;
+
+    /* Affichage des indices des colonnes dans les logs */
+    strcpy(buffer, " ");  /* Espace pour les indices de lignes */
+    for (i = 0; i < g->taille_x; i++)
+    {
+        sprintf(buffer + strlen(buffer), "%3d", i);  /* Ajout des numéros de colonnes */
+    }
+    log_message(buffer);  /* Envoi de la ligne avec les indices de colonnes */
+
+    /* Ligne supérieure avec les séparateurs de colonnes */
+    strcpy(buffer, " ");
+    for (i = 0; i < g->taille_x; i++)
+    {
+        strcat(buffer, "---");
+    }
+    log_message(buffer);  /* Affichage de la ligne de séparation */
+
+    /* Parcours de la grille (axe Y de haut en bas) */
+    for (j = g->taille_y - 1; j >= 0; j--)
+    {
+        /* Numéro de ligne */
+        sprintf(buffer, "%2d|", j);
+        for (i = 0; i < g->taille_x; i++)
+        {
+            n = taille_objet(g->objets[i][j]);
+            if (n > 0)
+                sprintf(buffer + strlen(buffer), "%2d ", n);  /* Affiche le nombre d'objets dans la cellule */
+            else
+                strcat(buffer, " . ");  /* Affiche un point pour une cellule vide */
+        }
+        log_message(buffer);  /* Affichage de la ligne avec les objets */
+    }
+
+    /* Ligne du bas avec les séparateurs */
+    strcpy(buffer, " ");
+    for (i = 0; i < g->taille_x; i++)
+    {
+        strcat(buffer, "---");
+    }
+    log_message(buffer);  /* Affichage de la ligne de séparation */
+}
 #endif /*_GRILLE_C_*/
