@@ -2,7 +2,7 @@
 #define _INTERFACE_C_
 
 #include"moteur/interface.h"
-#include"noyau/menu_amelioration.h"
+#include"moteur/menu_amelioration.h"
 
 /*varaible globale*/
 clock_t timer = 0;

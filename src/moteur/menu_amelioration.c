@@ -1,7 +1,7 @@
 #ifndef _MENU_AMELIORATION_C_
 #define _MENU_AMELIORATION_C_
 
-#include "noyau/menu_amelioration.h"
+#include "moteur/menu_amelioration.h"
 
 void aff_fen_amelioration(){
     int ame_x = largeur_ecran/2-300;
