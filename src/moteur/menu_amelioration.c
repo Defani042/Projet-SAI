@@ -7,6 +7,12 @@ char *description1;
 char *description2;
 char *description3;
 
+/*
+R: affiche le fenêtre du menu
+E: rien
+S: rien
+A: Gaultier
+*/
 void aff_fen_amelioration(){
     int ame_x = largeur_ecran/2-300;
     int ame_y = hauteur_ecran/2-250;
@@ -17,6 +23,8 @@ void aff_fen_amelioration(){
     description3 = "+ 20% ATQ";
     /*fin test*/
 
+    draw_rect(largeur_ecran - 20, 0, 20, 20, 1,0,0,1);
+    draw_text_color(largeur_ecran - 15, 15, "x",1,1,1);
     draw_rect(ame_x,ame_y,600,500,0,0,0, 0.7f);
     draw_text_underlined_color(ame_x + 187,ame_y + 30, "Choisissez une amélioration !",1,1,1);
     draw_rect(ame_x + 100,ame_y + 70,400,100,0,0,0, 1.0f);

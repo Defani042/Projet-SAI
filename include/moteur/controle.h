@@ -18,6 +18,7 @@ extern float directionX;
 extern float directionY;
 extern float directionZ;
 extern int competence;
+extern int interruption;
 
 void avancer();
 

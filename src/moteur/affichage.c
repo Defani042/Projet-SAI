@@ -82,7 +82,7 @@ void sortie_propre(){
             log_message(INIT SUCC"Signal SIGSEV reçu. Nettoyage...");
             log_message(INIT SUCC"Erreur de ségmentation...");
             exit(EXIT_FAILURE);
-            break;        
+            break;
         default:
             sprintf(buffer, INIT SUCC"Signal %d reçu. Nettoyage...", signal_recu);
             log_message(buffer);
@@ -129,7 +129,7 @@ A: Gaultier
 void animer(){
     clock_t current_time = clock();
     static clock_t last_time = 0;
-    if (should_exit) {
+    if (should_exit || interruption) {
         sortie_propre();
         return;
     }

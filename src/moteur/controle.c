@@ -24,6 +24,9 @@ float angle_direction;
 /*competence choisie*/
 int competence = 0;
 
+/*Demande d'interruption*/
+int interruption = 0;
+
 /*
 R: Permet d'avancer
 E: rien
@@ -284,6 +287,11 @@ void gerer_souris(int bouton, int etat, int x, int y){
                 show_menu_upgrade();
             }
             printf("Amélioration %d choisie\n",competence);
+        }
+        if(x > largeur_ecran - 20 && y < 20){
+            show_menu_upgrade();
+            glutPostRedisplay();
+            interruption = 1;
         }
     }
 }
