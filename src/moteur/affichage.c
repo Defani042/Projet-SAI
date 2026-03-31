@@ -115,6 +115,7 @@ void initialisation(){
     glutKeyboardUpFunc(touche_relachee);
     glutWarpPointer(largeur_ecran/2, hauteur_ecran/2);
     glutPassiveMotionFunc(mouvement_souris);
+    glutMouseFunc(gerer_souris);
     glutMotionFunc(mouvement_souris);
 }
 

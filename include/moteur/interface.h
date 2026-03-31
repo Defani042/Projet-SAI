@@ -14,6 +14,7 @@
 
 extern clock_t timer;
 extern int show_menu_debug;
+extern int aff_amelioration;
 
 void afficher_vie();
 

@@ -62,8 +62,8 @@ E: les coordonnées et le rayon de la sphère
 S: rien
 A: Gaultier
 */
-void sphere(float x, float y, float z, float radius) {
-     glColor3f(0.7f, 0.7f, 0.0f);
+void sphere(float x, float y, float z, float radius, float r, float g, float b) {
+     glColor3f(r, g, b);
     glPushMatrix();
     glTranslatef(x, y, z);
     glutSolidSphere(radius, 20, 20);
@@ -298,10 +298,13 @@ S: rien
 A: Adrien
 */
 void afficher3d(){
+    float soleil_x = 950.0 * cos(angle_soleil);
+    float soleil_y = 950.0 * sin(angle_soleil);
     joueur j = carte_jeu->j;
     afficher_carte(carte_jeu);
     afficher_cercle3D(j->pos,j->taille);
-    sphere(950.0 * cos(angle_soleil), 0, 950.0 * sin(angle_soleil), 50.0);
+    sphere(soleil_x, 0, soleil_y, 50.0, 0.7f, 0.7f, 0);
+    sphere(-soleil_x, 0, -soleil_y, 50.0, 0.9f, 0.9f, 0.6f);
 }
 
 #endif /*_COMPOSANT3D_C_*/

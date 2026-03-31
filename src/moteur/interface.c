@@ -2,10 +2,12 @@
 #define _INTERFACE_C_
 
 #include"moteur/interface.h"
+#include"noyau/menu_amelioration.h"
 
 /*varaible globale*/
 clock_t timer = 0;
 int show_menu_debug = 0;
+int aff_amelioration = 0;
 
 /*variable pour compter le nombre de FPS*/
 static int frame_count = 0;
@@ -216,7 +218,7 @@ void afficher_nb_ennemie(){
 
 void afficher_menu_debug(){
     draw_rect(largeur_ecran-160,0,160,hauteur_ecran,0,0,0, 0.5f);
-    draw_text_underlined_color(largeur_ecran-150,20, "INFO",1,0,0);
+    draw_text_underlined_color(largeur_ecran-150,20, "DEBUG",1,0,0);
     afficher_fps();
     afficher_pos();
     afficher_nb_ennemie();
@@ -236,6 +238,9 @@ A: Adrien
 void afficher_interface(){
     if(show_menu_debug){
         afficher_menu_debug();
+    }
+    if(aff_amelioration){
+        aff_fen_amelioration(); /*changer la condition pour le booleen aff_amelioration*/
     }
     afficher_vie();
     afficher_jet();

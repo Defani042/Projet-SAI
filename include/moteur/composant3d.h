@@ -23,7 +23,7 @@ void afficher_objet_couleur(objet o);
 
 void afficher_carte(carte c);
 
-void sphere(float x, float y, float z, float radius);
+void sphere(float x, float y, float z, float radius, float r, float g, float b);
 
 void afficher_cercle3D(position c, float radius);
 

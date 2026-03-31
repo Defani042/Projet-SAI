@@ -182,6 +182,22 @@ void show_debug_menu(){
     }
 }
 
+/*
+R: affichage du menu debug
+E: rien
+S: rien 
+A: Gaultier
+*/
+void show_menu_upgrade(){
+    if(aff_amelioration == 0){
+        aff_amelioration = 1;
+        glutSetCursor(GLUT_CURSOR_INHERIT);
+    }
+    else{
+        aff_amelioration = 0;
+        glutSetCursor(GLUT_CURSOR_NONE);
+    }
+}
 
 /*
 R: Permet de mettre à jour le tableau de touches actives
@@ -195,6 +211,9 @@ void touche_pressee(unsigned char touche, int x, int y) {
     touches[touche] = 1;
     if(touche == 'k'){
         show_debug_menu();
+    }
+    if(touche == 'l'){
+        show_menu_upgrade();
     }
 }
 
@@ -244,8 +263,22 @@ S: rien
 A: Gaultier
 */
 void gerer_souris(int bouton, int etat, int x, int y){
-    /*printf pour le warning de non use */
-    printf("Bouton: %d, Etat: %d, X: %d, Y: %d\n", bouton, etat, x, y);
+    if(bouton == 0 && etat == 1 && aff_amelioration){
+        if(x > largeur_ecran/2-200 && x < largeur_ecran/2+200){
+            if(y > hauteur_ecran/2-180 && y < hauteur_ecran/2-80){
+                printf("Amélioration 1 choisie\n");
+                show_menu_upgrade();
+            }
+            if(y > hauteur_ecran/2-40 && y < hauteur_ecran/2+60){
+                printf("Amélioration 2 choisie\n");
+                show_menu_upgrade();
+            }
+            if(y > hauteur_ecran/2+110 && y < hauteur_ecran/2+210){
+                printf("Amélioration 3 choisie\n");
+                show_menu_upgrade();
+            }
+        }
+    }
 }
 
 /*
