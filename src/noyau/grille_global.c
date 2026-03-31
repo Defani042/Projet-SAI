@@ -13,10 +13,10 @@ void maj_grille_dynamique(ennemi liste_ennemis) {
     vider_grille(grille_dynamique);
     remplir_grille_dynamique(grille_dynamique, liste_ennemis);
     /*log_message(NOYAU SUCC "Grille dynamique mise à jour");*/
-    
+    /*
     printf("GRILLE DYNAMIQUE:\n");
     afficher_grille(grille_dynamique);
-    /*printf("GRILLE STATIQUE:\n");
+    printf("GRILLE STATIQUE:\n");
     afficher_grille(grille_statique);*/
     
     }

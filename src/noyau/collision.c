@@ -122,8 +122,18 @@ A: Adrien
 */
 objet detecter_collision_ennemi(grille g, ennemi e)
 {
+    objet tmp;
     if (!e || !e->obj)
         return NULL;  /* pour chaque objet de l’ennemi */
-    return detecter_collision_generique(g, e->obj->pos->x, e->obj->pos->y, e->obj->pos->z, e->obj->largeur, e->obj->hauteur, e->obj->longueur, 0); /* objets non centrés */
+    tmp = detecter_collision_generique(g, e->obj->pos->x, e->obj->pos->y, e->obj->pos->z, e->obj->largeur, e->obj->hauteur, e->obj->longueur, 0); /* objets non centrés */
+    
+    if (tmp == NULL)
+        return NULL; /* pas de collision */
+
+    /* vérifie que l'objet appartient bien à cet ennemi */
+    if (tmp->parent == e)
+        return NULL;
+
+    return tmp;
 }
 #endif /* _COLLISION_C_ */

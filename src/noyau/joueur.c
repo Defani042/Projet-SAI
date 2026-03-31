@@ -25,7 +25,7 @@ joueur creer_joueur(position pos) {
     j->atk = ATK;
     j->jetpack = JET;
     j->jetpack_max = JET;
-    j->niv = 0;
+    j->niv = 1;
     j->xp = 0;
     j->vie = VIE;
     j->vie_max = VIE;
@@ -124,11 +124,15 @@ S: vide
 A: Adrien
 */
 void niveau_suivant(joueur j){
-    if(j->xp >= j->niv*j->seuil){
-        j->xp -= j->seuil*j->niv;
-        j->niv++;
-        j->seuil*=2;
-        j->xp =0;
+    char buff[64];
+
+    if(j->xp >= j->niv * j->seuil){
+        sprintf(buff, "%s%s passage du niveau %d au niveau %d", NOYAU, SUCC, j->niv, j->niv + 1);
+        log_message(buff);
+
+        j->niv++;          /* niveau supérieur */
+        j->xp = 0;         /* réinitialisation de l'expérience */
+        j->seuil *= 2;     /* seuil pour le prochain niveau */
     }
 }
 

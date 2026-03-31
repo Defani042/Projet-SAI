@@ -100,7 +100,7 @@ void afficher_xp(int screen_width){
     draw_rect(x + 10, y + 4, (largeur - 20) * ratio, hauteur - 8, 0.0f, 0.1f, 1.0f);
 
     /* Texte sur la barre (XP ou jetpack) */
-    sprintf(buffer, "%d / %d", (int)j->xp, (int)j->seuil);
+    sprintf(buffer, "%d / %d", j->xp,j->seuil);
     draw_text(x + (largeur / 2) - 30, y + 16, buffer); /*centré approximativement*/ 
 
     /* Affichage du niveau sous la barre */

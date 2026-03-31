@@ -19,7 +19,7 @@ extern clock_t dernier_temps_degat;
 #define ATK 10
 #define JET 50
 #define SEUIL 100
-#define TAILLE 3;
+#define TAILLE 5;
 
 typedef struct s_joueur
 {

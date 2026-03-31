@@ -8,6 +8,8 @@
 #include "noyau/collision.h"
 #include "noyau/grille_global.h"
 
+extern int nbkill;
+
 void deplacer_joueur(carte c, double dirx, double diry, double dirz);
 
 void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur joueur);

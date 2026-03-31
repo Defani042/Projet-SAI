@@ -201,12 +201,11 @@ void affichage(){
     /*Fin*/
     glutSwapBuffers();
 
-
     /*application de la logique du jeu*/
     bas();
     regenerer_jetpack(carte_jeu->j);
     regeneration_vie(carte_jeu->j);
-    avencer_vague_ennemi(carte_jeu);
+   
     maj_grille_dynamique(carte_jeu->liste_ennemi);
     /*
     printf("NOMBRE OBJ dans la map: %d\n",taille_objet(carte_jeu->liste_objets)); 
@@ -218,8 +217,8 @@ void affichage(){
     if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
         carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
     }
-    avencer_vague_ennemi(carte_jeu); /*on avance les ennemi*/
     niveau_suivant(carte_jeu->j);
+    avencer_vague_ennemi(carte_jeu);
     /* Mesure du temps */
     /*fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;

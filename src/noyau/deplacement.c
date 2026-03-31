@@ -3,7 +3,7 @@
 
 #include"noyau/deplacement.h"
 
-
+int nbkill =0;
 /*
 R: Déplacement d'un joueur dans la carte avec détection des colision
 E: 1 TAD joueur et 3 double (les direction sur les axe X,Y et Z)
@@ -123,22 +123,22 @@ void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur j)
     if (detecter_collision_ennemi(grille_statique, e) ||
         detecter_collision_ennemi(grille_dynamique, e)){
             e->obj->pos->x = old_x;
-            printf("pos bloquer en x\n");
+            /*printf("pos bloquer en x\n");*/
         }
         
     e->obj->pos->y += move_y;
     if (detecter_collision_ennemi(grille_statique, e) ||
         detecter_collision_ennemi(grille_dynamique, e)){
         e->obj->pos->y = old_y;
-        printf("pos bloquer en y\n");
+        /*printf("pos bloquer en y\n");*/
     }
        
 
     e->obj->pos->z += move_z;
     if (detecter_collision_ennemi(grille_statique, e) ||
         detecter_collision_ennemi(grille_dynamique, e)){
-            e->obj->pos->x = old_x;
-            printf("pos bloquer en y\n");
+            e->obj->pos->z = old_z;
+            /*printf("pos bloquer en z\n");*/
         }
        
 }
@@ -162,7 +162,6 @@ void avencer_vague_ennemi(carte c)
 
     tmp = c->liste_ennemi;
     j = c->j;
-
     while (tmp != NULL)
     {
         suivant = tmp->next;
@@ -172,6 +171,8 @@ void avencer_vague_ennemi(carte c)
         {
             j->xp += tmp->xp;
             log_message(NOYAU SUCC "un ennemie est mort");
+            nbkill++;
+            /*printf("kill == %d\n",nbkill);*/
             c->liste_ennemi = supprimer_ennemi_ptr(c->liste_ennemi, tmp);
         }
         else

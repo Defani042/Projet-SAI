@@ -20,7 +20,7 @@ position creer_position(double x, double y , double z){
     p->x = x;
     p->y = y;
     p->z = z;
-    log_message(NOYAU SUCC "Position créé");
+    /*log_message(NOYAU SUCC "Position créé");*/
     return p;
 }
 
@@ -35,7 +35,7 @@ void liberer_position(position p){
         free(p);
         p = NULL;
     }
-    log_message(NOYAU SUCC "Position libéré");
+    /*log_message(NOYAU SUCC "Position libéré");*/
 }
 
 /*

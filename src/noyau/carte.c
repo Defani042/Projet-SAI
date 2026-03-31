@@ -39,10 +39,13 @@ void liberer_carte(carte c)
         return;
     log_message(NOYAU SUCC "libération des objets...");
     liberer_objet(c->liste_objets);
+    log_message(NOYAU SUCC "Les objets de la carte sont libres");
     log_message(NOYAU SUCC "libération du joueur...");
     liberer_joueur(c->j);
+    log_message(NOYAU SUCC "Le Joueur de la carte est libre");
     log_message(NOYAU SUCC "libération des ennemis...");
     liberer_ennemi(c->liste_ennemi);
+    log_message(NOYAU SUCC "Les ennemis de la carte sont libres");
     free(c);
     log_message(NOYAU SUCC "Carte libéré");
 }

@@ -28,7 +28,7 @@ objet creer_objet(position pos,double h,double l,double L){
     o->pos = pos;
     o->next = NULL;
     o->parent = NULL;
-    log_message(NOYAU SUCC "Objet créé");
+    /*log_message(NOYAU SUCC "Objet créé");*/
     return o;
 }
 
@@ -131,7 +131,7 @@ void liberer_objet(objet o){
         free(o);
         o = tmp;
     }
-    log_message(NOYAU SUCC "objet liberé !");
+    /*log_message(NOYAU SUCC "objet liberé !");*/
      
 }
 

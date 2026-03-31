@@ -21,17 +21,17 @@ void init_tab_ennemi(){
     /*set e1 TANK*/
     e1->degat = 3;
     e1->vie = 50;
-    e1->vit = 1.0;
+    e1->vit = 0.1;
 
     /*set e2 SOLDAT*/
     e2->degat = 5;
     e2->vie = 30;
-    e2->vit = 1.5;
+    e2->vit = 0.2;
 
     /*set e2 SOLDAT*/
     e3->degat = 5;
     e3->vie = 15;
-    e3->vit = 1.8;
+    e3->vit = 0.3;
 
     /*rangement dans le tableau*/
     globale_ennemi_tab[TANK] = e1;
