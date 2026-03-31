@@ -84,8 +84,14 @@ void sortie_propre(){
             exit(EXIT_FAILURE);
             break;
         default:
-            sprintf(buffer, INIT SUCC"Signal %d reçu. Nettoyage...", signal_recu);
-            log_message(buffer);
+            if(interruption){
+                sprintf(buffer, INIT SUCC"Signal d'arrêt reçu via le menu pause. Nettoyage...");
+                log_message(buffer);
+            }
+            else{
+                sprintf(buffer, INIT SUCC"Signal %d reçu. Nettoyage...", signal_recu);
+                log_message(buffer);
+            }
     }
     liberer_jeux();
     glutLeaveMainLoop();
