@@ -41,6 +41,9 @@ S: rien
 A: Adrien
 */
 void fermer_fenetre() {
+    /* STOP GLUT AVANT */
+    glutIdleFunc(NULL);
+    glutPassiveMotionFunc(NULL);
     log_message(INIT SUCC "Fermeture de la fenêtre...");
     liberer_jeux();
 }
@@ -154,7 +157,7 @@ void animer(){
         regeneration_vie(carte_jeu->j);
         raffraichir();
         glutPostRedisplay();
-         maj_grille_dynamique(carte_jeu->liste_ennemi);
+        maj_grille_dynamique(carte_jeu->liste_ennemi);
         if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
             carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
         }
