@@ -2,6 +2,7 @@
 #define CONTROLE_C
 
 #include "moteur/controle.h"
+#include "moteur/menu_amelioration.h"
 
 int touches[256] = {0};
 
@@ -197,6 +198,7 @@ A: Gaultier
 void show_menu_upgrade(){
     if(aff_amelioration == 0){
         aff_amelioration = 1;
+        choix_competence();
         glutPassiveMotionFunc(NULL);
         glutSetCursor(GLUT_CURSOR_INHERIT);
     }
@@ -223,7 +225,7 @@ void show_menu_pause(){
     else{
         aff_pause = 0;
         glutPassiveMotionFunc(mouvement_souris);
-        glutSetCursor(GLUT_CURSOR_NONE);
+        if(!aff_amelioration)glutSetCursor(GLUT_CURSOR_NONE);
         glutIdleFunc(animer);
     }
 }
@@ -305,16 +307,18 @@ void gerer_souris(int bouton, int etat, int x, int y){
             if(y > hauteur_ecran/2-180 && y < hauteur_ecran/2-80){
                 competence = 1;
                 show_menu_upgrade();
+                /*amelirorer_stat(j,competence1,val1);*/
             }
             if(y > hauteur_ecran/2-40 && y < hauteur_ecran/2+60){
                 competence = 2;
                 show_menu_upgrade();
+                /*amelirorer_stat(j,competence2,val2);*/
             }
             if(y > hauteur_ecran/2+110 && y < hauteur_ecran/2+210){
                 competence = 3;
                 show_menu_upgrade();
+                /*amelirorer_stat(j,competence3,val3);*/
             }
-            printf("Amélioration %d choisie\n",competence);
         }
         if(x > largeur_ecran - 20 && y < 20){
             show_menu_upgrade();

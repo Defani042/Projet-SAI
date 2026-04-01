@@ -30,6 +30,8 @@ joueur creer_joueur(position pos) {
     j->xp = 0;
     j->vie = VIE;
     j->vie_max = VIE;
+    j->taux_crit = TAUX_CRIT;
+    j->degats_crit = DEGATS_CRIT;
     j->pos = pos;
     j->vit = DEFAULT;
     j->def = DEFAULT;
@@ -122,6 +124,14 @@ void amelirorer_stat(joueur j,int stat,double val){
         break;
     }
     case CAP_VIT:j->vit += val;break;
+    case CAP_TAUX_CRIT:{
+        if(j->taux_crit >=100) j->degats_crit += val*2;
+        else j->taux_crit += val;
+        break;
+    }
+    case CAP_DEGATS_CRIT:{
+        j->degats_crit += val;
+    }
     default:break;
     }
 }

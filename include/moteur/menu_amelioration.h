@@ -3,10 +3,21 @@
 
 #include "moteur/composant2d.h"
 #include "moteur/affichage.h"
+#include "config/config.h"
 
-extern char *description1;
-extern char *description2;
-extern char *description3;
+extern char description1[NB_MAX];
+extern char description1[NB_MAX];
+extern char description1[NB_MAX];
+
+extern int stat_competence1;
+extern int stat_competence2;
+extern int stat_competence3;
+
+extern int val1;
+extern int val2;
+extern int val3;
+
+void choix_competence();
 
 void afficher_fenetre_amelioration();
 

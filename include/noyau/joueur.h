@@ -19,7 +19,9 @@ extern clock_t dernier_temps_degat;
 #define ATK 10
 #define JET 50
 #define SEUIL 100
-#define TAILLE 5;
+#define TAILLE 5
+#define TAUX_CRIT 10 
+#define DEGATS_CRIT 50
 
 typedef struct s_joueur
 {
@@ -35,6 +37,8 @@ typedef struct s_joueur
     double jetpack_max; /*jet pack*/
     int niv;
     int xp;
+    int taux_crit;
+    int degats_crit;
     double vit;
     double def;
     int taille;
