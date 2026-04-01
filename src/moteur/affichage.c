@@ -54,6 +54,7 @@ A: Adrien
 void liberer_jeux(){
    
     if (deja_libere) return; /*portection*/
+     deja_libere = 1;
     /*zone de la meme à libérrer*/
     liberer_carte(carte_jeu);
     carte_jeu = NULL;
