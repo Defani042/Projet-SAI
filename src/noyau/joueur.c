@@ -110,9 +110,17 @@ void amelirorer_stat(joueur j,int stat,double val){
     {
     case CAP_ATK:j->atk += val;break;
     case CAP_DEF:j->def += val;break;
-    case CAP_JET:j->jetpack_max += val;break;
+    case CAP_JET:{
+        j->jetpack_max += val;
+        j->jetpack += val;
+        break;
+    }
     case CAP_REG:j->reg_vie += val;break;
-    case CAP_VIE:j->vie_max += val;break;
+    case CAP_VIE:{
+        j->vie_max += val;
+        j->vie += val;
+        break;
+    }
     case CAP_VIT:j->vit += val;break;
     default:break;
     }

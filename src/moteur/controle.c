@@ -189,7 +189,7 @@ void show_debug_menu(){
 }
 
 /*
-R: affichage du menu debug
+R: affichage du menu d'amélioration
 E: rien
 S: rien 
 A: Gaultier
@@ -202,6 +202,26 @@ void show_menu_upgrade(){
     }
     else{
         aff_amelioration = 0;
+        glutPassiveMotionFunc(mouvement_souris);
+        glutSetCursor(GLUT_CURSOR_NONE);
+        glutIdleFunc(animer);
+    }
+}
+
+/*
+R: affichage du menu pause
+E: rien
+S: rien 
+A: Gaultier
+*/
+void show_menu_pause(){
+    if(aff_pause == 0){
+        aff_pause = 1;
+        glutPassiveMotionFunc(NULL);
+        glutSetCursor(GLUT_CURSOR_INHERIT);
+    }
+    else{
+        aff_pause = 0;
         glutPassiveMotionFunc(mouvement_souris);
         glutSetCursor(GLUT_CURSOR_NONE);
         glutIdleFunc(animer);
@@ -222,7 +242,7 @@ void touche_pressee(unsigned char touche, int x, int y) {
         show_debug_menu();
     }
     if(touche == 27){ /*echap*/
-        show_menu_upgrade();
+        show_menu_pause();
     }
 }
 
@@ -235,7 +255,15 @@ A: Gaultier
 void touche_relachee(unsigned char touche, int x, int y) {
     (void)x; /*pour le warning de non use */
     (void)y; /*pour le warning de non use */
-    touches[touche] = 0;
+    if(touche >= 'A' && touche <= 'Z'){
+        touches[touche] = 0;
+        touches[touche + 32] = 0;
+    }
+    else if(touche >= 'a' && touche <= 'z'){
+        touches[touche] = 0;
+        touches[touche - 32] = 0;
+    }
+    else touches[touche] = 0;
 }
 
 /*
@@ -294,6 +322,18 @@ void gerer_souris(int bouton, int etat, int x, int y){
             interruption = 1;
         }
     }
+    if(bouton == 0 && etat == 1 && aff_pause){
+        if(y > hauteur_ecran/2 + 50 && y < hauteur_ecran/2 + 100){
+            if(x > largeur_ecran/2 - 180 && x < largeur_ecran/2 - 60){
+                show_menu_pause();
+            }
+            if(x > largeur_ecran/2 + 60 && x < largeur_ecran/2 + 180){
+                show_menu_pause();
+                glutPostRedisplay();
+                interruption = 1;
+            }
+        }
+    }
 }
 
 /*
@@ -307,6 +347,8 @@ void mouvement_souris(int x, int y){
     int dy = y - derY;
     float rad_camY;
     joueur j;
+
+    if(aff_amelioration || aff_pause) return;
 
     j = carte_jeu->j;
     derX = x;

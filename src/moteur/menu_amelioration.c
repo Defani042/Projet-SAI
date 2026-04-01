@@ -22,9 +22,7 @@ void afficher_fenetre_amelioration(){
     description2 = "+ 20% DEF";
     description3 = "+ 20% ATQ";
     /*fin test*/
-
-    draw_rect(largeur_ecran - 20, 0, 20, 20, 1,0,0,1);
-    draw_text_color(largeur_ecran - 15, 15, "x",1,1,1);
+    
     draw_rect(ame_x,ame_y,600,500,0,0,0, 0.7f);
     draw_text_underlined_color(ame_x + 187,ame_y + 30, "Choisissez une amélioration !",1,1,1);
     draw_rect(ame_x + 100,ame_y + 70,400,100,0,0,0, 1.0f);
