@@ -215,9 +215,32 @@ void afficher_nb_ennemie(){
     
 }
 
+/*
+R: affichage de la position du joueur dans la grille 
+E: vide
+S: rien
+A: Adrien
+*/
+void afficher_position_grille(){
+    char buff[32];
+    float x = largeur_ecran - 150;
+    float y = 280;
+    int x_grille,y_grille;
+
+    x_grille = coord_to_cell_x(carte_jeu->j->pos->x,grille_statique);
+    y_grille = coord_to_cell_x(carte_jeu->j->pos->y,grille_statique);
+    sprintf(buff,"(%d,%d)",x_grille,y_grille);
+    draw_text(x,y,"Position grille:");
+    draw_text(x,y+20,buff);
+}
 
 
-
+/*
+R: permet d'afficher le menu de Debug
+E: vide
+S: rien
+A: Adrien
+*/
 void afficher_menu_debug(){
     draw_rect(largeur_ecran-160,0,160,hauteur_ecran,0,0,0, 0.5f);
     draw_text_underlined_color(largeur_ecran-150,20, "DEBUG",1,0,0);
@@ -227,9 +250,16 @@ void afficher_menu_debug(){
     afficher_nb_obj();
     maj_fps();
     afficher_fps();
+    afficher_position_grille();
     
 }
 
+/*
+R: permet d'afficher le nombre de kill
+E: vide
+S: rien
+A: Adrien
+*/
 void afficher_kill(){
     char buff[32];
     int x =20;

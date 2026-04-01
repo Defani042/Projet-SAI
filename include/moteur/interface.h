@@ -40,6 +40,8 @@ void afficher_timmer();
 
 void afficher_nb_ennemie();
 
+void afficher_position_grille();
+
 void afficher_menu_debug();
 
 void afficher_kill();
