@@ -172,6 +172,39 @@ int essayer_deplacement(ennemi e, double dx, double dy, double dz)
 }
 
 /*
+R: permet de calculer l'orientation des ennemi
+E: 1 TAD ennemi et 1 TAD joueur
+S: 1 entier 1 si le déplacement fonctionne sinon 0
+A: Adrien
+*/
+void orienter_ennemi_vers_joueur(ennemi e, joueur j)
+{
+    double dx, dy, dz;
+    double yaw, pitch, dist_xy;
+
+    if (!e || !e->obj || !e->obj->pos || !e->obj->rot ||
+        !j || !j->pos)
+        return;
+
+    /* vecteur direction entre ennemi et joueur*/
+    dx = j->pos->x - e->obj->pos->x; /*x*/
+    dy = j->pos->y - e->obj->pos->y; /*y*/
+    dz = j->pos->z - e->obj->pos->z; /*z*/
+
+    /* rotation horizontale AXE Z*/
+    yaw = atan2(dy, dx);
+    e->obj->rot->z = yaw * 180.0 / M_PI;
+
+    /* inclinaison verticale AXE X*/
+    dist_xy = sqrt(dx * dx + dy * dy);
+    if (dist_xy != 0.0)
+    {
+        pitch = atan2(dz, dist_xy);
+        e->obj->rot->x = pitch * 180.0 / M_PI;
+    }
+}
+
+/*
 R: Déplacement d'un ennemi vers le joueur dans la carte avec détection des collision et contournement des obstacle
 E: 1 TAD joueur , 1 TAD ennemi(celui qu'on veux déplacer), 1 TAD joueur
 S: vide
@@ -212,6 +245,7 @@ void deplacer_ennemi_vers_joueur2(carte c, ennemi e, joueur j)
         dx /= len;
         dy /= len;
     }
+    orienter_ennemi_vers_joueur(e,j);
 
     /* ===== direction principale ===== */
     if (essayer_deplacement(e, dx*pas, dy*pas, dz*pas)) {

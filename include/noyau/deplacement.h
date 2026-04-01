@@ -17,6 +17,8 @@ void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur joueur);
 
 int essayer_deplacement(ennemi e, double dx, double dy, double dz);
 
+void orienter_ennemi_vers_joueur(ennemi e, joueur j);
+
 void deplacer_ennemi_vers_joueur2(carte c, ennemi e, joueur j);
 
 void avencer_vague_ennemi(carte c);
