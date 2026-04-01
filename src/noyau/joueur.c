@@ -2,6 +2,7 @@
 #define _JOUEUR_C_
 
 #include"noyau/joueur.h"
+#include"moteur/controle.h"
 
 /*VAR GLOBALE*/
 clock_t dernier_temps_jetpack = 0;
@@ -29,6 +30,8 @@ joueur creer_joueur(position pos) {
     j->xp = 0;
     j->vie = VIE;
     j->vie_max = VIE;
+    j->taux_crit = TAUX_CRIT;
+    j->degats_crit = DEGATS_CRIT;
     j->pos = pos;
     j->vit = DEFAULT;
     j->def = DEFAULT;
@@ -109,10 +112,26 @@ void amelirorer_stat(joueur j,int stat,double val){
     {
     case CAP_ATK:j->atk += val;break;
     case CAP_DEF:j->def += val;break;
-    case CAP_JET:j->jetpack_max += val;break;
+    case CAP_JET:{
+        j->jetpack_max += val;
+        j->jetpack += val;
+        break;
+    }
     case CAP_REG:j->reg_vie += val;break;
-    case CAP_VIE:j->vie_max += val;break;
+    case CAP_VIE:{
+        j->vie_max += val;
+        j->vie += val;
+        break;
+    }
     case CAP_VIT:j->vit += val;break;
+    case CAP_TAUX_CRIT:{
+        if(j->taux_crit >=100) j->degats_crit += val*2;
+        else j->taux_crit += val;
+        break;
+    }
+    case CAP_DEGATS_CRIT:{
+        j->degats_crit += val;
+    }
     default:break;
     }
 }
@@ -133,6 +152,7 @@ void niveau_suivant(joueur j){
         j->niv++;          /* niveau supérieur */
         j->xp -= j->niv * j->seuil; /* garde le surplus */
         j->seuil *= 2;     /* seuil pour le prochain niveau */
+        show_menu_upgrade(); /*affiche le menu d'amélioration*/
     }
 }
 

@@ -3,11 +3,13 @@
 
 #include"moteur/interface.h"
 #include"moteur/menu_amelioration.h"
+#include"moteur/menu_pause.h"
 
 /*varaible globale*/
 clock_t timer = 0;
 int show_menu_debug = 0;
 int aff_amelioration = 0;
+int aff_pause = 0;
 
 /*variable pour compter le nombre de FPS*/
 static int frame_count = 0;
@@ -251,7 +253,12 @@ void afficher_interface(){
         afficher_menu_debug();
     }
     if(aff_amelioration){
-        aff_fen_amelioration(); /*changer la condition pour le booleen aff_amelioration*/
+        afficher_fenetre_amelioration(); /*changer la condition pour le booleen aff_amelioration*/
+        glutPostRedisplay();
+        glutIdleFunc(NULL);
+    }
+    if(aff_pause){
+        afficher_fenetre_pause(); /*changer la condition pour le booleen aff_amelioration*/
         glutPostRedisplay();
         glutIdleFunc(NULL);
     }

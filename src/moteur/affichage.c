@@ -148,6 +148,10 @@ void animer(){
         last_time = current_time;
         angle_soleil += 0.0001f;
         bas();
+        avencer_vague_ennemi(carte_jeu);
+        /*application de la logique du jeu*/
+        regenerer_jetpack(carte_jeu->j);
+        regeneration_vie(carte_jeu->j);
         raffraichir();
         glutPostRedisplay();
     }
@@ -212,10 +216,6 @@ void affichage(){
 
     /*Fin*/
     glutSwapBuffers();
-
-    /*application de la logique du jeu*/
-    regenerer_jetpack(carte_jeu->j);
-    regeneration_vie(carte_jeu->j);
    
     maj_grille_dynamique(carte_jeu->liste_ennemi);
     /*
@@ -229,7 +229,6 @@ void affichage(){
         carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
     }
     niveau_suivant(carte_jeu->j);
-    avencer_vague_ennemi(carte_jeu);
     /* Mesure du temps */
     /*fin = clock();
     temps = (double)(fin - debut) / CLOCKS_PER_SEC;
