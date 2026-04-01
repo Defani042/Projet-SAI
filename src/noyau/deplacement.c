@@ -75,7 +75,7 @@ void deplacer_joueur(carte c, double dx, double dy, double dz)
 
 
 /*
-R: Déplacement d'un ennemi vers le joeur dans la carte avec détection des colision
+R: Déplacement d'un ennemi vers le joueur dans la carte avec détection des collision
 E: 1 TAD joueur , 1 TAD ennemi(celui qu'on veux déplacer), 1 TAD joueur
 S: vide
 A: Adrien
@@ -143,6 +143,103 @@ void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur j)
        
 }
 
+/*
+R: test le déplacement 
+E: 1 TAD ennemi et 3 double (direction en x,y,z)
+S: 1 entier 1 si le déplacement fonctionne sinon 0
+A: Adrien
+*/
+int essayer_deplacement(ennemi e, double dx, double dy, double dz)
+{
+    double old_x = e->obj->pos->x;
+    double old_y = e->obj->pos->y;
+    double old_z = e->obj->pos->z;
+
+    e->obj->pos->x += dx;
+    e->obj->pos->y += dy;
+    e->obj->pos->z += dz;
+
+    if (detecter_collision_ennemi(grille_statique, e) ||
+        detecter_collision_ennemi(grille_dynamique, e))
+    {
+        e->obj->pos->x = old_x;
+        e->obj->pos->y = old_y;
+        e->obj->pos->z = old_z;
+        return 0;
+    }
+
+    return 1;
+}
+
+/*
+R: Déplacement d'un ennemi vers le joueur dans la carte avec détection des collision et contournement des obstacle
+E: 1 TAD joueur , 1 TAD ennemi(celui qu'on veux déplacer), 1 TAD joueur
+S: vide
+A: Adrien
+*/
+void deplacer_ennemi_vers_joueur2(carte c, ennemi e, joueur j)
+{
+    double dx, dy, dz;
+    double len;
+    double pas;
+
+    /* sécurité */
+    if (!c || !e || !e->obj || !e->obj->pos || !j || !j->pos)
+        return;
+
+    pas = e->vit;
+
+    /* direction vers joueur */
+    dx = j->pos->x - e->obj->pos->x;
+    dy = j->pos->y - e->obj->pos->y;
+    dz = j->pos->z - e->obj->pos->z;
+
+    len = sqrt(dx*dx + dy*dy + dz*dz);
+    if (len == 0)
+        return;
+
+    dx /= len;
+    dy /= len;
+    dz /= len;
+
+    /* petit random pour éviter comportement robot */
+    dx += alea_double(-0.2, 0.2);
+    dy += alea_double(-0.2, 0.2);
+
+    /* renormalisation XY */
+    len = sqrt(dx*dx + dy*dy);
+    if (len != 0) {
+        dx /= len;
+        dy /= len;
+    }
+
+    /* ===== direction principale ===== */
+    if (essayer_deplacement(e, dx*pas, dy*pas, dz*pas)) {
+        e->blocage = 0;
+        return;
+    }
+
+    e->blocage++;
+
+    /* ===== droite ===== */
+    if (essayer_deplacement(e, -dy*pas, dx*pas, 0))
+        return;
+
+    /* ===== gauche ===== */
+    if (essayer_deplacement(e, dy*pas, -dx*pas, 0))
+        return;
+
+    /* ===== comportement secours ===== */
+    if (e->blocage > 5)
+    {
+        double rx = alea_double(-1,1);
+        double ry = alea_double(-1,1);
+
+        essayer_deplacement(e, rx*pas, ry*pas, 0);
+        e->blocage = 0;
+    }
+}
+
 
 /*
 R: gestion du déplacement de tous les ennemi
@@ -178,7 +275,7 @@ void avencer_vague_ennemi(carte c)
         else
         {
             /* déplacement */
-            deplacer_ennemi_vers_joueur(c, tmp, j);
+            deplacer_ennemi_vers_joueur2(c, tmp, j);
 
             /* recalcul distance après déplacement */
             dist = distance_carre(tmp->obj->pos, j->pos);

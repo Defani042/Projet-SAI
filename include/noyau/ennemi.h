@@ -16,6 +16,7 @@ typedef struct  s_ennemi
     double degat;
     double vit;
     int xp;
+    double blocage;
     struct s_ennemi* next;
 }s_ennemi;
 
