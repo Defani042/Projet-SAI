@@ -17,6 +17,8 @@ extern int val1;
 extern int val2;
 extern int val3;
 
+extern char* nom_stat[8];
+
 void choix_competence();
 
 void afficher_fenetre_amelioration();

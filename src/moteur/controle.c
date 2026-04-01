@@ -303,7 +303,7 @@ A: Gaultier
 */
 void gerer_souris(int bouton, int etat, int x, int y){
     if(bouton == 0 && etat == 1 && aff_amelioration){
-        if(x > largeur_ecran/2-200 && x < largeur_ecran/2+200){
+        if(x > (largeur_ecran/2)-270 && x < (largeur_ecran/2)+130){
             if(y > hauteur_ecran/2-180 && y < hauteur_ecran/2-80){
                 competence = 1;
                 show_menu_upgrade();
@@ -325,10 +325,10 @@ void gerer_souris(int bouton, int etat, int x, int y){
     }
     if(bouton == 0 && etat == 1 && aff_pause){
         if(y > hauteur_ecran/2 + 50 && y < hauteur_ecran/2 + 100){
-            if(x > largeur_ecran/2 - 180 && x < largeur_ecran/2 - 60){
+            if(x > largeur_ecran/2-250 && x < largeur_ecran/2 - 130){
                 show_menu_pause();
             }
-            if(x > largeur_ecran/2 + 60 && x < largeur_ecran/2 + 180){
+            if(x > largeur_ecran/2-8 && x < largeur_ecran/2 + 112){
                 show_menu_pause();
                 glutPostRedisplay();
                 interruption = 1;
