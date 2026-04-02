@@ -214,6 +214,50 @@ void regeneration_vie(joueur j){
     }
 }
 
+/*
+R: reset les stat du jouer  
+E: 1 TAD joueur 
+S: vide
+A: Adrien
+*/
+void reset_joueur(joueur j){
+    /*reset*/
+    j->dir = creer_position(1,0,0);
+   
+    /*position*/
+    j->pos->x = 0;
+    j->pos->y = 0;
+    j->pos->z = 2;
+    /*regard*/
+    j->dir->x = 1;
+    j->dir->y = 0;
+    j->dir->z = 0;
+    /*stats*/
+    j->vit = DEFAULT;
+    j->def = DEFAULT;
+    j->seuil = SEUIL;
+    j->taille = TAILLE;
+    j->atk = ATK;
+    j->jetpack = JET;
+    j->jetpack_max = JET;
+    j->niv = 1;
+    j->xp = 0;
+    j->vie = VIE;
+    j->vie_max = VIE;
+    j->taux_crit = TAUX_CRIT;
+    j->degats_crit = DEGATS_CRIT;
 
+    /*hitbox du joueur*/
+    j->hauteur = HAUT;
+    j->largeur = LARG;
+    j->longueur = LONG;
+
+    /*regeneration*/
+    j->reg_jetpack = 0.05;
+    j->reg_vie = 0.05;
+    log_message(NOYAU SUCC "Joueur créé");
+    return j;
+
+}
 
 #endif /*_JOUEUR_C_*/

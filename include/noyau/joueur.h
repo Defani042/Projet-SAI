@@ -65,4 +65,6 @@ void regenerer_jetpack(joueur j);
 
 void regeneration_vie(joueur j);
 
+void reset_joueur(joueur j);
+
 #endif /*_JOUEUR_H_*/
