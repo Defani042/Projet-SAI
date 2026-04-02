@@ -3,6 +3,7 @@
 
 #include "noyau/carte.h"
 #include "noyau/generateur_ennemi.h"
+#include "moteur/composant3d.h"
 
 carte creer_carte_test()
 {
@@ -81,6 +82,10 @@ void creer_monde(carte c){
     ciel6= creer_objet(creer_position(1000,-1000,-1000),2000,1,2000);
     couleur_objet(ciel6, 0.5f, 0.8f, 1.0f);
     c->liste_objets = ajouter_fin(c->liste_objets, ciel6);
+
+    creer_arbre(c,4,4,0);
+    creer_rocher(c,1,-6,0);
+    creer_maison(c,-6,1,0);
 }
 
 carte creer_carte_jeu(){

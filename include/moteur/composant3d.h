@@ -29,5 +29,10 @@ void afficher_cercle3D(position c, float radius);
 
 void afficher3d();
 
+void creer_arbre(carte c, int x, int y, int z);
+
+void creer_rocher(carte c, int x, int y, int z);
+
+void creer_maison(carte c, int x, int y, int z);
 
 #endif /*_COMPOSANT3D_H_*/
