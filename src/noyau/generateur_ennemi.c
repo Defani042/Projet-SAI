@@ -73,6 +73,7 @@ ennemi creer_ennemi_alea(carte c){
     e->degat = globale_ennemi_tab[classe]->degat;
     e->vie   = globale_ennemi_tab[classe]->vie;
     e->vit   = globale_ennemi_tab[classe]->vit; 
+    e->classe = classe;
     while (ok && essais < 100)/*on test le spawn d'un ennemi 100 fois et si on n'arrive pas à le faire spawn on quitte*/
     {
         /*génération du signe pour x et y*/

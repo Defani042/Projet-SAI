@@ -41,7 +41,8 @@
 #define CAP_JET 4
 #define CAP_VIT 5
 #define CAP_TAUX_CRIT 6
-#define CAP_DEGATS_CRIT 7
+#define CAP_TAILLE 7
+#define CAP_DEGATS_CRIT 8
 
 
 /*LOG*/
@@ -60,7 +61,7 @@
 #endif
 
 
-#define NBMAX_ENNEMI 5
+#define NBMAX_ENNEMI 10
 #define NB_MAX 128
 
 /* ---------- GRILLE ---------- */

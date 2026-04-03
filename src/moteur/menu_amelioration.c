@@ -8,15 +8,16 @@
 #include "noyau/aleatoire.h"
 #include "config/config.h"
 
-char* nom_stat[8] = {
+char* nom_stat[9] = {
     "Defence",
     "Point de vie",
     "Attaque",
-    "Regeneration de pv",
-    "Point de jetpack",
+    "Regeneration pv",
+    "Jet",
     "Vitesse",
-    "Taux critique",
-    "Degats critique"
+    "Taux crit",
+    "Taille",
+    "Degats crit"
 };
 
 char description1[NB_MAX];
@@ -27,20 +28,21 @@ int stat_competence1;
 int stat_competence2;
 int stat_competence3;
 
-int val1;
-int val2;
-int val3;
+float val1;
+float val2;
+float val3;
 
-int choix_valeur(int comp){
+float choix_valeur(int comp){
     switch(comp){
-        case CAP_DEF: return alea_int(1,3);
-        case CAP_VIE: return alea_int(5,15);
-        case CAP_ATK: return alea_int(1,3);
-        case CAP_REG: return alea_int(1,2);
-        case CAP_JET: return alea_int(1,3);
-        case CAP_VIT: return alea_int(1,3);
-        case CAP_TAUX_CRIT: return alea_int(2,7);
-        default: return alea_int(5,15);
+        case CAP_DEF: return (float)alea_int(1,3);
+        case CAP_VIE: return (float)alea_int(5,15);
+        case CAP_ATK: return (float)alea_int(1,3);
+        case CAP_REG: return alea_double(0.05,0.15);
+        case CAP_JET: return (float)alea_int(1,3);
+        case CAP_VIT: return alea_double(0.05,0.15);
+        case CAP_TAILLE: return alea_double(0.5,1.5);
+        case CAP_TAUX_CRIT: return (float)alea_int(2,7);
+        default: return (float)alea_int(5,15);
     }
 }
 
@@ -64,9 +66,9 @@ void choix_competence(){
     val2 = choix_valeur(stat_competence2);
     val3 = choix_valeur(stat_competence3); 
     
-    sprintf(description1,"La stat %s augmente de %d",nom_stat[stat_competence1],val1);
-    sprintf(description2,"La stat %s augmente de %d",nom_stat[stat_competence2],val2);
-    sprintf(description3,"La stat %s augmente de %d",nom_stat[stat_competence3],val3);
+    sprintf(description1,"La stat %s augmente de %.2f",nom_stat[stat_competence1],val1);
+    sprintf(description2,"La stat %s augmente de %.2f",nom_stat[stat_competence2],val2);
+    sprintf(description3,"La stat %s augmente de %.2f",nom_stat[stat_competence3],val3);
 }
 
 /*
@@ -86,9 +88,9 @@ void afficher_fenetre_amelioration(){
     draw_rect(ame_x + 100,ame_y + 70,400,100,0,0,0, 1.0f);
     draw_rect(ame_x + 100,ame_y + 210,400,100,0,0,0, 1.0f);
     draw_rect(ame_x + 100,ame_y + 360,400,100,0,0,0, 1.0f);
-    draw_text_underlined_color(ame_x + 140,ame_y + 125, description1,1,0,0);
-    draw_text_underlined_color(ame_x + 140,ame_y + 265, description2,0,1,0);
-    draw_text_underlined_color(ame_x + 140,ame_y + 415, description3,0,0,1);
+    draw_text_underlined_color(ame_x + 135,ame_y + 125, description1,1,0,0);
+    draw_text_underlined_color(ame_x + 135,ame_y + 265, description2,0,1,0);
+    draw_text_underlined_color(ame_x + 135,ame_y + 415, description3,0,0,1);
 }
 
 #endif /*_MENU_AMELIORATION_C_*/

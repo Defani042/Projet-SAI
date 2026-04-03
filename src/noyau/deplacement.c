@@ -286,6 +286,7 @@ void avencer_vague_ennemi(carte c)
     ennemi tmp;
     ennemi suivant;
     joueur j;
+    int chance;
     double dist;
 
     if (c == NULL || c->j == NULL)
@@ -317,8 +318,14 @@ void avencer_vague_ennemi(carte c)
 
             /* zone d'attaque joueur */
             if (dist < j->taille)
-            {
-                tmp->vie -= j->atk;
+            {   
+                chance = alea_int(1,100);
+                if (chance <= j->taux_crit){
+                    tmp->vie -= j->atk * j->degats_crit;
+                }
+                else{
+                    tmp->vie -= j->atk;
+                }
             }
 
             /* collision directe avec joueur */
@@ -330,8 +337,13 @@ void avencer_vague_ennemi(carte c)
                     tmp->obj->largeur, tmp->obj->hauteur, tmp->obj->longueur,
                 NO_CENTRER)
             )
-            {
-                degat(tmp->degat, j);
+            {   
+                if((tmp->degat-j->def) > 0){
+                    degat(tmp->degat-j->def, j);
+                }
+                else{
+                    degat(1, j); /*dégat minimum*/
+                }
             }
         }
 

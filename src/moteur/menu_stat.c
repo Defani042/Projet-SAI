@@ -43,7 +43,7 @@ void afficher_fenetre_stat(joueur j){
     sprintf(statistique,"Degat crit : %d", j->degats_crit);
     draw_text_color(ame_x + 10,ame_y + 400 + 30, statistique,1,1,1);
 
-    sprintf(statistique,"Vitesse : %.0f", j->vit);
+    sprintf(statistique,"Vitesse : %.2f", j->vit);
     draw_text_color(ame_x + 10,ame_y + 450 + 30, statistique,1,1,1);
 
 }

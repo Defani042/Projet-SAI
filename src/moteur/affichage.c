@@ -2,6 +2,7 @@
 #define AFFICHAGE_C
 
 #include "moteur/controle.h"
+#include "moteur/texture.h"
 
 
 /*variables globales*/
@@ -196,6 +197,9 @@ void initialisation(){
        - la couleur ambiante
        - la couleur diffuse */
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+    /*initialisation des textures*/
+    initialisation_texture();
 }
 
 

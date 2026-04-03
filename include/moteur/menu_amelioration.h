@@ -13,11 +13,11 @@ extern int stat_competence1;
 extern int stat_competence2;
 extern int stat_competence3;
 
-extern int val1;
-extern int val2;
-extern int val3;
+extern float val1;
+extern float val2;
+extern float val3;
 
-extern char* nom_stat[8];
+extern char* nom_stat[9];
 
 void choix_competence();
 

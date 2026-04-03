@@ -12,6 +12,7 @@
 typedef struct  s_ennemi
 {
     objet obj;/*sprite 3D*/
+    int classe;
     double vie;
     double degat;
     double vit;

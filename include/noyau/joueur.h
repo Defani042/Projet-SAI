@@ -15,6 +15,7 @@ extern clock_t dernier_temps_degat;
 #include "noyau/position.h"
 
 #define DEFAULT 1
+#define VITESSE 0.5
 #define VIE 100
 #define ATK 10
 #define JET 50

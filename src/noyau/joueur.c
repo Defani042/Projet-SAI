@@ -33,7 +33,7 @@ joueur creer_joueur(position pos) {
     j->taux_crit = TAUX_CRIT;
     j->degats_crit = DEGATS_CRIT;
     j->pos = pos;
-    j->vit = DEFAULT;
+    j->vit = VITESSE;
     j->def = DEFAULT;
     j->seuil = SEUIL;
     j->taille = TAILLE;
@@ -129,6 +129,7 @@ void amelirorer_stat(joueur j,int stat,double val){
         else j->taux_crit += val;
         break;
     }
+    case CAP_TAILLE:j->taille += val;break;
     case CAP_DEGATS_CRIT:{
         j->degats_crit += val;
     }
@@ -233,7 +234,7 @@ void reset_joueur(joueur j){
     j->dir->y = 0;
     j->dir->z = 0;
     /*stats*/
-    j->vit = DEFAULT;
+    j->vit = VITESSE;
     j->def = DEFAULT;
     j->seuil = SEUIL;
     j->taille = TAILLE;
