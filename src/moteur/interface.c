@@ -266,7 +266,7 @@ void afficher_kill(){
     int y =100;
 
     sprintf(buff,"KILL : %d",nbkill);
-    draw_rect(x,y,80,35,0,0,0,1);
+    draw_rect(x,y,140,35,0,0,0,1);
     draw_text(x+5,y+25,buff);
 
 }
