@@ -365,11 +365,50 @@ objet creer_maison(int x, int y, int z){
     return maison;
 
 }
+/*
+R: affiche la hitbox du joueur
+E: joueur j
+S: rien
+A: Adrien
+*/
+
+void afficher_hitbox_joueur(joueur j){
+    double xmax,xmin,ymax,ymin,zmax,zmin;
+    /*couleur position de la hit box du joeuur*/
+    xmax = j->pos->x + j->largeur/2;
+    xmin = j->pos->x - j->largeur/2;
+    ymax = j->pos->y + j->hauteur/2;
+    ymin = j->pos->y - j->hauteur/2;
+    zmax = j->pos->z + j->longueur/2;
+    zmin = j->pos->z - j->longueur/2;
+
+    glBegin(GL_LINES);
+    glColor3f(1.0,0.0,0.0); /*couleur rouge*/
+    /*Arêtes face arrière*/
+    glVertex3d(xmin, ymin, zmin); glVertex3d(xmax, ymin, zmin);
+    glVertex3d(xmax, ymin, zmin); glVertex3d(xmax, ymax, zmin);
+    glVertex3d(xmax, ymax, zmin); glVertex3d(xmin, ymax, zmin);
+    glVertex3d(xmin, ymax, zmin); glVertex3d(xmin, ymin, zmin);
+
+    /*Arêtes face avant*/
+    glVertex3d(xmin, ymin, zmax); glVertex3d(xmax, ymin, zmax);
+    glVertex3d(xmax, ymin, zmax); glVertex3d(xmax, ymax, zmax);
+    glVertex3d(xmax, ymax, zmax); glVertex3d(xmin, ymax, zmax);
+    glVertex3d(xmin, ymax, zmax); glVertex3d(xmin, ymin, zmax);
+
+    /*Arêtes verticales*/ 
+    glVertex3d(xmin, ymin, zmin); glVertex3d(xmin, ymin, zmax);
+    glVertex3d(xmax, ymin, zmin); glVertex3d(xmax, ymin, zmax);
+    glVertex3d(xmax, ymax, zmin); glVertex3d(xmax, ymax, zmax);
+    glVertex3d(xmin, ymax, zmin); glVertex3d(xmin, ymax, zmax);
+    
+    glEnd();    
+}
 
 
 /*
 R: affiche tous les objets 3d
-E: carte c
+E: rien
 S: rien
 A: Adrien
 */
@@ -381,6 +420,10 @@ void afficher3d(){
     afficher_cercle3D(j->pos,j->taille);
     sphere(soleil_x, 0, soleil_y, 50.0, 0.7f, 0.7f, 0);
     sphere(-soleil_x, 0, -soleil_y, 50.0, 0.9f, 0.9f, 0.6f);
+
+    if(show_menu_debug){
+        afficher_hitbox_joueur(carte_jeu->j);
+    }
 }
 
 

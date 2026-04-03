@@ -16,6 +16,7 @@ extern float angle_soleil;
 #include "noyau/objet.h"
 #include "noyau/carte_globale.h"
 #include "noyau/aleatoire.h"
+#include "moteur/interface.h"
 
 void Parallelepiped(float x, float y, float z, float dx, float dy, float dz);
 
@@ -32,6 +33,8 @@ objet creer_arbre(int x, int y, int z);
 objet creer_rocher(int x, int y, int z);
 
 objet creer_maison(int x, int y, int z);
+
+void afficher_hitbox_joueur(joueur j);
 
 void afficher3d();
 
