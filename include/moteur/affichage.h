@@ -18,6 +18,12 @@
 /*partie noyeau*/
 #include "noyau/generateur_ennemi.h"
 #include "noyau/grille_global.h"
+#include "noyau/difficulte.h"
+
+/*var des popup*/
+extern const char *popup_texte;
+extern int popup_fin_time;
+extern float popup_r, popup_g, popup_b;
 
 /*Variables globales*/
 extern float eyeX;

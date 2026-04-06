@@ -221,4 +221,48 @@ void draw_colored_disk(float cx, float cy, float radius, int num_segments, float
     glEnd();
 }
 
+/*
+R: affiche un texte centrer sur un point x,y    
+E: 1 char(le texte) 5 float(le point de centrage(x,y) la taille et la couleur (r,g,b))
+S: rien
+A: Adrien
+*/
+void afficher_texte_centre(const char *texte, float x_centre, float y_centre, float scale, float r, float g, float b)
+{
+    float largeur = 0.0f;
+    int i;
+
+    /* calcul de la largeur totale du texte */
+    for (i = 0; texte[i] != '\0'; i++)
+        largeur += glutStrokeWidth(GLUT_STROKE_ROMAN, texte[i]);
+
+    /* couleur du texte */
+    glColor3f(r, g, b);
+
+    glPushMatrix();
+        /* recentrer le texte */
+        glTranslatef(x_centre - (largeur * scale / 2), y_centre, 0.0f);
+        glScalef(scale, -scale, 1.0f); /*application de la taille*/
+
+        /* afficher chaque caractère */
+        for (i = 0; texte[i] != '\0'; i++)
+            glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, texte[i]);
+    glPopMatrix();
+}
+
+/*
+R: afficher une popup
+E: 1 char(le texte) 1 entier durer de la popus 3 float( la couleur (r,g,b))
+S: rien
+A: Adrien
+*/
+void afficher_popup(const char *popup_texte, int popup_fin_time,float r,float g,float b)
+{
+    int t = glutGet(GLUT_ELAPSED_TIME);
+    if (t < popup_fin_time)  /*tant que le temps n'est pas écoulé*/
+    {
+        /*Affiche le texte centré*/
+        afficher_texte_centre(popup_texte, largeur_ecran / 2, hauteur_ecran / 2, 0.3f,r,g,b);
+    }
+}
 #endif /*_COMPOSANT2D_C_*/

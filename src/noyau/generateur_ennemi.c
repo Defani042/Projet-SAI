@@ -70,9 +70,9 @@ ennemi creer_ennemi_alea(carte c){
     /*création de l'ennemie de base*/
     e = creer_ennemi(creer_objet(creer_position(-9000,-9000,-9000),1,1,1));/*je les fais spawn hors de la map sinon dégat au joueur possible*/
     /*affectation des caractéristique de la classe*/
-    e->degat = globale_ennemi_tab[classe]->degat;
-    e->vie   = globale_ennemi_tab[classe]->vie;
-    e->vit   = globale_ennemi_tab[classe]->vit; 
+    e->degat = globale_ennemi_tab[classe]->degat * (1.0 + 0.15 * difficulte); /*+15% dégâts par niveau*/ 
+    e->vie   = globale_ennemi_tab[classe]->vie   * (1.0 + 0.2  * difficulte); /*+20% vie par niveau*/ 
+    e->vit   = globale_ennemi_tab[classe]->vit   * (1.0 + 0.05 * difficulte); /*+5% vitesse par niveau*/
     e->classe = classe;
     while (ok && essais < 100)/*on test le spawn d'un ennemi 100 fois et si on n'arrive pas à le faire spawn on quitte*/
     {

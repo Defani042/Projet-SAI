@@ -7,5 +7,9 @@
 
 #include "moteur/interface.h"
 
+extern int difficulte;
+
+void gestion_difficulte();
+
 
 #endif /*_DIFFICULTE_H_*/

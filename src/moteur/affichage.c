@@ -4,6 +4,10 @@
 #include "moteur/controle.h"
 #include "moteur/texture.h"
 
+/*var des popup*/
+const char *popup_texte = NULL;
+int popup_fin_time = 0;
+float popup_r, popup_g, popup_b;
 
 /*variables globales*/
 float eyeX = 0;
@@ -211,7 +215,7 @@ void initialisation(){
 R: permet d'actualiser les images
 E: rien
 S: rien
-A: Gaultier
+A: Gaultier et Adrien
 */
 void animer(){
     static clock_t last_time = 0;
@@ -228,6 +232,7 @@ void animer(){
         glutPostRedisplay();
         return;
     }
+   
     /*** LOGIQUE DU JEU***/
     angle_soleil += 0.0001f;
     bas();
@@ -240,6 +245,7 @@ void animer(){
     if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
         carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
     }
+    gestion_difficulte();
     /*afficher_ennemi_term(carte_jeu->liste_ennemi);*/
     
 }
@@ -297,6 +303,12 @@ void affichage(){
 
     /* Dessin UI */
     afficher_interface();
+    /*gestion popup*/
+    if (popup_texte && glutGet(GLUT_ELAPSED_TIME) < popup_fin_time) {
+        afficher_popup(popup_texte, popup_fin_time, popup_r, popup_g, popup_b);
+    } else if (popup_texte) {
+        popup_texte = NULL;
+    }
     
    
     glEnable(GL_DEPTH_TEST); 

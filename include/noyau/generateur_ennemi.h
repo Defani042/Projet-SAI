@@ -10,7 +10,8 @@
 #include "noyau/carte_globale.h"
 #include "noyau/aleatoire.h"
 #include "noyau/collision.h"
-#include "grille_global.h"
+#include "noyau/grille_global.h"
+#include "noyau/difficulte.h"
 
 #define NB_TYPE_E 3
 #define TANK 0
