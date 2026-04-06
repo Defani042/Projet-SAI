@@ -92,7 +92,7 @@ void deplacer_ennemi_vers_joueur(carte c, ennemi e, joueur j)
     if (!c || !e || !e->obj || !e->obj->pos || !j || !j->pos)
         return;
 
-    pas = e->vit;
+    pas = e->vit * deltaTime;
 
     /* Sauvegarde position */
     old_x = e->obj->pos->x;
@@ -220,7 +220,7 @@ void deplacer_ennemi_vers_joueur2(carte c, ennemi e, joueur j)
     if (!c || !e || !e->obj || !e->obj->pos || !j || !j->pos)
         return;
 
-    pas = e->vit;
+    pas = e->vit * deltaTime;
 
     /* direction vers joueur */
     dx = j->pos->x - e->obj->pos->x;

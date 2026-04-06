@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
     
 
     /*init timer*/
-    timer = clock();
+    timer = 0;
     log_message(INIT SUCC "timer initialisé");
     /*initialisation de la map*/
     carte_jeu = creer_carte_jeu();

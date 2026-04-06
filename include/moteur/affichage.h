@@ -35,6 +35,8 @@ extern int f;
 extern int largeur_ecran;
 extern int hauteur_ecran;
 
+extern float deltaTime;
+
 void gestion_signal(int sig);
 
 void sortie_propre();

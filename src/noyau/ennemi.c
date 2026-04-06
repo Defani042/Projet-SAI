@@ -128,6 +128,23 @@ int taille_ennemi(ennemi e){
 
 }
 
+/*
+R: affiche la pos de ennemi dans le terminal
+E: 1 TAD ennemie
+S: rien
+A: Adrien
+*/
+void afficher_ennemi_term(ennemi e){
+    ennemi tmp = e;
+    if(e==NULL)return;
+
+    while (tmp!=NULL)
+    {
+        printf("ennemi pos: %f %f\n", tmp->obj->pos->x, tmp->obj->pos->y);
+        tmp =tmp->next;
+    }
+
+}
 
 
 

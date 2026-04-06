@@ -36,4 +36,5 @@ int mort(ennemi e);
 
 int taille_ennemi(ennemi e);
 
+void afficher_ennemi_term(ennemi e);
 #endif /*_ENNELI_H_*/

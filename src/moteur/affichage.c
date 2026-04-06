@@ -214,10 +214,9 @@ S: rien
 A: Gaultier
 */
 void animer(){
-    clock_t current_time = clock();
     static clock_t last_time = 0;
-
     int curr_time = glutGet(GLUT_ELAPSED_TIME);
+    
     deltaTime = (curr_time - last_time) / 1000.0f; /* en secondes*/
     last_time = curr_time;
     if (should_exit || interruption) {
@@ -229,21 +228,20 @@ void animer(){
         glutPostRedisplay();
         return;
     }
-    if (!(current_time - last_time < CLOCKS_PER_SEC / 60)){
-        last_time = current_time;
-        angle_soleil += 0.0001f;
-        bas();
-        avencer_vague_ennemi(carte_jeu);
-        /*application de la logique du jeu*/
-        regenerer_jetpack(carte_jeu->j);
-        regeneration_vie(carte_jeu->j);
-        raffraichir();
-        glutPostRedisplay();
-        maj_grille_dynamique(carte_jeu->liste_ennemi);
-        if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
-            carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
-        }
+    /*** LOGIQUE DU JEU***/
+    angle_soleil += 0.0001f;
+    bas();
+    avencer_vague_ennemi(carte_jeu);
+    regenerer_jetpack(carte_jeu->j);
+    regeneration_vie(carte_jeu->j);
+    raffraichir();
+    glutPostRedisplay();
+    maj_grille_dynamique(carte_jeu->liste_ennemi);
+    if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
+        carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
     }
+    /*afficher_ennemi_term(carte_jeu->liste_ennemi);*/
+    
 }
 
 

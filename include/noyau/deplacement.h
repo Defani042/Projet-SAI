@@ -9,6 +9,9 @@
 #include "noyau/grille_global.h"
 #include "noyau/aleatoire.h"
 
+/*pour deltatime*/
+#include "moteur/affichage.h"
+
 extern int nbkill;
 
 void deplacer_joueur(carte c, double dirx, double diry, double dirz);
