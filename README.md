@@ -18,6 +18,8 @@ Projet-SAI/
 ├─ 📁 build/
 ├─ 📁 game/
 ├─ 📁 fich/
+│  ├─ 📁 textures/
+│  │  └─ 📁 Personnage/
 │  └─ 📁 log/
 ├─ 📄 Makefile
 └─ 📄 README.md
@@ -97,7 +99,10 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
   gestion des variables globals, grille dynamique et statique
 
 - **carte** (`carte_global.c / carte_global.h`)  
-  gestion de la variable gloabal carte_jeu  
+  gestion de la variable gloabal carte_jeu 
+
+- **difficulte** (`difficulte.c / difficulte.h`)  
+  gestion de l'évolution de la difficulté en fonction du temps 
 
 ---
 
@@ -141,6 +146,9 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
   Gestion de l'affichage du menu du menu pause  
   - gestion de la sortie du jeu 
   - gestion de la reprise du jeu  
+
+- **texture** (`texture.c / texture.h`)  
+  gestion du chargement et de la libération des texture du jeu
    
 ---
 
