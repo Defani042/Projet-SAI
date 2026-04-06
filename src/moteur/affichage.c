@@ -25,6 +25,10 @@ int deja_libere = 0;
 volatile sig_atomic_t should_exit = 0;
 volatile sig_atomic_t signal_recu = 0;
 
+int last_time = 0;
+float deltaTime = 0.0f;
+
+
 /*
 R: gestionn du handler en cas de fin
 E: un entier le signale reçu
@@ -212,6 +216,10 @@ A: Gaultier
 void animer(){
     clock_t current_time = clock();
     static clock_t last_time = 0;
+
+    int curr_time = glutGet(GLUT_ELAPSED_TIME);
+    deltaTime = (curr_time - last_time) / 1000.0f; /* en secondes*/
+    last_time = curr_time;
     if (should_exit || interruption) {
         sortie_propre();
         return;

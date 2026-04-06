@@ -6,7 +6,7 @@
 #include"moteur/menu_pause.h"
 
 /*varaible globale*/
-clock_t timer = 0;
+int timer =0;
 int show_menu_debug = 0;
 int aff_amelioration = 0;
 int aff_pause = 0;
@@ -184,21 +184,22 @@ A: Adrien
 */
 void afficher_timmer(){
     char buffer[32];
-    int min,sec,heur;
+    int min, sec, heur;
     float x = 400;
     float y = 20;
-    /*calcul du timer*/
-    clock_t maintenant = clock(); /*temps actuel*/
-    float secondes = (float)(maintenant - timer) / CLOCKS_PER_SEC;
+    float secondes;
+    /* calcul du timer avec temps réel */
+    timer = glutGet(GLUT_ELAPSED_TIME); /*Temps en milliseconde*/
+    secondes = timer / 1000.0f;
+
     heur = (int)(secondes / 3600);
     min  = ((int)secondes % 3600) / 60;
     sec  = (int)secondes % 60;
-    /*desin du timmer*/
-    sprintf(buffer, "%02d:%02d:%02d",heur,min,sec);
-    draw_text(x,y+20, buffer);
-    
+
+    /* dessin du timer */
+    sprintf(buffer, "%02d:%02d:%02d", heur, min, sec);
+    draw_text(x, y+20, buffer);
 }
-  
 /*
 R: permet d'afficher le nombre d'ennemie
 E: vide

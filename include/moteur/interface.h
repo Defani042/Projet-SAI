@@ -15,7 +15,7 @@
 /*partie noyau*/
 #include "noyau/deplacement.h"
 
-extern clock_t timer;
+extern int timer;
 extern int show_menu_debug;
 extern int aff_amelioration;
 extern int aff_pause;
