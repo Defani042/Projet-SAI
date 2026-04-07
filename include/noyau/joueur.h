@@ -7,15 +7,15 @@
 #include <time.h>
 
 /*VAR GLOBALE*/
-extern clock_t dernier_temps_jetpack;
-extern clock_t dernier_temps_degat;
+extern int dernier_temps_jetpack;
+extern int dernier_temps_degat;
 
 
 #include "config/config.h"
 #include "noyau/position.h"
 
 #define DEFAULT 1
-#define VITESSE 0.5
+#define VITESSE 0.25
 #define VIE 100
 #define ATK 10
 #define JET 50
