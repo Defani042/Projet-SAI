@@ -45,9 +45,9 @@ void avancer() {
     deplacer_joueur(carte_jeu, 1.0, 0.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
-    eyeX = (int)j->pos->x;
-    eyeY = (int)j->pos->y;
-    eyeZ = (int)j->pos->z;
+    eyeX = j->pos->x;
+    eyeY = j->pos->y;
+    eyeZ = j->pos->z;
     eyeX += directionX;
     eyeY += directionY;
     eyeZ += directionZ;
@@ -71,9 +71,9 @@ void gauche(){
     deplacer_joueur(carte_jeu, 0.0, 1.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
-    eyeX = (int)j->pos->x;
-    eyeY = (int)j->pos->y;
-    eyeZ = (int)j->pos->z;
+    eyeX = j->pos->x;
+    eyeY = j->pos->y;
+    eyeZ = j->pos->z;
     eyeX -= directionY;
     eyeY += directionX;
 }
@@ -95,9 +95,9 @@ void reculer(){
     deplacer_joueur(carte_jeu, -1.0, 0.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
-    eyeX = (int)j->pos->x;
-    eyeY = (int)j->pos->y;
-    eyeZ = (int)j->pos->z;
+    eyeX = j->pos->x;
+    eyeY = j->pos->y;
+    eyeZ = j->pos->z;
 
     eyeX -= directionX;
     eyeY -= directionY;
@@ -120,9 +120,9 @@ void droite(){
     deplacer_joueur(carte_jeu, 0.0, -1.0, 0.0);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
-    eyeX = (int)j->pos->x;
-    eyeY = (int)j->pos->y;
-    eyeZ = (int)j->pos->z;
+    eyeX = j->pos->x;
+    eyeY = j->pos->y;
+    eyeZ = j->pos->z;
     eyeX += directionY;
     eyeY -= directionX;
 }
@@ -145,9 +145,9 @@ void haut(){
     }
 
     /*Mise à jour de la caméra pour OpenGL*/ 
-    eyeX = (int)j->pos->x;
-    eyeY = (int)j->pos->y;
-    eyeZ = (int)j->pos->z;
+    eyeX = j->pos->x;
+    eyeY = j->pos->y;
+    eyeZ = j->pos->z;
     eyeZ++;
 }
 
@@ -168,9 +168,9 @@ void bas(){
     deplacer_joueur(carte_jeu, 0.0, 0.0, -0.5);
 
     /*Mise à jour de la caméra pour OpenGL*/ 
-    eyeX = (int)j->pos->x;
-    eyeY = (int)j->pos->y;
-    eyeZ = (int)j->pos->z;
+    eyeX = j->pos->x;
+    eyeY = j->pos->y;
+    eyeZ = j->pos->z;
     eyeZ--;
 }
 
