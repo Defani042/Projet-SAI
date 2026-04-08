@@ -3,6 +3,7 @@
 
 #include "moteur/composant3d.h"
 #include "moteur/texture.h"
+#include "moteur/cycle_jour_nuit.h"
 
 int nb_obj = 0;
 float angle_soleil = M_PI / 2.0f;
@@ -454,15 +455,11 @@ S: rien
 A: Adrien
 */
 void afficher3d(){
-    float soleil_x = 950.0 * cos(angle_soleil);
-    float soleil_y = 950.0 * sin(angle_soleil);
     joueur j = carte_jeu->j;
     afficher_carte(carte_jeu);
     glColor4f(0.5f, 0.0f, 0.5f, 0.4f);
     afficher_cercle3D(j->pos,j->taille);
-    sphere(soleil_x, 0, soleil_y, 50.0, 0.7f, 0.7f, 0);
-    sphere(-soleil_x, 0, -soleil_y, 50.0, 0.9f, 0.9f, 0.6f);
-
+    cycle_jour_nuit();
     if(show_menu_debug){
         afficher_hitbox_joueur(carte_jeu->j);
     }

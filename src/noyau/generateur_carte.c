@@ -7,6 +7,8 @@
 #include "config/config.h"
 #include "noyau/aleatoire.h"
 
+objet ciel1,ciel2,ciel3,ciel4,ciel5,ciel6;
+
 carte creer_carte_test()
 {
     carte c;
@@ -166,7 +168,6 @@ S: rien
 A: Adrien
 */
 void creer_monde(carte c){
-    objet ciel1,ciel2,ciel3,ciel4,ciel5,ciel6;
     int i, x, y;
     objet mai,roc,arb;
 

@@ -6,6 +6,8 @@
 
 #include "noyau/carte.h"
 
+extern objet ciel1,ciel2,ciel3,ciel4,ciel5,ciel6;
+
 carte creer_carte_test();
 
 objet creer_rocher_aleatoire(objet sol);
