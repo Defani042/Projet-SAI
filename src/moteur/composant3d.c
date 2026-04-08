@@ -328,11 +328,14 @@ objet creer_arbre(int x, int y, int z){
     objet tronc;
     objet feuillage;
 
-    tronc = creer_objet(creer_position(x,y,z),2,2,5);
+    int taille_tronc = alea_int(5, 10);
+    int taille_feuillage = alea_int(6, 12);
+
+    tronc = creer_objet(creer_position(x,y,z),2,2,taille_tronc);
     couleur_objet(tronc, 0.345f, 0.160f, 0.0f);
     arbre = ajouter_fin(arbre, tronc);
 
-    feuillage = creer_objet(creer_position(x-2,y-2,z+5),6,6,6);
+    feuillage = creer_objet(creer_position(x-(taille_feuillage/2-1),y-(taille_feuillage/2-1),z+taille_tronc),taille_feuillage,taille_feuillage,taille_feuillage);
     couleur_objet(feuillage, 0.153f, 0.227f, 0.0f);
     arbre = ajouter_fin(arbre, feuillage);
 
@@ -370,23 +373,35 @@ A: Adrien et Gaultier
 objet creer_maison(int x, int y, int z){
     objet maison = NULL;
     objet base;
-    objet toit1,toit2,toit3;
+    objet toit1,toit2,toit3,toit4,toit5,toit6;
 
-    base = creer_objet(creer_position(x,y,z),4,4,4);
+    base = creer_objet(creer_position(x,y,z),10,10,10);
     couleur_objet(base, 0.8f, 0.5f, 0.3f);
     maison = ajouter_fin(maison, base);
 
-    toit1 = creer_objet(creer_position(x-1,y-1,z+4),6,6,1);
+    toit1 = creer_objet(creer_position(x-1,y-1,z+10),12,12,1);
     couleur_objet(toit1, 0.8f, 0.1f, 0.1f);
     maison = ajouter_fin(maison, toit1);
 
-    toit2 = creer_objet(creer_position(x,y,z+5),4,4,1);
+    toit2 = creer_objet(creer_position(x,y,z+11),10,10,1);
     couleur_objet(toit2, 0.8f, 0.1f, 0.1f);
     maison = ajouter_fin(maison, toit2);
 
-    toit3 = creer_objet(creer_position(x+1,y+1,z+6),2,2,1);
+    toit3 = creer_objet(creer_position(x+1,y+1,z+12),8,8,1);
     couleur_objet(toit3, 0.8f, 0.1f, 0.1f);
     maison = ajouter_fin(maison, toit3);
+
+    toit4 = creer_objet(creer_position(x+2,y+2,z+13),6,6,1);
+    couleur_objet(toit4, 0.8f, 0.1f, 0.1f);
+    maison = ajouter_fin(maison, toit4);
+
+    toit5 = creer_objet(creer_position(x+3,y+3,z+14),4,4,1);
+    couleur_objet(toit5, 0.8f, 0.1f, 0.1f);
+    maison = ajouter_fin(maison, toit5);
+
+    toit6 = creer_objet(creer_position(x+4,y+4,z+15),2,2,1);
+    couleur_objet(toit6, 0.8f, 0.1f, 0.1f);
+    maison = ajouter_fin(maison, toit6);
 
     return maison;
 

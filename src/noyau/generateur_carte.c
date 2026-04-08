@@ -4,6 +4,8 @@
 #include "noyau/carte.h"
 #include "noyau/generateur_ennemi.h"
 #include "moteur/composant3d.h"
+#include "config/config.h"
+#include "noyau/aleatoire.h"
 
 carte creer_carte_test()
 {
@@ -165,6 +167,8 @@ A: Adrien
 */
 void creer_monde(carte c){
     objet ciel1,ciel2,ciel3,ciel4,ciel5,ciel6;
+    int i, x, y;
+    objet mai,roc,arb;
 
     ciel1= creer_objet(creer_position(-1000,-1000,-1000),2000,2000,1);
     couleur_objet(ciel1, 0.5f, 0.8f, 1.0f);
@@ -190,10 +194,56 @@ void creer_monde(carte c){
     couleur_objet(ciel6, 0.5f, 0.8f, 1.0f);
     c->liste_objets = ajouter_fin(c->liste_objets, ciel6);
     creer_sol_aleatoire(c);
-}
 
+    /* Générer des objets aléatoirement */
+    for(i = 0; i < 20; i++){
+        /* Générer x dans [-250, -11] ou [11, 250] */
+        if(alea_int(0, 1) == 0){
+            x = alea_int(-250, -11);
+        } else {
+            x = alea_int(11, 250);
+        }
+        /* Générer y dans [-250, -11] ou [11, 250] */
+        if(alea_int(0, 1) == 0){
+            y = alea_int(-250, -11);
+        } else {
+            y = alea_int(11, 250);
+        }
+        arb = creer_arbre(x, y, 0);
+        c->liste_objets = ajouter_fin(c->liste_objets, arb);
+    }
+
+    for(i = 0; i < 20; i++){
+        if(alea_int(0, 1) == 0){
+            x = alea_int(-250, -11);
+        } else {
+            x = alea_int(11, 250);
+        }
+        if(alea_int(0, 1) == 0){
+            y = alea_int(-250, -11);
+        } else {
+            y = alea_int(11, 250);
+        }
+        roc = creer_rocher(x, y, 0);
+        c->liste_objets = ajouter_fin(c->liste_objets, roc);
+    }
+
+    for(i = 0; i < 20; i++){
+        if(alea_int(0, 1) == 0){
+            x = alea_int(-250, -11);
+        } else {
+            x = alea_int(11, 250);
+        }
+        if(alea_int(0, 1) == 0){
+            y = alea_int(-250, -11);
+        } else {
+            y = alea_int(11, 250);
+        }
+        mai = creer_maison(x, y, 0);
+        c->liste_objets = ajouter_fin(c->liste_objets, mai);
+    }
+}
 /*
-R: creer la carte du jeu
 E: rien
 S: carte
 A: Adrien
@@ -219,7 +269,7 @@ carte creer_carte_jeu(){
     init_tab_ennemi();
 
     c->liste_objets = ajouter_fin(c->liste_objets,sol);
-
+    
     return c;
 }
 
