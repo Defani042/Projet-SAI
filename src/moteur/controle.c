@@ -48,11 +48,7 @@ void avancer() {
     eyeX = j->pos->x;
     eyeY = j->pos->y;
     eyeZ = j->pos->z;
-    eyeX += directionX;
-    eyeY += directionY;
-    eyeZ += directionZ;
 }
-
 /*
 R: Permet d'aller à gauche
 E: rien
@@ -74,8 +70,6 @@ void gauche(){
     eyeX = j->pos->x;
     eyeY = j->pos->y;
     eyeZ = j->pos->z;
-    eyeX -= directionY;
-    eyeY += directionX;
 }
 
 /*
@@ -99,9 +93,6 @@ void reculer(){
     eyeY = j->pos->y;
     eyeZ = j->pos->z;
 
-    eyeX -= directionX;
-    eyeY -= directionY;
-
 }
 
 /*
@@ -123,8 +114,6 @@ void droite(){
     eyeX = j->pos->x;
     eyeY = j->pos->y;
     eyeZ = j->pos->z;
-    eyeX += directionY;
-    eyeY -= directionX;
 }
 
 /*
@@ -148,7 +137,6 @@ void haut(){
     eyeX = j->pos->x;
     eyeY = j->pos->y;
     eyeZ = j->pos->z;
-    eyeZ++;
 }
 
 /*
@@ -171,7 +159,6 @@ void bas(){
     eyeX = j->pos->x;
     eyeY = j->pos->y;
     eyeZ = j->pos->z;
-    eyeZ--;
 }
 
 /*
