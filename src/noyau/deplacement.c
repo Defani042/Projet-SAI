@@ -287,7 +287,7 @@ void avencer_vague_ennemi(carte c)
     ennemi suivant;
     joueur j;
     int chance;
-    double dist;
+    double dx,dy,dist;
 
     if (c == NULL || c->j == NULL)
         return;
@@ -314,10 +314,11 @@ void avencer_vague_ennemi(carte c)
             deplacer_ennemi_vers_joueur2(c, tmp, j);
 
             /* recalcul distance après déplacement */
-            dist = distance_carre(tmp->obj->pos, j->pos);
-
+            dx = j->pos->x - tmp->obj->pos->x; 
+            dy = j->pos->y - tmp->obj->pos->y; 
+            dist = dx*dx + dy*dy;
             /* zone d'attaque joueur */
-            if (dist < j->taille)
+            if (dist < j->taille*j->taille)
             {   
                 chance = alea_int(1,100);
                 if (chance <= j->taux_crit){
