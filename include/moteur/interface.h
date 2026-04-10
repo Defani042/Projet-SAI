@@ -11,6 +11,10 @@
 /*partie moteur*/
 #include "moteur/composant2d.h"
 #include "moteur/affichage.h"
+#include "moteur/menu_amelioration.h"
+#include "moteur/menu_pause.h"
+#include "moteur/menu_mort.h"
+#include "moteur/controle.h"
 
 /*partie noyau*/
 #include "noyau/deplacement.h"
@@ -19,6 +23,7 @@ extern int timer;
 extern int show_menu_debug;
 extern int aff_amelioration;
 extern int aff_pause;
+extern int aff_mort;
 
 void afficher_vie();
 

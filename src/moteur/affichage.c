@@ -227,7 +227,7 @@ void animer(){
         sortie_propre();
         return;
     }
-    if (aff_pause || aff_amelioration) {
+    if (aff_pause || aff_amelioration || aff_mort) {
         /* mode pause ne rien faire MAIS rester vivant */
         glutPostRedisplay();
         return;

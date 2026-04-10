@@ -229,6 +229,19 @@ void show_menu_pause(){
 }
 
 /*
+R: affichage du menu de mort
+E: rien
+S: rien
+A: Gaultier
+*/
+void show_menu_mort(){
+    if(aff_mort == 0){
+        aff_mort = 1;
+        glutSetCursor(GLUT_CURSOR_INHERIT);
+    }
+}
+
+/*
 R: Permet de mettre à jour le tableau de touches actives
 E: la touche et les coordonnées de la souris
 S: rien
@@ -332,6 +345,12 @@ void gerer_souris(int bouton, int etat, int x, int y){
                 interruption = 1;
             }
         }
+    }
+    if(bouton == 0 && etat == 1 && aff_mort){
+        interruption = 1;
+        aff_mort = 0;
+        glutPassiveMotionFunc(mouvement_souris);
+        if(!aff_amelioration)glutSetCursor(GLUT_CURSOR_NONE);
     }
 }
 

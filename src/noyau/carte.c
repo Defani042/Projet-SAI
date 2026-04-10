@@ -73,7 +73,7 @@ S: 1 si la partie est finie sinon 0
 A: Adrien
 */
 int game_over(carte c){
-    return(c->j->vie == 0);
+    return(c->j->vie <= 0);
 }
 
 /*

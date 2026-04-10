@@ -4,12 +4,14 @@
 #include"moteur/interface.h"
 #include"moteur/menu_amelioration.h"
 #include"moteur/menu_pause.h"
+#include "moteur/menu_mort.h"
 
 /*varaible globale*/
 int timer =0;
 int show_menu_debug = 0;
 int aff_amelioration = 0;
 int aff_pause = 0;
+int aff_mort = 0;
 
 /*variable pour compter le nombre de FPS*/
 static int frame_count = 0;
@@ -288,6 +290,12 @@ void afficher_interface(){
     }
     if(aff_pause){
         afficher_fenetre_pause(); /*changer la condition pour le booleen aff_amelioration*/
+    }
+    if(game_over(carte_jeu)){
+        show_menu_mort();
+    }
+    if(aff_mort){
+        afficher_fenetre_mort(carte_jeu->j);
     }
     afficher_kill();
     afficher_vie();

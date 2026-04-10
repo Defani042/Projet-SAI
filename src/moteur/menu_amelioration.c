@@ -38,7 +38,7 @@ float choix_valeur(int comp){
         case CAP_VIE: return (float)alea_int(5,15);
         case CAP_ATK: return (float)alea_int(1,3);
         case CAP_REG: return alea_double(0.05,0.15);
-        case CAP_JET: return (float)alea_int(1,3);
+        case CAP_JET: return (float)alea_int(50,150);
         case CAP_VIT: return alea_double(0.05,0.15);
         case CAP_TAILLE: return alea_double(0.5,1.5);
         case CAP_TAUX_CRIT: return (float)alea_int(2,7);

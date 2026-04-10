@@ -18,7 +18,7 @@ extern int dernier_temps_degat;
 #define VITESSE 0.25
 #define VIE 100
 #define ATK 10
-#define JET 50
+#define JET 100
 #define SEUIL 100
 #define TAILLE 5
 #define TAUX_CRIT 10 

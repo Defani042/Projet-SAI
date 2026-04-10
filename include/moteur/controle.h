@@ -38,6 +38,8 @@ void show_debug_menu();
 
 void show_menu_upgrade();
 
+void show_menu_mort();
+
 void touche_pressee(unsigned char touche, int x, int y);
 
 void touche_relachee(unsigned char touche, int x, int y);
