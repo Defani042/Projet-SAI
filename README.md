@@ -149,6 +149,9 @@ Le projet est organisé en modules pour séparer les responsabilités et facilit
 
 - **texture** (`texture.c / texture.h`)  
   gestion du chargement et de la libération des texture du jeu
+
+- **menu_pause** (`menu_pause.c / menu_pause.h`)     
+  Gestion de la mort du joueur et de la fin de jeu  
    
 ---
 
