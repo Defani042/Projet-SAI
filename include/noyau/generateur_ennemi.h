@@ -13,10 +13,11 @@
 #include "noyau/grille_global.h"
 #include "noyau/difficulte.h"
 
-#define NB_TYPE_E 3
+#define NB_TYPE_E 4
 #define TANK 0
 #define SOLDAT 1
 #define ASSASIN 2
+#define SUPER_SPRINTER 3
 
 
 extern ennemi globale_ennemi_tab[NB_TYPE_E];

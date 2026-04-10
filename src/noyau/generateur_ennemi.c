@@ -12,11 +12,12 @@ S: vide
 A: Adrien
 */
 void init_tab_ennemi(){
-    ennemi e1,e2,e3;
+    ennemi e1,e2,e3,e4;
     /*création des ennemi*/
     e1 = creer_ennemi(creer_objet(creer_position(0,0,0),1,1,1));
     e2 = creer_ennemi(creer_objet(creer_position(2,0,0),1,1,1));
     e3 = creer_ennemi(creer_objet(creer_position(4,0,0),1,1,1));
+    e4 = creer_ennemi(creer_objet(creer_position(6,0,0),1,1,1));
 
     /*set e1 TANK*/
     e1->degat = 3;
@@ -33,10 +34,16 @@ void init_tab_ennemi(){
     e3->vie = 15;
     e3->vit = 13;
 
+    /*set e4 SUPER_SPRINTER*/
+    e4->degat = 2;
+    e4->vie = 15;
+    e4->vit = 20;
+
     /*rangement dans le tableau*/
     globale_ennemi_tab[TANK] = e1;
     globale_ennemi_tab[SOLDAT] = e2;
-    globale_ennemi_tab[ASSASIN] =e3;
+    globale_ennemi_tab[ASSASIN] = e3;
+    globale_ennemi_tab[SUPER_SPRINTER] = e4;
 
     log_message(NOYAU SUCC "tableau des ennemi... OK");
 
@@ -66,7 +73,7 @@ ennemi creer_ennemi_alea(carte c){
 
     
     /*génération de la classe entre 0 et 2*/
-    classe = alea_int(0,2);
+    classe = alea_int(0,3);
     /*création de l'ennemie de base*/
     e = creer_ennemi(creer_objet(creer_position(-9000,-9000,-9000),1,1,1));/*je les fais spawn hors de la map sinon dégat au joueur possible*/
     /*affectation des caractéristique de la classe*/

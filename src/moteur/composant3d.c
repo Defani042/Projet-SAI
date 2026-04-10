@@ -180,8 +180,8 @@ void afficher_ennemie(ennemi e){
     glEnable(GL_TEXTURE_2D);
     switch (e->classe){
         case 2:{
-            glBindTexture(GL_TEXTURE_2D, texture_ennemi_A);
-            glColor3f(1.0f, 0.1f, 0.0f);
+            glBindTexture(GL_TEXTURE_2D, texture_ennemi_D);
+            glColor3f(1.0f, 1.0f, 0.4f);
             break;
         }
         case 1:{

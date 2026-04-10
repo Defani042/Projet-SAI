@@ -4,22 +4,26 @@
 #include "moteur/menu_mort.h"
 
 char buffer[NB_MAX];
+int aff_message = 1;
 
 void afficher_fenetre_mort(joueur j){
     if (j->vie < 0) j->vie = 0; /*pour éviter les valeurs négatives dans les statistiques*/
     /* Affichage de la fenêtre de mort avec les statistiques du joueur */
-    sprintf(buffer,NOYAU"=== Vous êtes mort ===\n");
-    log_message(buffer);
-    sprintf(buffer,NOYAU"Vie finale : %.2f\n", j->vie);
-    log_message(buffer);
-    sprintf(buffer,NOYAU"Jetpack final : %.2f\n", j->jetpack);
-    log_message(buffer);
-    sprintf(buffer,NOYAU"Niveau atteint : %d\n", j->niv);
-    log_message(buffer);
-    sprintf(buffer,NOYAU"XP total : %d\n", j->xp);
-    log_message(buffer);
-    sprintf(buffer,NOYAU"Merci d'avoir joué !\n");
-    log_message(buffer);
+    if(aff_message){
+        sprintf(buffer,NOYAU"=== Vous êtes mort ===\n");
+        log_message(buffer);
+        sprintf(buffer,NOYAU"Vie finale : %.2f\n", j->vie);
+        log_message(buffer);
+        sprintf(buffer,NOYAU"Jetpack final : %.2f\n", j->jetpack);
+        log_message(buffer);
+        sprintf(buffer,NOYAU"Niveau atteint : %d\n", j->niv);
+        log_message(buffer);
+        sprintf(buffer,NOYAU"XP total : %d\n", j->xp);
+        log_message(buffer);
+        sprintf(buffer,NOYAU"Merci d'avoir joué !\n");
+        log_message(buffer);
+        aff_message = 0;
+    }
 
     draw_rect(0,0,largeur_ecran,hauteur_ecran,0,0,0, 1.0f);
     afficher_fenetre_stat(j);

@@ -11,11 +11,13 @@
 GLuint texture_ennemi_A;
 GLuint texture_ennemi_S;
 GLuint texture_ennemi_T;
+GLuint texture_ennemi_D;
 
 void initialisation_texture() {
     texture_ennemi_A = load_texture(PATH_TEXTURE_ENNEMI_A);
     texture_ennemi_S = load_texture(PATH_TEXTURE_ENNEMI_S);
     texture_ennemi_T = load_texture(PATH_TEXTURE_ENNEMI_T);
+    texture_ennemi_D = load_texture(PATH_TEXTURE_ENNEMI_D);
 }
 
 GLuint load_texture(const char *filename){
