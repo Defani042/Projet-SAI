@@ -10,17 +10,21 @@ void afficher_fenetre_mort(joueur j){
     if (j->vie < 0) j->vie = 0; /*pour éviter les valeurs négatives dans les statistiques*/
     /* Affichage de la fenêtre de mort avec les statistiques du joueur */
     if(aff_message){
-        sprintf(buffer,NOYAU"=== Vous êtes mort ===\n");
+        sprintf(buffer,NOYAU SUCC "=== Vous êtes mort ===");
         log_message(buffer);
-        sprintf(buffer,NOYAU"Vie finale : %.2f\n", j->vie);
+        sprintf(buffer,NOYAU SUCC "Vie finale : %.2f", j->vie_max);
         log_message(buffer);
-        sprintf(buffer,NOYAU"Jetpack final : %.2f\n", j->jetpack);
+        sprintf(buffer,NOYAU SUCC "Jetpack final : %.2f", j->jetpack_max);
         log_message(buffer);
-        sprintf(buffer,NOYAU"Niveau atteint : %d\n", j->niv);
+        sprintf(buffer,NOYAU SUCC "Niveau atteint : %d", j->niv);
         log_message(buffer);
-        sprintf(buffer,NOYAU"XP total : %d\n", j->xp);
+        sprintf(buffer,NOYAU SUCC "XP total : %d", j->xp);
         log_message(buffer);
-        sprintf(buffer,NOYAU"Merci d'avoir joué !\n");
+        sprintf(buffer,NOYAU SUCC "Ennemi(s) tué(s) : %d",nbkill);
+        log_message(buffer);
+        sprintf(buffer,NOYAU SUCC "Merci d'avoir joué !");
+        log_message(buffer);
+        sprintf(buffer,NOYAU SUCC "======================");
         log_message(buffer);
         aff_message = 0;
     }
