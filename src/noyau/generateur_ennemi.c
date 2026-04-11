@@ -21,23 +21,23 @@ void init_tab_ennemi(){
 
     /*set e1 TANK*/
     e1->degat = 3;
-    e1->vie = 50;
-    e1->vit = 6.5;
+    e1->vie = 60;
+    e1->vit = 8;
 
     /*set e2 SOLDAT*/
     e2->degat = 5;
-    e2->vie = 30;
-    e2->vit = 8.5;
+    e2->vie = 40;
+    e2->vit = 10;
 
     /*set e2 SOLDAT*/
     e3->degat = 5;
-    e3->vie = 15;
-    e3->vit = 13;
+    e3->vie = 25;
+    e3->vit = 15;
 
     /*set e4 SUPER_SPRINTER*/
     e4->degat = 2;
-    e4->vie = 15;
-    e4->vit = 20;
+    e4->vie = 25;
+    e4->vit = 23;
 
     /*rangement dans le tableau*/
     globale_ennemi_tab[TANK] = e1;

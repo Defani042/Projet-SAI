@@ -93,7 +93,7 @@ void degat(int deg,joueur j){
         return;
     }
     dernier_temps_degat = glutGet(GLUT_ELAPSED_TIME);
-    j->vie -= deg/j->def;
+    j->vie -= (deg/j->def) * deltaTime;
 }
 
 

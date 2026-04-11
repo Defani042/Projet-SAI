@@ -5,6 +5,7 @@
 
 int difficulte = 0;
 int dernier_changement = 0; /*le temps écouler depuis le dernier changement de difficulte*/
+int nb_ennemi_max = NBMAX_ENNEMI;
 
 
 

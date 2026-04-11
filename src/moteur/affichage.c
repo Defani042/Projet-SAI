@@ -242,7 +242,7 @@ void animer(){
     raffraichir();
     glutPostRedisplay();
     maj_grille_dynamique(carte_jeu->liste_ennemi);
-    if(taille_ennemi(carte_jeu->liste_ennemi) < NBMAX_ENNEMI){
+    if(taille_ennemi(carte_jeu->liste_ennemi) < nb_ennemi_max +(5 * difficulte)){
         carte_jeu->liste_ennemi = ajouter_ennemi(creer_ennemi_alea(carte_jeu),carte_jeu->liste_ennemi);
     }
     gestion_difficulte();

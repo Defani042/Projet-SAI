@@ -8,6 +8,7 @@
 #include "moteur/interface.h"
 
 extern int difficulte;
+extern int nb_ennemi_max;
 
 void gestion_difficulte();
 

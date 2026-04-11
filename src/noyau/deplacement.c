@@ -322,10 +322,10 @@ void avencer_vague_ennemi(carte c)
             {   
                 chance = alea_int(1,100);
                 if (chance <= j->taux_crit){
-                    tmp->vie -= j->atk * j->degats_crit;
+                    tmp->vie -= j->atk * j->degats_crit *deltaTime;
                 }
                 else{
-                    tmp->vie -= j->atk;
+                    tmp->vie -= j->atk * deltaTime;
                 }
             }
 
