@@ -235,7 +235,9 @@ void animer(){
    
     /*** LOGIQUE DU JEU***/
     angle_soleil += 0.00005f;
-    bas();
+    if(GRAVITY){
+        bas();
+    }
     avencer_vague_ennemi(carte_jeu);
     regenerer_jetpack(carte_jeu->j);
     regeneration_vie(carte_jeu->j);

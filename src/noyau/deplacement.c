@@ -50,7 +50,7 @@ void deplacer_joueur(carte c, double dx, double dy, double dz)
     move_z = j->dir->z * dx;
     move_z += dz;
 
-    if(move_z > 0.45 && j->jetpack>0){
+    if(move_z > ANGLE_AVANCEE && j->jetpack>0){
         utiliser_jetpack(j);
     }
     else{
